@@ -94,7 +94,9 @@ export default function Footer() {
             }}>
               Marrakech, Kingdom of Morocco<br />
               Abu Dhabi, United Arab Emirates<br />
-              <br />
+              Madrid, Spain<br />
+              The World
+              <br /> <br />
               <a
                 href="mailto:contact@dekkak.com"
                 style={{ color: "inherit", opacity: 1, transition: "color 0.3s" }}

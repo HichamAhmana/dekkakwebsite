@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const GOLD = "#C9A84C";
@@ -14,6 +15,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/business",
     accent: "#C9A84C",
     icon: "◈",
+    logo: null as string | null,
   },
   {
     id: "amcham",
@@ -23,6 +25,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/about",
     accent: "#6A9FCB",
     icon: "◇",
+    logo: null as string | null,
   },
   {
     id: "anouar",
@@ -32,6 +35,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/impact",
     accent: "#8BC4A8",
     icon: "◉",
+    
   },
 ];
 
@@ -160,19 +164,56 @@ function EngagementCard({
         {String(index + 1).padStart(2, "0")}
       </div>
 
-      {/* Icon */}
-      <div
-        style={{
-          fontSize: "22px",
-          color: item.accent,
-          marginBottom: "28px",
-          display: "block",
-          transform: hovered ? "scale(1.2) rotate(15deg)" : "scale(1) rotate(0deg)",
-          transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)",
-        }}
-      >
-        {item.icon}
-      </div>
+      {/* Icon / Logo */}
+      {item.logo ? (
+        <div
+          style={{
+            marginBottom: "28px",
+            display: "block",
+            width: "140px",
+            height: "52px",
+            position: "relative",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+            transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)",
+          }}
+        >
+          {/* Tinted overlay so logo feels at home on dark bg */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              borderRadius: "4px",
+              background: `radial-gradient(ellipse at 50% 50%, ${item.accent}18, transparent 80%)`,
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          />
+          <Image
+            src={item.logo}
+            alt="Anouar Association logo"
+            fill
+            style={{
+              objectFit: "contain",
+              objectPosition: "left center",
+              mixBlendMode: "screen",
+              filter: `brightness(0.92) saturate(1.1) drop-shadow(0 0 6px ${item.accent}55)`,
+            }}
+          />
+        </div>
+      ) : (
+        <div
+          style={{
+            fontSize: "22px",
+            color: item.accent,
+            marginBottom: "28px",
+            display: "block",
+            transform: hovered ? "scale(1.2) rotate(15deg)" : "scale(1) rotate(0deg)",
+            transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1)",
+          }}
+        >
+          {item.icon}
+        </div>
+      )}
 
       {/* Tag */}
       <div

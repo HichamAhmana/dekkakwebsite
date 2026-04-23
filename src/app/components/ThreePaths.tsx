@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const GOLD = "#C9A84C";
+const GOLD = "rgba(201, 167, 74, 1)";
 const CREAM = "#F5F0E8";
 
 const CARDS = [

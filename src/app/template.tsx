@@ -102,8 +102,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
           }}>
             <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: CREAM, opacity: 0.5, animation: "fadeIn 0.6s ease 0.6s both" }}>Marrakech</span>
             <div style={{ width: "24px", height: "1px", background: GOLD, animation: "fadeIn 0.6s ease 0.6s both" }} />
-            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: CREAM, opacity: 0.5, animation: "fadeIn 0.6s ease 0.6s both" }}>Abu Dhabi</span>
+            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: CREAM, opacity: 0.5, animation: "fadeIn 0.6s ease 0.8s both" }}>Abu Dhabi</span>
+             <div style={{ width: "24px", height: "1px", background: GOLD, animation: "fadeIn 0.6s ease 0.6s both" }} />
+            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: CREAM, opacity: 0.5, animation: "fadeIn 0.6s ease 1s both" }}>Madrid</span>
           </div>
+           
+          
 
         </div>
       )}
