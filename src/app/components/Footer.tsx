@@ -101,11 +101,10 @@ export default function Footer() {
               The World
               <br /> <br />
               <a
-                href="mailto:contact@dekkak.com"
+                href={`mailto:${String.fromCharCode(99, 111, 110, 116, 97, 99, 116, 64, 100, 101, 107, 107, 97, 107, 46, 99, 111, 109)}`}
                 style={{ color: "inherit", opacity: 1, transition: "color 0.3s" }}
-              >
-                contact@dekkak.com
-              </a>
+                dangerouslySetInnerHTML={{ __html: "&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#100;&#101;&#107;&#107;&#97;&#107;&#46;&#99;&#111;&#109;" }}
+              />
             </address>
           </div>
 

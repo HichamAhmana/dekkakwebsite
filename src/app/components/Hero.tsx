@@ -157,7 +157,7 @@ export default function Hero() {
         }} />
         
         <Image 
-          src="/dekkak cinema marrakech festival.png" 
+          src="/dekkak-cinema-marrakech-festival.png" 
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
           style={{ objectFit: "cover", objectPosition: "60% center" }}

@@ -7,7 +7,7 @@ export const events = [
     shortDate: "◈",
     monthYear: "ABU DHABI",
     description: "Founded in 1992 in Abu Dhabi, Adgeco Group has grown into a distinguished multi-sector holding company with cross-continental influence spanning oil & gas, EPC, construction, marine, and desalination across Arab countries, Europe, Africa, and North America. Key projects include the Abu Dhabi International Airport runway, Civil Works for Oil Terminal 2 at Port Fujairah, and System Floats Concrete at Khalifa Port.",
-    image: "/Mohammed dekkak Adgeco Group.png",
+    image: "/mohamed-dekkak-adgeco-group.png",
     href: "/blog/adgeco-group"
   },
   {
@@ -18,7 +18,7 @@ export const events = [
     shortDate: "◇",
     monthYear: "ABU DHABI",
     description: "Mohamed Dekkak is an active member of the American Business Group (AmCham) Abu Dhabi — a leading chamber that boosts UAE connectivity and business opportunities. His membership bridges strategic East–West commercial diplomacy, connecting international investors with the Gulf's most dynamic market.",
-    image: "/Mohammed dekkak AmCham.png",
+    image: "/mohamed-dekkak-amcham.png",
     href: "/blog/amcham"
   },
   {
@@ -29,7 +29,7 @@ export const events = [
     shortDate: "◉",
     monthYear: "MARRAKECH",
     description: "Founded in January 2007, the Anouar Association serves underprivileged children and uncared-for elders in Ait Faska, Al Haouz Province. Its programs include the Coding Coach initiative, Art Workshops for Children with Disabilities aligned with the UN Disability Inclusion Strategy, and continuous community beautification and welfare projects.",
-    image: "/Mohhamed dekkak Anouar Association.png",
+    image: "/mohamed-dekkak-anouar-association.png",
     href: "/blog/anouar"
   },
   {
@@ -40,7 +40,7 @@ export const events = [
     shortDate: "2022",
     monthYear: "MARRAKECH",
     description: "Participated in the International Social and Behavior Change Summit alongside UNICEF, USAID, Save the Children, and Johns Hopkins Center for Communication Programs, focusing on women's empowerment and community welfare.",
-    image: "/dekkak cinema marrakech festival.png",
+    image: "/dekkak-cinema-marrakech-festival.png",
     href: "/blog/sbcc-summit"
   },
   {

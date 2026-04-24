@@ -14,7 +14,7 @@ const FOUNDATIONS = [
     focus: "Flagship Charity — Education, Water, Health, Sustainable Development",
     description: "Founded in January 2007, serving underprivileged children and uncared-for elders in Ait Faska, Al Haouz Province, Marrakech. Key programs include the Coding Coach Program, Art Workshops for Children with Disabilities (aligned with UN strategies), and ongoing community beautification projects.",
     accent: "#C9A84C",
-    image: "/Mohhamed dekkak Anouar Association.png",
+    image: "/mohamed-dekkak-anouar-association.png",
     imagePosition: "center top",
   },
   {

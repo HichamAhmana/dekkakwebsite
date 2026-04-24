@@ -107,7 +107,7 @@ export default function AboutPage() {
               overflow: "hidden"
             }}>
               <Image
-                src="/Mohammed dekkak AmCham.png"
+                src="/mohamed-dekkak-amcham.png"
                 alt="Mohamed Dekkak"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 700px"

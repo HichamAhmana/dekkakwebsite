@@ -101,6 +101,38 @@ const personSchema = {
   ]
 };
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Mohamed Dekkak",
+  "email": "contact@dekkak.com",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Marrakech",
+      "addressCountry": "Morocco"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Abu Dhabi",
+      "addressCountry": "UAE"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressLocality": "Madrid",
+      "addressCountry": "Spain"
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/mohameddekkak/",
+    "https://www.instagram.com/mohameddekkak/",
+    "https://x.com/MohamedDekkak1",
+    "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",
+    "https://www.pinterest.com/dekkak/",
+    "https://www.youtube.com/user/AdgecoGroup"
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -112,6 +144,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>

@@ -14,7 +14,7 @@ const COMPANIES = [
     sector: "Holding Company — Oil & Gas, EPC, Construction, Marine, Desalination",
     description: "Founded in 1992 in Abu Dhabi, Adgeco Group has successfully grown many startup foreign businesses and ventures into full-fledged companies across Arab Countries, Europe, Africa, and North America. Key projects include Abu Dhabi International Airport runway, Civil Works for Oil Terminal 2 at Port Fujairah, and System Floats Concrete at Khalifa Port.",
     link: "adgeco.com",
-    image: "/Mohammed dekkak Adgeco Group.png",
+    image: "/mohamed-dekkak-adgeco-group.png",
   },
   {
     name: "Gate One Properties",
@@ -129,7 +129,7 @@ function AdgecoCard({ company, loaded }: { company: typeof COMPANIES[0]; loaded:
           <div style={{ position: "absolute", left: 0, top: "10%", bottom: "10%", width: "1px", background: `linear-gradient(to bottom, transparent, ${GOLD}66, transparent)`, zIndex: 3 }} />
 
           <Image
-            src="/Mohammed dekkak Adgeco Group.png"
+            src="/mohamed-dekkak-adgeco-group.png"
             alt="Mohamed Dekkak — Adgeco Group"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"

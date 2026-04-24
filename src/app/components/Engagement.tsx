@@ -135,7 +135,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/business",
     accent: "#C9A84C",
     icon: "◈",
-    image: "/Mohammed dekkak Adgeco Group.png",
+    image: "/mohamed-dekkak-adgeco-group.png",
     imagePosition: "center 18%",
   },
   {
@@ -146,7 +146,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/about",
     accent: "#6A9FCB",
     icon: "◇",
-    image: "/Mohammed dekkak AmCham.png",
+    image: "/mohamed-dekkak-amcham.png",
     imagePosition: "center center",
   },
   {
@@ -157,7 +157,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/impact",
     accent: "#8BC4A8",
     icon: "◉",
-    image: "/Mohhamed dekkak Anouar Association.png",
+    image: "/mohamed-dekkak-anouar-association.png",
     imagePosition: "center top",
   },
   {
