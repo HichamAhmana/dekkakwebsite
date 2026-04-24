@@ -59,6 +59,7 @@ export default function BlogPage() {
                 src={featured.image!}
                 alt={featured.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 1140px"
                 style={{
                   objectFit: "cover",
                   objectPosition: featured.id === "adgeco-group" ? "center 20%" : "center center",
@@ -156,6 +157,7 @@ function PostCard({ event, idx, loaded }: { event: typeof events[0]; idx: number
               src={event.image}
               alt={event.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
               style={{
                 objectFit: "cover",
                 objectPosition: event.id === "adgeco-group" ? "center 20%" : "center center",

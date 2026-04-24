@@ -62,6 +62,7 @@ function CardBackground({ item, hovered, scanKey }: { item: (typeof ENGAGEMENT_I
           src={item.image}
           alt={item.title}
           fill
+          sizes="(max-width: 768px) 100vw, 750px"
           style={{
             objectFit: "cover",
             objectPosition: item.imagePosition ?? "center center",

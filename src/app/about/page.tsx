@@ -110,6 +110,7 @@ export default function AboutPage() {
                 src="/Mohammed dekkak AmCham.png"
                 alt="Mohamed Dekkak"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 700px"
                 style={{ objectFit: "cover", objectPosition: "center top" }}
                 priority
               />

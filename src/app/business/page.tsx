@@ -132,6 +132,7 @@ function AdgecoCard({ company, loaded }: { company: typeof COMPANIES[0]; loaded:
             src="/Mohammed dekkak Adgeco Group.png"
             alt="Mohamed Dekkak — Adgeco Group"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
             style={{
               objectFit: "cover",
               objectPosition: "center 20%",

@@ -56,6 +56,7 @@ export default function BlogPostPage() {
               src={post.image}
               alt={post.title}
               fill
+              sizes="100vw"
               style={{
                 objectFit: "cover",
                 objectPosition: post.id === "adgeco-group" ? "center 20%" : "center center",
