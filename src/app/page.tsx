@@ -13,7 +13,7 @@ const Blog = dynamic(() => import("./components/Blog"));
 
 export default function Home() {
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg-color)" }}>
+    <main style={{ position: "relative", minHeight: "100vh", background: "var(--bg-color)" }}>
       <Navbar />
       <Hero />
       <Stats />
