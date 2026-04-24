@@ -64,6 +64,43 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mohamed Dekkak",
+  "url": BASE_URL,
+  "jobTitle": [
+    "Founding Partner of US Data Center",
+    "Founding Partner of The American University - Marrakesh",
+    "Founding Partner of The American Medical City - Marrakesh",
+    "Chairman and Founder of Orchid Island Real Estate Agency",
+    "Chairman and Founder of Adgeco Group",
+    "President of Gate One Properties",
+    "Chairman of Arab Peace Corps Foundation",
+    "Chief Financial Officer and Founding Member of CARLAC",
+    "President/Executive Director of the New Arab Foundation",
+    "Honorary President of Ibn Battuta Association",
+    "Chairman of Anouar Association",
+    "Honorary President of Union Road Association",
+    "Executive President of Sahara Spirit Foundation"
+  ],
+  "hasOccupation": [
+    { "@type": "Occupation", "name": "Founding Partner", "mainEntityOfPage": { "@type": "Organization", "name": "US Data Center" } },
+    { "@type": "Occupation", "name": "Founding Partner", "mainEntityOfPage": { "@type": "Organization", "name": "The American University - Marrakesh" } },
+    { "@type": "Occupation", "name": "Founding Partner", "mainEntityOfPage": { "@type": "Organization", "name": "The American Medical City - Marrakesh" } },
+    { "@type": "Occupation", "name": "Chairman and Founder", "mainEntityOfPage": { "@type": "Organization", "name": "Orchid Island Real Estate Agency" } },
+    { "@type": "Occupation", "name": "Chairman and Founder", "mainEntityOfPage": { "@type": "Organization", "name": "Adgeco Group" } },
+    { "@type": "Occupation", "name": "President", "mainEntityOfPage": { "@type": "Organization", "name": "Gate One Properties" } },
+    { "@type": "Occupation", "name": "Chairman", "mainEntityOfPage": { "@type": "Organization", "name": "Arab Peace Corps Foundation" } },
+    { "@type": "Occupation", "name": "Chief Financial Officer and Founding Member", "mainEntityOfPage": { "@type": "Organization", "name": "CARLAC" } },
+    { "@type": "Occupation", "name": "President/Executive Director", "mainEntityOfPage": { "@type": "Organization", "name": "New Arab Foundation" } },
+    { "@type": "Occupation", "name": "Honorary President", "mainEntityOfPage": { "@type": "Organization", "name": "Ibn Battuta Association" } },
+    { "@type": "Occupation", "name": "Chairman", "mainEntityOfPage": { "@type": "Organization", "name": "Anouar Association" } },
+    { "@type": "Occupation", "name": "Honorary President", "mainEntityOfPage": { "@type": "Organization", "name": "Union Road Association" } },
+    { "@type": "Occupation", "name": "Executive President", "mainEntityOfPage": { "@type": "Organization", "name": "Sahara Spirit Foundation" } }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,6 +108,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
         <ThemeProvider>
           {/* <Cursor /> */}

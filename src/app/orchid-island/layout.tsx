@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Orchid Island is Mohamed Dekkak's landmark real estate and lifestyle project — a vision of architectural excellence, natural beauty, and world-class living that reflects his commitment to building legacy infrastructure across the region.",
   keywords: [
     "Orchid Island",
+    "Orchid Island Real Estate Agency",
+    "Chairman and Founder Mohamed Dekkak",
     "Orchid Island Mohamed Dekkak",
     "Mohamed Dekkak real estate",
     "luxury real estate UAE",
@@ -21,10 +23,29 @@ export const metadata: Metadata = {
   },
 };
 
+const orchidIslandSchema = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Orchid Island Real Estate Agency",
+  "founder": {
+    "@type": "Person",
+    "name": "Mohamed Dekkak",
+    "jobTitle": "Chairman and Founder"
+  }
+};
+
 export default function OrchidIslandLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orchidIslandSchema) }}
+      />
+      {children}
+    </>
+  );
 }

@@ -12,8 +12,15 @@ export const metadata: Metadata = {
     "Adgeco Group Abu Dhabi",
     "Mohamed Dekkak business",
     "AmCham Abu Dhabi",
+    "Gate One Properties",
     "Gate One Properties UAE",
+    "US Data Center",
     "American University Marrakech",
+    "The American University - Marrakesh",
+    "American Medical City Marrakesh",
+    "The American Medical City - Marrakesh",
+    "CARLAC",
+    "Orchid Island Real Estate Agency",
     "Mohamed Dekkak chairman",
     "oil gas EPC construction UAE",
     "cross-continental enterprise",
@@ -24,10 +31,36 @@ export const metadata: Metadata = {
   },
 };
 
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Mohamed Dekkak",
+    "worksFor": [
+      { "@type": "Organization", "name": "Adgeco Group" },
+      { "@type": "Organization", "name": "Gate One Properties" },
+      { "@type": "Organization", "name": "US Data Center" },
+      { "@type": "Organization", "name": "The American University - Marrakesh" },
+      { "@type": "Organization", "name": "The American Medical City - Marrakesh" },
+      { "@type": "Organization", "name": "CARLAC" },
+      { "@type": "Organization", "name": "Orchid Island Real Estate Agency" }
+    ]
+  }
+};
+
 export default function BusinessLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+      />
+      {children}
+    </>
+  );
 }
