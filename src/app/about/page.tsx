@@ -80,16 +80,9 @@ export default function AboutPage() {
             <p style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "16px", fontWeight: 300, lineHeight: 1.8,
-              color: CREAM, opacity: 0.7, margin: "0 0 24px"
-            }}>
-              Mohamed Dekkak was born and raised in a modest family in Marrakech, Morocco. This origin is not just a detail—it is the beginning of a genuine arc: a man who started with nothing in one of Morocco's oldest cities and built a cross-continental business and humanitarian empire.
-            </p>
-            <p style={{
-              fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "16px", fontWeight: 300, lineHeight: 1.8,
               color: CREAM, opacity: 0.7, margin: "0"
             }}>
-              Although born Moroccan, he expatriated and emerged through the Arab world as Chairman and Founder of Adgeco Group. Being multilingual—fluent in Arabic, French, and English—attributed enormously to how this transpired, allowing him to build deals in the Gulf, negotiate in Europe, and organize initiatives in Latin America.
+              Mohamed Dekkak is a Moroccan businessman, investor, and philanthropist, best known as the Chairman and Founder of Adgeco Group. Multilingual in English, Arabic, and French, he has spent over three decades building cross-continental enterprises across UAE, Morocco, Europe and beyond.
             </p>
           </div>
 
@@ -193,6 +186,89 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Awards & Memberships Section */}
+      <section style={{ padding: "80px 40px 120px", background: "var(--bg-color)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "80px" }}>
+          
+          {/* Awards */}
+          <div style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.8s ease 0.6s"
+          }}>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: "36px", fontWeight: 300, color: CREAM,
+              margin: "0 0 40px", borderBottom: `1px solid rgba(201,168,76,0.2)`, paddingBottom: "16px"
+            }}>Awards & <i style={{ color: GOLD }}>Honors.</i></h2>
+            
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "24px" }}>
+              {[
+                { title: "Medal from King Abdullah University of Science and Technology", date: "January 2009" },
+                { title: "CHONMA-CHONG Gold Crown — Korean Ministry of Foreign Affairs", date: "2006" },
+                { title: "BRIGADE DE REPRESSION DU BANDITISME — French Police", date: "2005" },
+                { title: "Gold Star Award — Institute for Professional Excellence, Spain", date: "October 2015" },
+                { title: "Recognition/Certificate of Gratitude — Intellectual Property Arab IP Forum, Abu Dhabi UAE", date: "2008" }
+              ].map((award, i) => (
+                <li key={i} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", color: CREAM, opacity: 0.85 }}>{award.title}</span>
+                  <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", color: GOLD }}>{award.date}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Memberships */}
+          <div style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.8s ease 0.8s"
+          }}>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: "36px", fontWeight: 300, color: CREAM,
+              margin: "0 0 40px", borderBottom: `1px solid rgba(201,168,76,0.2)`, paddingBottom: "16px"
+            }}>Global <i style={{ color: GOLD }}>Memberships.</i></h2>
+            
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "16px" }}>
+              {[
+                "Chairman & Founder of Adgeco Group (adgeco.com)",
+                "President of Gate One Properties (gateone.ae)",
+                "Chairman of Arab Peace Corp Foundation (arabpeacecorps.org)",
+                "Chief Financial Officer and Founding Member of CARLAC (carlac.net)",
+                "President/Executive Director of New Arab Foundation (newarabfoundation.org)",
+                "Honorary President – Ibn Battuta Association (ibnbattuta.ma)",
+                "Chairman of Anouar Association (anouar.org.ma)",
+                "Executive President of Sahara Spirit Foundation (saharaspirit.org)",
+                "Honorary President – Union Road Association (unionroad.org)",
+                "Member of AmCham Abu Dhabi (amchamabudhabi.org)",
+                "Member of Australian Business Council Dubai (abcduae.com)",
+                "Member of Singapore Business Council (sbcuae.org)",
+                "Member of Danish Business Council Dubai",
+                "Member of Netherlands Business Council",
+                "Member of Canadian Business Council (cbc-dubai.com)",
+                "Member of German Emirati Joint Council for Industry & Commerce",
+                "Member of British Business Group Abu Dhabi (britishbusiness.org)",
+                "Member of Benelux Business Council",
+                "Member of Arab Business Club (arabbusinessclub.org)",
+                "Member of Chambre Française de Commerce et d'Industrie du Maroc (cfcim.org)",
+                "Member of French Chamber of Commerce Abu Dhabi (fbgabudhabi.com)",
+                "Member of Spanish Business Council (spanishbusinesscouncil.ae)",
+                "Member of Swiss Business Council (swissbcuae.com)"
+              ].map((membership, i) => (
+                <li key={i} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                  <div style={{ marginTop: "6px", minWidth: "4px", height: "4px", background: GOLD, borderRadius: "50%" }} />
+                  <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "14px", color: CREAM, opacity: 0.75, lineHeight: 1.5 }}>
+                    {membership}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
         </div>
       </section>
 
