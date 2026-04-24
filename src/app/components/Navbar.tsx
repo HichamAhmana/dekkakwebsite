@@ -9,7 +9,7 @@ const CREAM = "var(--nav-text)";
 const NAV_LINKS = [
   { label: "BUSINESS",      href: "/business" },
   { label: "IMPACT",        href: "/impact" },
-  { label: "HEALTHCARE",    href: "/healthcare" },
+  { label: "SERVICES",      href: "/services" },
   { label: "BLOG",          href: "/blog" },
   { label: "GALLERY",       href: "/gallery" },
   { label: "ABOUT",         href: "/about" },

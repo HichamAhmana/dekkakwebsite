@@ -8,7 +8,7 @@ const CREAM = "var(--text-color)";
 const NAVIGATE = [
   { label: "Business",      href: "/business" },
   { label: "Impact",        href: "/impact" },
-  { label: "Healthcare",    href: "/healthcare" },
+  { label: "Services",      href: "/services" },
   { label: "Gallery",       href: "/gallery" },
   { label: "About",         href: "/about" },
   { label: "Orchid Island", href: "/orchid-island" },
