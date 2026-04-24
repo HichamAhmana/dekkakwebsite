@@ -73,7 +73,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
         <ThemeProvider>
-          <Cursor />
+          {/* <Cursor /> */}
           {children}
         </ThemeProvider>
       </body>
