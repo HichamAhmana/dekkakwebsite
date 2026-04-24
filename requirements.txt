@@ -1,0 +1,87 @@
+# ============================================================
+#  REQUIREMENTS — Mohamed Dekkak Website
+#  Next.js / React project (Node.js ecosystem)
+#
+#  NOTE: This is a Node.js project, NOT a Python project.
+#  Dependencies are managed via npm and defined in package.json.
+#  This file documents the runtime requirements and tech stack
+#  for onboarding, deployment, and reference purposes.
+# ============================================================
+
+
+# ── Runtime Requirements ─────────────────────────────────────
+
+Node.js  >= 18.17.0   (LTS recommended — tested on v25.8.2)
+npm      >= 9.0.0     (tested on v11.11.0)
+
+
+# ── Install All Dependencies ─────────────────────────────────
+
+  npm install
+
+
+# ── Dev Server ───────────────────────────────────────────────
+
+  npm run dev          # starts on http://localhost:3000
+
+
+# ── Production Build ─────────────────────────────────────────
+
+  npm run build        # compile & optimise
+  npm run start        # serve production build
+
+
+# ── Linting ──────────────────────────────────────────────────
+
+  npm run lint
+
+
+# ── Environment Variables ────────────────────────────────────
+
+  Copy .env.local and set:
+
+  NEXT_PUBLIC_SITE_URL=https://dekkak.com   # production domain
+
+
+# ── Production Dependencies ──────────────────────────────────
+
+next             16.2.4    # App Router, Image optimisation, SSR/SSG
+react            19.2.4    # UI library
+react-dom        19.2.4    # DOM renderer
+framer-motion    ^12.38.0  # scroll-linked animations (Engagement section)
+
+
+# ── Dev / Build Dependencies ─────────────────────────────────
+
+typescript            ^5        # static typing
+@types/node           ^20       # Node type definitions
+@types/react          ^19       # React type definitions
+@types/react-dom      ^19       # React DOM type definitions
+eslint                ^9        # linter
+eslint-config-next    16.2.4    # Next.js ESLint rules
+tailwindcss           ^4        # CSS utility layer (PostCSS pipeline)
+@tailwindcss/postcss  ^4        # Tailwind PostCSS integration
+
+
+# ── Key Next.js Features Used ────────────────────────────────
+
+App Router            src/app/              routing
+Server Components     layout.tsx files      SEO metadata
+Client Components     page.tsx files        interactivity
+next/image            <Image>               optimised images
+next/font             Google Fonts          Cormorant + DM Sans
+next/navigation       useParams             dynamic blog routes
+Sitemap API           app/sitemap.ts        /sitemap.xml
+Robots API            app/robots.ts         /robots.txt
+
+
+# ── Deployment ───────────────────────────────────────────────
+
+Platform   : Vercel (recommended)
+Repository : https://github.com/HichamAhmana/dekkakwebsite
+Branch     : main
+Build cmd  : npm run build
+Output dir : .next (auto-detected by Vercel)
+
+Vercel environment variables to set:
+  NEXT_PUBLIC_SITE_URL = https://dekkak.com
