@@ -1,13 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import ThreePaths from "./components/ThreePaths";
-import Engagement from "./components/Engagement";
-import Blog from "./components/Blog";
-import Quote from "./components/Quote";
 import Footer from "./components/Footer";
+
+const Engagement = dynamic(() => import("./components/Engagement"));
+const Quote = dynamic(() => import("./components/Quote"));
+const Blog = dynamic(() => import("./components/Blog"));
 
 export default function Home() {
   return (
