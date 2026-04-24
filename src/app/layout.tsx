@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Cursor from "./components/Cursor";
@@ -154,6 +155,7 @@ export default function RootLayout({
         <ThemeProvider>
           {/* <Cursor /> */}
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
