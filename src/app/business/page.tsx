@@ -17,6 +17,14 @@ const COMPANIES = [
     image: "/mohamed-dekkak-adgeco-group.png",
   },
   {
+    name: "Orchid Island Real Estate Agency",
+    role: "Chairman & Founder",
+    sector: "Real Estate — Global",
+    description: "A landmark real estate and lifestyle project, offering premium property services and unparalleled luxury developments.",
+    link: "/orchid-island",
+    image: null,
+  },
+  {
     name: "Gate One Properties",
     role: "President",
     sector: "Real Estate — UAE",
@@ -25,10 +33,67 @@ const COMPANIES = [
     image: null,
   },
   {
+    name: "Arab Peace Corps Foundation",
+    role: "Chairman",
+    sector: "Philanthropy & Diplomacy",
+    description: "Promoting peace, diplomacy, and mutual understanding across the Arab world.",
+    link: "arabpeacecorps.org",
+    image: null,
+  },
+  {
+    name: "CARLAC",
+    role: "Chief Financial Officer & Founding Member",
+    sector: "Diplomacy",
+    description: "Council on Arab Relations with Latin America and the Caribbean, strengthening bilateral ties between the two regions.",
+    link: "carlac.net",
+    image: null,
+  },
+  {
+    name: "New Arab Foundation",
+    role: "President / Executive Director",
+    sector: "Philanthropy",
+    description: "Dedicated to advancing cultural, social, and economic initiatives across the Arab world.",
+    link: "newarabfoundation.org",
+    image: null,
+  },
+  {
+    name: "Ibn Battuta Association",
+    role: "Honorary President",
+    sector: "Culture & Tourism",
+    description: "Celebrating the legacy of the great Moroccan explorer and fostering global cultural exchange.",
+    link: "ibnbattuta.ma",
+    image: null,
+  },
+  {
+    name: "Anouar Association",
+    role: "Chairman",
+    sector: "Philanthropy",
+    description: "Serving underprivileged communities in Marrakech, including coding programs and art workshops for children with disabilities.",
+    link: "anouar.org.ma",
+    image: null,
+  },
+  {
+    name: "Sahara Spirit Foundation",
+    role: "Executive President",
+    sector: "Philanthropy",
+    description: "Empowering local communities and preserving the cultural heritage of the region.",
+    link: "saharaspirit.org",
+    image: null,
+  },
+  {
+    name: "Union Road Association",
+    role: "Honorary President",
+    sector: "Philanthropy",
+    description: "Aiding community development and social cohesion.",
+    link: "unionroad.org",
+    image: null,
+  },
+  {
     name: "The American University – Marrakech",
     role: "Founding Partner",
     sector: "Education",
     description: "A city-scale educational infrastructure project aimed at bringing world-class American higher education to the heart of Morocco.",
+    link: null,
     image: null,
   },
   {
@@ -36,6 +101,7 @@ const COMPANIES = [
     role: "Founding Partner",
     sector: "Healthcare",
     description: "A massive healthcare infrastructure initiative bringing advanced medical facilities and research to the Marrakech region.",
+    link: null,
     image: null,
   },
   {
@@ -43,6 +109,7 @@ const COMPANIES = [
     role: "Founding Partner",
     sector: "Technology Infrastructure",
     description: "Strategic investment in advanced data infrastructure, supporting the digital transformation of the region.",
+    link: null,
     image: null,
   }
 ];
@@ -109,12 +176,12 @@ function AdgecoCard({ company, loaded }: { company: typeof COMPANIES[0]; loaded:
 
           <div style={{ display: "flex", alignItems: "center", gap: "24px", flexWrap: "wrap" }}>
             {company.link && (
-              <a href={`http://${company.link}`} target="_blank" rel="noreferrer" style={{
+              <a href={company.link.startsWith('/') ? company.link : `https://${company.link}`} target={company.link.startsWith('/') ? "_self" : "_blank"} rel="noreferrer" style={{
                 fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 700, letterSpacing: "0.25em",
                 textTransform: "uppercase", color: GOLD, borderBottom: `1px solid ${GOLD}55`, paddingBottom: "4px",
                 transition: "opacity 0.3s ease", opacity: hovered ? 1 : 0.7,
               }}>
-                Visit {company.link} →
+                Visit Website →
               </a>
             )}
             <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: CREAM, opacity: 0.3 }}>
@@ -268,10 +335,10 @@ export default function BusinessPage() {
                     {company.description}
                   </p>
                   {company.link && (
-                    <a href={`http://${company.link}`} target="_blank" rel="noreferrer" style={{
+                    <a href={company.link.startsWith('/') ? company.link : `https://${company.link}`} target={company.link.startsWith('/') ? "_self" : "_blank"} rel="noreferrer" style={{
                       fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, borderBottom: `1px solid ${GOLD}44`, paddingBottom: "4px"
                     }}>
-                      Visit {company.link}
+                      Visit Website →
                     </a>
                   )}
                 </div>
