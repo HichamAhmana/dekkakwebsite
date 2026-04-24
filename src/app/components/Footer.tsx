@@ -25,7 +25,10 @@ const VENTURES = [
 const SOCIALS = [
   { label: "LinkedIn",      href: "https://www.linkedin.com/in/mohameddekkak/" },
   { label: "Instagram",     href: "https://www.instagram.com/mohameddekkak/" },
-  { label: "X",   href: "https://x.com/MohamedDekkak1" },
+  { label: "X",             href: "https://x.com/MohamedDekkak1" },
+  { label: "Facebook",      href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#" },
+  { label: "Pinterest",     href: "https://www.pinterest.com/dekkak/" },
+  { label: "YouTube",       href: "https://www.youtube.com/user/AdgecoGroup" },
 ];
 
 function FooterLink({ label, href }: { label: string; href: string }) {
