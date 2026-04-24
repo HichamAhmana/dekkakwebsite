@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const NAVIGATE = [
   { label: "Business",      href: "/business" },

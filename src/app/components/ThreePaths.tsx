@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const GOLD = "rgba(201, 167, 74, 1)";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const CARDS = [
   {
@@ -41,7 +41,7 @@ function Card({ card }: { card: typeof CARDS[0] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#0F0E0C" : "#0A0A0A",
+        background: hovered ? "#0F0E0C" : "var(--bg-color)",
         padding: "56px 48px",
         transition: "background 0.4s ease",
         display: "flex",

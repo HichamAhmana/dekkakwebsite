@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 export default function ContactPage() {
   const [loaded, setLoaded] = useState(false);
@@ -22,7 +22,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       <section style={{

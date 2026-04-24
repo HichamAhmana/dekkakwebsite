@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const GALLERY_ITEMS = [
   { id: 1, category: "Diplomacy", aspect: "aspect-[4/5]", caption: "SBCC Summit 2022, Marrakech" },
@@ -33,7 +33,7 @@ export default function GalleryPage() {
     : GALLERY_ITEMS.filter(item => item.category === activeCategory);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero Section */}

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 const MARRAKECH_TERRACOTTA = "#B86A51"; // Adding a subtle warm tone for Orchid Island
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 export default function OrchidIslandPage() {
   const [loaded, setLoaded] = useState(false);
@@ -16,7 +16,7 @@ export default function OrchidIslandPage() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       {/* Immersive Hero Section */}
@@ -35,7 +35,7 @@ export default function OrchidIslandPage() {
           zIndex: 0
         }}>
           {/* Gradients to blend image into the dark theme */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.4) 50%, #0A0A0A 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.4) 50%, var(--bg-color) 100%)" }} />
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at center, transparent 0%, rgba(10,10,10,0.8) 100%)` }} />
         </div>
 

@@ -1,36 +1,12 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
-const BLOG_POSTS = [
-  {
-    id: "biography",
-    day: "05",
-    monthYear: "SEP, 2024",
-    title: "Biography",
-    excerpt: "Mohamed Dekkak is a Moroccan businessman, investor, and philanthropist. A Moroccan expat, he has spent decades building bridges across continents...",
-    href: "/blog/biography",
-  },
-  {
-    id: "amcham",
-    day: "05",
-    monthYear: "SEP, 2024",
-    title: "AmCham",
-    excerpt: "American Business Group (AmCham) Abu Dhabi boosts United Arab Emirate's connectivity and business opportunities bridging east and west...",
-    href: "/blog/amcham",
-  },
-  {
-    id: "anouar",
-    day: "04",
-    monthYear: "SEP, 2024",
-    title: "Anouar Association",
-    excerpt: "The Anouar Association is a nonprofit organization that has been working for the poor and downtrodden for a long time. It focuses on delivering education and care...",
-    href: "/blog/anouar-association",
-  },
-];
+import { events } from "../data/events";
 
 function useIntersectionObserver(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,7 +29,7 @@ function BlogCard({
   index,
   visible,
 }: {
-  post: (typeof BLOG_POSTS)[0];
+  post: (typeof events)[0];
   index: number;
   visible: boolean;
 }) {
@@ -80,7 +56,7 @@ function BlogCard({
         transitionDelay: visible && !hovered ? `${index * 0.1}s` : "0s",
       }}
     >
-      {/* Image Placeholder */}
+      {/* Image area */}
       <div
         style={{
           width: "100%",
@@ -90,15 +66,38 @@ function BlogCard({
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `linear-gradient(45deg, ${GOLD}22, transparent)`,
-            opacity: hovered ? 1 : 0.5,
-            transition: "opacity 0.5s ease",
-          }}
-        />
+        {post.image ? (
+          <>
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: post.id === "adgeco-group" ? "center 20%" : "center center",
+                filter: hovered ? "brightness(0.8) saturate(0.95)" : "brightness(0.55) saturate(0.7)",
+                transform: hovered ? "scale(1.06)" : "scale(1.0)",
+                transition: "filter 0.8s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1)",
+              }}
+            />
+            {/* Gold gradient overlay */}
+            <div style={{
+              position: "absolute", inset: 0,
+              background: `linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 60%), linear-gradient(45deg, ${GOLD}1A, transparent)`,
+            }} />
+          </>
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(45deg, ${GOLD}22, transparent)`,
+              opacity: hovered ? 1 : 0.5,
+              transition: "opacity 0.5s ease",
+            }}
+          />
+        )}
+
         {/* Date Badge */}
         <div
           style={{
@@ -114,19 +113,20 @@ function BlogCard({
             width: "60px",
             height: "68px",
             transition: "all 0.3s ease",
+            zIndex: 2,
           }}
         >
           <span
             style={{
               fontFamily: "var(--font-cormorant), serif",
-              fontSize: "24px",
+              fontSize: "20px",
               fontWeight: 600,
               lineHeight: 1,
               color: hovered ? "#000" : CREAM,
               transition: "color 0.3s ease",
             }}
           >
-            {post.day}
+            {post.shortDate}
           </span>
           <div style={{ height: "1px", width: "30px", background: hovered ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.2)", margin: "4px 0" }} />
           <span
@@ -139,7 +139,7 @@ function BlogCard({
               transition: "color 0.3s ease",
             }}
           >
-            {post.monthYear.split(',')[0]}
+            {post.monthYear}
           </span>
         </div>
       </div>
@@ -170,9 +170,9 @@ function BlogCard({
             flexGrow: 1,
           }}
         >
-          {post.excerpt}
+          {post.description.substring(0, 150)}...
         </p>
-        
+
         <Link
           href={post.href}
           style={{
@@ -226,7 +226,7 @@ export default function Blog() {
       style={{
         padding: "140px 40px",
         width: "100%",
-        background: "#0A0A0A",
+        background: "var(--bg-color)",
         position: "relative",
       }}
     >
@@ -291,7 +291,7 @@ export default function Blog() {
             gap: "32px",
           }}
         >
-          {BLOG_POSTS.map((post, i) => (
+          {events.slice(0, 3).map((post, i) => (
             <BlogCard key={post.id} post={post} index={i} visible={visible} />
           ))}
         </div>

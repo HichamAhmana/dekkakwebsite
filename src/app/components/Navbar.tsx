@@ -2,13 +2,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--nav-text)";
 
 const NAV_LINKS = [
   { label: "BUSINESS",      href: "/business" },
   { label: "IMPACT",        href: "/impact" },
   { label: "HEALTHCARE",    href: "/healthcare" },
+  { label: "BLOG",          href: "/blog" },
   { label: "GALLERY",       href: "/gallery" },
   { label: "ABOUT",         href: "/about" },
   { label: "ORCHID ISLAND", href: "/orchid-island" },
@@ -51,6 +53,7 @@ export default function Navbar() {
     return () => { clearTimeout(t); window.removeEventListener("scroll", onScroll); };
   }, []);
 
+
   const barBase: React.CSSProperties = {
     display: "block", width: "24px", height: "1px",
     background: CREAM, transition: "transform 0.3s ease, opacity 0.3s ease",
@@ -63,9 +66,9 @@ export default function Navbar() {
         position: "fixed", top: 0, left: 0, width: "100%", zIndex: 100,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 48px", height: "64px",
-        background: "rgba(10,10,10,0.93)",
+        background: "var(--nav-bg)",
         backdropFilter: "blur(14px)",
-        borderBottom: "1px solid rgba(201,168,76,0.15)",
+        borderBottom: "1px solid var(--border-color)",
         transition: "all 0.4s ease",
       }}>
         <Link href="/" style={{
@@ -154,7 +157,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   return (
     <div style={{
       position: "absolute", top: "100%", left: 0, width: "100%",
-      background: "rgba(10,10,10,0.97)", backdropFilter: "blur(14px)",
+      background: "var(--nav-bg)", backdropFilter: "blur(14px)",
       padding: "24px 40px 32px",
     }}>
       {NAV_LINKS.map((l, i) => (
@@ -164,7 +167,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             display: "block", padding: "20px 0",
             fontFamily: "var(--font-dm-sans), sans-serif",
             fontSize: "13px", letterSpacing: "0.2em",
-            textTransform: "uppercase", color: "#F5F0E8", opacity: 0.85,
+            textTransform: "uppercase", color: "var(--text-color)", opacity: 0.85,
           }}>{l.label}</Link>
         </div>
       ))}

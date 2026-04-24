@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -43,7 +43,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           position: "fixed",
           inset: 0,
           zIndex: 9999,
-          background: "#0A0A0A",
+          background: "var(--bg-color)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

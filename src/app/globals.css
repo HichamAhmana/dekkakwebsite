@@ -1,15 +1,29 @@
 :root {
   --gold: #C9A84C;
   --gold-light: #E8C97A;
-  --dark: #0A0A0A;
-  --cream: #F5F0E8;
+}
+
+[data-theme='dark'] {
+  --bg-color: #0A0A0A;
+  --text-color: #F5F0E8;
+  --nav-bg: rgba(10, 10, 10, 0.93);
+  --border-color: rgba(201, 168, 76, 0.15);
+  --nav-text: #F5F0E8;
+}
+
+[data-theme='light'] {
+  --bg-color: #FFFFFF;
+  --text-color: #0A0A0A;
+  --nav-bg: rgba(255, 255, 255, 0.93);
+  --border-color: rgba(10, 10, 10, 0.15);
+  --nav-text: #0A0A0A;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background-color: var(--dark);
-  color: var(--cream);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: var(--font-dm-sans), sans-serif;
   margin: 0; padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -17,6 +31,7 @@ body {
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, a, div {
@@ -78,6 +93,14 @@ body::after {
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
+/* Gold scanline sweeps over portrait images */
+@keyframes imageScanline {
+  0%   { transform: translateY(0);     opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(600px); opacity: 0; }
+}
+
 /* Floating ambient gold orbs */
 @keyframes orbFloat1 {
   0%, 100% { transform: translate(0px,   0px); }
@@ -134,4 +157,19 @@ body::after {
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 0.5; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Custom Cursor Overrides */
+@media (pointer: fine) {
+  body, a, button, h1, h2, h3, h4, p, span, div, img, svg {
+    cursor: none !important;
+  }
+  input, textarea {
+    cursor: text !important;
+  }
 }

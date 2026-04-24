@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 export default function HealthcarePage() {
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +15,7 @@ export default function HealthcarePage() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero Section */}
@@ -92,7 +92,7 @@ export default function HealthcarePage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
             {["Advanced Research", "World-Class Facilities", "Regional Impact"].map((item, i) => (
               <div key={i} style={{
-                padding: "40px 24px", background: "#0A0A0A", border: "1px solid rgba(255,255,255,0.05)"
+                padding: "40px 24px", background: "var(--bg-color)", border: "1px solid rgba(255,255,255,0.05)"
               }}>
                 <div style={{ width: "32px", height: "1px", background: GOLD, margin: "0 auto 24px" }} />
                 <h4 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: CREAM }}>{item}</h4>

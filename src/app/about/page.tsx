@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const TIMELINE = [
   { year: "1987–1991", text: "Studies at European University (MBA in International Business & Marketing)" },
@@ -26,7 +27,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero Section */}
@@ -92,7 +93,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Right: Portrait Placeholder */}
+          {/* Right: Portrait */}
           <div style={{
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateX(0)" : "translateX(20px)",
@@ -101,23 +102,30 @@ export default function AboutPage() {
           }}>
             <div style={{
               width: "100%", aspectRatio: "3/4",
-              background: "#111",
               border: `1px solid rgba(201,168,76,0.2)`,
               position: "relative",
               overflow: "hidden"
             }}>
+              <Image
+                src="/Mohammed dekkak AmCham.png"
+                alt="Mohamed Dekkak"
+                fill
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+                priority
+              />
+              {/* Cinematic gold overlay */}
               <div style={{
                 position: "absolute", inset: 0,
-                background: `linear-gradient(45deg, transparent, rgba(201,168,76,0.1), transparent)`,
+                background: `linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.7) 100%), linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%)`,
               }} />
+              {/* Bottom label */}
               <div style={{
-                position: "absolute", inset: 0,
-                display: "flex", alignItems: "center", justifyContent: "center",
+                position: "absolute", bottom: "20px", left: "20px", right: "20px",
                 fontFamily: "var(--font-dm-sans), sans-serif",
-                fontSize: "11px", letterSpacing: "0.2em", color: GOLD, opacity: 0.5,
-                textTransform: "uppercase"
+                fontSize: "9px", fontWeight: 700, letterSpacing: "0.35em",
+                textTransform: "uppercase", color: GOLD,
               }}>
-                [Portrait Placeholder]
+                AmCham Abu Dhabi
               </div>
             </div>
             {/* Accent lines */}

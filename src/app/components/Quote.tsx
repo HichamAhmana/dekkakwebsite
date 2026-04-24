@@ -2,19 +2,19 @@
 import { useState, useEffect } from "react";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const QUOTES = [
   {
-    text: "Every day is a chance to leave a mark on the world — whether through a handshake, an investment, or an act of compassion.",
+    text: "Impact The World.",
     author: "Mohamed Dekkak",
   },
   {
-    text: "True leadership is not about power. It is about the lives you transform and the communities you lift along the way.",
+    text: "Lead Your Field.",
     author: "Mohamed Dekkak",
   },
   {
-    text: "Business is the most powerful vehicle for positive change — when it is driven by purpose rather than profit alone.",
+    text: "Own Your Genius.",
     author: "Mohamed Dekkak",
   },
   {

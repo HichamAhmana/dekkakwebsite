@@ -1,19 +1,20 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const GOLD = "#C9A84C";
 const GOLD_LIGHT = "#E8C97A";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const NAME_LETTERS = ["D", "E", "K", "K", "A", "K"];
 const ROLES = ["Chairman", "Investor", "Philanthropist", "Statesman", "Visionary"];
 const COORDS = "34°01′N 6°50′W  ·  24°28′N 54°22′E";
 
 export default function Hero() {
-  const [loaded, setLoaded]   = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [btnHover, setBtnHover] = useState<"primary" | "secondary" | null>(null);
-  const [mouse, setMouse]     = useState({ x: -600, y: -600 });
+  const [mouse, setMouse] = useState({ x: -600, y: -600 });
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -47,7 +48,7 @@ export default function Hero() {
       flexDirection: "column",
       justifyContent: "center",
       overflow: "hidden",
-      background: "radial-gradient(ellipse at 65% 40%, #1a1410 0%, #0A0A0A 70%)",
+      background: "radial-gradient(ellipse at 65% 40%, #1a1410 0%, var(--bg-color) 70%)",
     }}>
 
       {/* ── Interactive mouse-following gold glow ── */}
@@ -120,11 +121,49 @@ export default function Hero() {
         background: "linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 55%, rgba(10,10,10,0.96) 100%)",
       }} />
 
-      {/* PHOTO PLACEHOLDER */}
-      {/* Replace with:
-          <Image src="/hero.jpg" fill alt="Mohamed Dekkak"
-            style={{ objectFit:"cover", objectPosition:"65% center", zIndex:0 }} priority />
-      */}
+      {/* ── Editorial Cinematic Portrait ── */}
+      <div style={{
+        position: "absolute",
+        top: 0, right: 0,
+        width: "70%", height: "100%",
+        zIndex: 0,
+        opacity: loaded ? 0.8 : 0,
+        transform: loaded ? "scale(1.03)" : "scale(1.08)",
+        transition: "opacity 3.5s ease 0.5s, transform 25s cubic-bezier(0.1,0.5,0.8,1)",
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}>
+        {/* Soft edge masks to blend image into the background gracefully */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "linear-gradient(to right, var(--bg-color) 0%, transparent 40%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "linear-gradient(to top, var(--bg-color) 0%, transparent 40%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "radial-gradient(ellipse at center, transparent 0%, rgba(201,168,76,0.15) 100%)",
+          mixBlendMode: "color",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "rgba(10, 10, 10, 0.45)", // Semi-transparent black wash
+        }} />
+        
+        <Image 
+          src="/dekkak cinema marrakech festival.png" 
+          alt="Mohamed Dekkak at Marrakech Festival"
+          fill
+          style={{ objectFit: "cover", objectPosition: "60% center" }}
+          priority
+        />
+      </div>
 
       {/* ── Main content ── */}
       <div style={{

@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const FOUNDATIONS = [
   {
@@ -12,7 +13,9 @@ const FOUNDATIONS = [
     role: "Chairman & Founder",
     focus: "Flagship Charity — Education, Water, Health, Sustainable Development",
     description: "Founded in January 2007, serving underprivileged children and uncared-for elders in Ait Faska, Al Haouz Province, Marrakech. Key programs include the Coding Coach Program, Art Workshops for Children with Disabilities (aligned with UN strategies), and ongoing community beautification projects.",
-    accent: "#C9A84C"
+    accent: "#C9A84C",
+    image: "/Mohhamed dekkak Anouar Association.png",
+    imagePosition: "center top",
   },
   {
     name: "Sahara Spirit Foundation",
@@ -74,7 +77,7 @@ export default function ImpactPage() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero Section */}
@@ -119,29 +122,58 @@ export default function ImpactPage() {
       </section>
 
       {/* Foundations Grid */}
-      <section style={{ padding: "80px 40px 140px", background: "linear-gradient(180deg, #0A0A0A 0%, #0D0C0A 100%)" }}>
+      <section style={{ padding: "80px 40px 140px", background: "linear-gradient(180deg, var(--bg-color) 0%, #0D0C0A 100%)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "2px", background: "rgba(201,168,76,0.15)" }}>
           {FOUNDATIONS.map((f, i) => (
             <div key={i} style={{
-              background: "#0A0A0A",
+              background: "var(--bg-color)",
               padding: "60px 48px",
               display: "flex",
               flexDirection: "column"
             }}>
-              <div style={{
-                width: "40px", height: "2px", background: f.accent, marginBottom: "32px"
-              }} />
+              <div style={{ width: "40px", height: "2px", background: f.accent, marginBottom: "32px" }} />
               <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", fontWeight: 400, color: CREAM, margin: "0 0 16px" }}>{f.name}</h3>
               <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: f.accent, marginBottom: "8px" }}>{f.role}</div>
               <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: CREAM, opacity: 0.5, marginBottom: "24px" }}>{f.focus}</div>
-              
-              {/* Photo Placeholder */}
+
+              {/* Photo — real image or styled placeholder */}
               <div style={{
-                width: "100%", height: "200px", background: "#111", border: `1px solid rgba(255,255,255,0.05)`,
-                marginBottom: "32px", position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"
+                width: "100%", height: "220px",
+                background: "#111", border: `1px solid rgba(255,255,255,0.05)`,
+                marginBottom: "32px", position: "relative", overflow: "hidden",
+                display: "flex", alignItems: "center", justifyContent: "center"
               }}>
-                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, ${f.accent}11)` }} />
-                <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: f.accent, opacity: 0.5 }}>[Documentary Photo]</span>
+                {(f as typeof FOUNDATIONS[0] & { image?: string }).image ? (
+                  <>
+                    <Image
+                      src={(f as typeof FOUNDATIONS[0] & { image?: string }).image!}
+                      alt={f.name}
+                      fill
+                      style={{
+                        objectFit: "cover",
+                        objectPosition: (f as typeof FOUNDATIONS[0] & { imagePosition?: string }).imagePosition ?? "center center",
+                        filter: "brightness(0.7) saturate(0.85)",
+                      }}
+                    />
+                    <div style={{
+                      position: "absolute", inset: 0,
+                      background: `linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 55%), linear-gradient(135deg, ${f.accent}11, transparent)`,
+                    }} />
+                    <div style={{
+                      position: "absolute", bottom: "14px", left: "16px",
+                      fontFamily: "var(--font-dm-sans)", fontSize: "8px", fontWeight: 700,
+                      letterSpacing: "0.35em", textTransform: "uppercase", color: f.accent,
+                    }}>
+                      {f.name}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 50% 50%, ${f.accent}18, transparent 70%)` }} />
+                    <div style={{ position: "absolute", inset: 0, background: `repeating-linear-gradient(45deg, transparent, transparent 24px, ${f.accent}08 24px, ${f.accent}08 25px)` }} />
+                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: f.accent, opacity: 0.5, position: "relative", zIndex: 1 }}>Photo Coming Soon</span>
+                  </>
+                )}
               </div>
 
               <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "14px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.8, margin: 0, flexGrow: 1 }}>
