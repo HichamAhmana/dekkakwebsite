@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -7,14 +8,38 @@ const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
 const GALLERY_ITEMS = [
-  { id: 1, category: "Diplomacy", aspect: "aspect-[4/5]", caption: "SBCC Summit 2022, Marrakech" },
-  { id: 2, category: "Philanthropy", aspect: "aspect-square", caption: "Ait Faska Coding Program" },
-  { id: 3, category: "Business", aspect: "aspect-[16/9]", caption: "Adgeco Strategic Alliance Signing" },
-  { id: 4, category: "Philanthropy", aspect: "aspect-[4/5]", caption: "Children's Art Workshop" },
-  { id: 5, category: "Diplomacy", aspect: "aspect-[3/2]", caption: "Ibn Battuta Festival, Tangier" },
-  { id: 6, category: "Business", aspect: "aspect-[4/3]", caption: "Khalifa Port Infrastructure" },
-  { id: 7, category: "Diplomacy", aspect: "aspect-[16/9]", caption: "CARLAC Latin America Delegation" },
-  { id: 8, category: "Philanthropy", aspect: "aspect-square", caption: "Sahara Spirit Foundation Launch" },
+  { 
+    id: 1, 
+    category: "Diplomacy", 
+    aspect: "aspect-[4/5]", 
+    caption: "Marrakech International Film Festival", 
+    event: "Cultural Diplomacy & Arts",
+    src: "/dekkak-cinema-marrakech-festival.png" 
+  },
+  { 
+    id: 2, 
+    category: "Philanthropy", 
+    aspect: "aspect-[4/5]", 
+    caption: "Anouar Association Initiative", 
+    event: "Community Welfare Event",
+    src: "/mohamed-dekkak-anouar-association.png" 
+  },
+  { 
+    id: 3, 
+    category: "Business", 
+    aspect: "aspect-[4/5]", 
+    caption: "Adgeco Group Leadership", 
+    event: "Strategic Corporate Meeting",
+    src: "/mohamed-dekkak-adgeco-group.png" 
+  },
+  { 
+    id: 4, 
+    category: "Business", 
+    aspect: "aspect-[4/5]", 
+    caption: "AmCham Abu Dhabi", 
+    event: "International Business Council",
+    src: "/mohamed-dekkak-amcham.png" 
+  },
 ];
 
 const CATEGORIES = ["All", "Business", "Philanthropy", "Diplomacy"];
@@ -130,15 +155,25 @@ export default function GalleryPage() {
                   width: "100%", paddingBottom: pb, background: "#111",
                   border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden"
                 }}>
-                  {/* Base Placeholder styling */}
-                  <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, rgba(201,168,76,0.05))` }} />
-                  
-                  <div style={{
-                    position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
-                    fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, opacity: 0.3
-                  }}>
-                    [Photo Placeholder]
-                  </div>
+                  {item.src ? (
+                    <Image
+                      src={item.src}
+                      alt={item.caption}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: "cover", filter: "brightness(0.85)" }}
+                    />
+                  ) : (
+                    <>
+                      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, rgba(201,168,76,0.05))` }} />
+                      <div style={{
+                        position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                        fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, opacity: 0.3
+                      }}>
+                        [Photo Placeholder]
+                      </div>
+                    </>
+                  )}
 
                   {/* Hover Overlay */}
                   <div className="overlay" style={{
@@ -146,8 +181,11 @@ export default function GalleryPage() {
                     display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                     opacity: 0, transition: "opacity 0.4s ease", padding: "32px", textAlign: "center"
                   }}>
-                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "8px" }}>
                       {item.category}
+                    </span>
+                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: CREAM, opacity: 0.6, marginBottom: "16px" }}>
+                      Event: {item.event}
                     </span>
                     <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", fontWeight: 300, color: CREAM, margin: 0 }}>
                       {item.caption}

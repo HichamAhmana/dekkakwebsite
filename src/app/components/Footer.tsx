@@ -172,7 +172,7 @@ export default function Footer() {
             opacity: 0.35,
             letterSpacing: "0.05em",
           }}>
-            © {new Date().getFullYear()} Mohamed Dekkak. All rights reserved.
+            © {new Date().getFullYear()} Mohamed Dekkak. All rights reserved by Dekkak.com.
           </span>
           <span style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
