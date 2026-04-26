@@ -303,45 +303,79 @@ export default function Engagement() {
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.333%"]);
 
   return (
-    <section ref={targetRef} style={{ height: "450vh", position: "relative", background: "var(--bg-color)" }}>
-      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", display: "flex", alignItems: "center" }}>
+    <>
+      {/* ── DESKTOP: Horizontal Scroll ── */}
+      <section className="desktop-only" ref={targetRef} style={{ height: "450vh", position: "relative", background: "var(--bg-color)" }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", display: "flex", alignItems: "center" }}>
+          <ParticleField />
+          <motion.div style={{ x, display: "flex", height: "100%", width: "600vw" }}>
+            {/* SLIDE 0: Intro */}
+            <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
+                <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
+                <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
+                <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
+              </div>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(50px, 8vw, 110px)", fontWeight: 300, color: CREAM, margin: "0 0 20px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
+              <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
+              <div style={{ position: "absolute", bottom: "10%", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", opacity: 0.5 }}>
+                <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD }}>Scroll</span>
+                <div style={{ width: "1px", height: "40px", background: `linear-gradient(to bottom, ${GOLD}, transparent)` }} />
+              </div>
+            </div>
+
+            {/* SLIDES 1-4: Cards */}
+            {ENGAGEMENT_ITEMS.map((item, i) => (
+              <div key={item.id} style={{ width: "100vw", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5vw", position: "relative", zIndex: 1 }}>
+                <EngagementCard item={item} index={i} />
+              </div>
+            ))}
+
+            {/* SLIDE 5: Outro */}
+            <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 300, color: CREAM, margin: "0 0 32px", lineHeight: 1 }}>Discover Our Impact</h2>
+              <Link href="/impact" style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, border: `1px solid ${GOLD}44`, padding: "20px 56px", transition: "all 0.3s ease" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = GOLD; (e.currentTarget as HTMLAnchorElement).style.color = "var(--bg-color)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}>
+                View All Engagements
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── MOBILE: Vertical Stack ── */}
+      <section className="mobile-only" style={{ flexDirection: "column", background: "var(--bg-color)", position: "relative", padding: "80px 0", overflow: "hidden" }}>
         <ParticleField />
-        <motion.div style={{ x, display: "flex", height: "100%", width: "600vw" }}>
-
-          {/* SLIDE 0: Intro */}
-          <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
-              <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
-              <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
-              <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
-            </div>
-            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(50px, 8vw, 110px)", fontWeight: 300, color: CREAM, margin: "0 0 20px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
-            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
-            <div style={{ position: "absolute", bottom: "10%", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", opacity: 0.5 }}>
-              <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD }}>Scroll</span>
-              <div style={{ width: "1px", height: "40px", background: `linear-gradient(to bottom, ${GOLD}, transparent)` }} />
-            </div>
+        
+        {/* Intro */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 20px 80px", position: "relative", zIndex: 1, textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
+            <div style={{ width: "32px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
+            <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
+            <div style={{ width: "32px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
           </div>
+          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(44px, 12vw, 60px)", fontWeight: 300, color: CREAM, margin: "0 0 20px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
+          <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
+        </div>
 
-          {/* SLIDES 1-4: Cards */}
+        {/* Cards */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "48px", padding: "0 20px", position: "relative", zIndex: 1 }}>
           {ENGAGEMENT_ITEMS.map((item, i) => (
-            <div key={item.id} style={{ width: "100vw", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5vw", position: "relative", zIndex: 1 }}>
-              <EngagementCard item={item} index={i} />
-            </div>
+            <EngagementCard key={item.id} item={item} index={i} />
           ))}
+        </div>
 
-          {/* SLIDE 5: Outro */}
-          <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
-            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 300, color: CREAM, margin: "0 0 32px", lineHeight: 1 }}>Discover Our Impact</h2>
-            <Link href="/impact" style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, border: `1px solid ${GOLD}44`, padding: "20px 56px", transition: "all 0.3s ease" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = GOLD; (e.currentTarget as HTMLAnchorElement).style.color = "var(--bg-color)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}>
-              View All Engagements
-            </Link>
-          </div>
-
-        </motion.div>
-      </div>
-    </section>
+        {/* Outro */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "100px 20px 40px", position: "relative", zIndex: 1 }}>
+          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(32px, 8vw, 40px)", fontWeight: 300, color: CREAM, margin: "0 0 32px", lineHeight: 1, textAlign: "center" }}>Discover Our Impact</h2>
+          <Link href="/impact" style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, border: `1px solid ${GOLD}44`, padding: "20px 40px", transition: "all 0.3s ease", textAlign: "center" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = GOLD; (e.currentTarget as HTMLAnchorElement).style.color = "var(--bg-color)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}>
+            View All Engagements
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
