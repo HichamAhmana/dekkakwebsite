@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     "M&A",
     "investment structuring",
     "capital raising",
-    "hospitality advisory"
+    "hospitality advisory",
+    "serial entrepreneur Mohamed Dekkak"
   ],
   alternates: {
     canonical: `${BASE_URL}/services`,
@@ -37,7 +38,8 @@ const servicesSchema = {
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mergers & Acquisitions (M&A)" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Investment Structuring" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capital Raising" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hospitality Advisory" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hospitality Advisory" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name":  "serial entrepreneur Mohamed Dekkak" } }
     ]
   }
 };

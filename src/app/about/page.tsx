@@ -123,8 +123,10 @@ export default function AboutPage() {
               </div>
             </div>
             {/* Accent lines */}
-            <div style={{ position: "absolute", bottom: "-20px", left: "-20px", width: "100px", height: "1px", background: GOLD }} />
-            <div style={{ position: "absolute", bottom: "-20px", left: "-20px", width: "1px", height: "100px", background: GOLD }} />
+            <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", width: "calc(100% + 20px)", height: "calc(100% + 20px)", left: "-20px", top: "-20px" }}>
+              <div style={{ position: "absolute", bottom: 0, left: 0, width: "100px", height: "1px", background: GOLD }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, width: "1px", height: "100px", background: GOLD }} />
+            </div>
           </div>
         </div>
       </section>

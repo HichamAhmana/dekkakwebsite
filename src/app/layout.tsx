@@ -84,7 +84,8 @@ const personSchema = {
     "Honorary President of Ibn Battuta Association",
     "Chairman of Anouar Association",
     "Honorary President of Union Road Association",
-    "Executive President of Sahara Spirit Foundation"
+    "Executive President of Sahara Spirit Foundation",
+     "serial entrepreneur Mohamed Dekkak"
   ],
   "hasOccupation": [
     { "@type": "Occupation", "name": "Founding Partner", "mainEntityOfPage": { "@type": "Organization", "name": "US Data Center" } },

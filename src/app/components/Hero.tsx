@@ -51,38 +51,40 @@ export default function Hero() {
       background: "radial-gradient(ellipse at 65% 40%, #1a1410 0%, var(--bg-color) 70%)",
     }}>
 
-      {/* ── Interactive mouse-following gold glow ── */}
-      <div style={{
-        position: "absolute", left: 0, top: 0,
-        width: "520px", height: "520px",
-        background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 68%)",
-        transform: `translate(${mouse.x - 260}px, ${mouse.y - 260}px)`,
-        transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
-        pointerEvents: "none", zIndex: 1,
-      }} />
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
+        {/* ── Interactive mouse-following gold glow ── */}
+        <div style={{
+          position: "absolute", left: 0, top: 0,
+          width: "520px", height: "520px",
+          background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 68%)",
+          transform: `translate(${mouse.x - 260}px, ${mouse.y - 260}px)`,
+          transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+          pointerEvents: "none", zIndex: 1,
+        }} />
 
-      {/* ── Floating ambient orbs ── */}
-      <div style={{
-        position: "absolute", top: "18%", right: "12%",
-        width: "340px", height: "340px",
-        background: "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)",
-        animation: "orbFloat1 14s ease-in-out infinite",
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", bottom: "28%", left: "6%",
-        width: "220px", height: "220px",
-        background: "radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)",
-        animation: "orbFloat2 18s ease-in-out infinite",
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", top: "55%", right: "28%",
-        width: "160px", height: "160px",
-        background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)",
-        animation: "orbFloat3 11s ease-in-out infinite",
-        pointerEvents: "none",
-      }} />
+        {/* ── Floating ambient orbs ── */}
+        <div style={{
+          position: "absolute", top: "18%", right: "12%",
+          width: "340px", height: "340px",
+          background: "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)",
+          animation: "orbFloat1 14s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute", bottom: "28%", left: "6%",
+          width: "220px", height: "220px",
+          background: "radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)",
+          animation: "orbFloat2 18s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute", top: "55%", right: "28%",
+          width: "160px", height: "160px",
+          background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)",
+          animation: "orbFloat3 11s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+      </div>
 
       {/* ── Static gold glow layers ── */}
       <div style={{

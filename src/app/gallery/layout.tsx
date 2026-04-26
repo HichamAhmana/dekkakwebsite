@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Anouar Association gallery",
     "Mohamed Dekkak Marrakech",
     "Mohamed Dekkak Abu Dhabi",
+    "serial entrepreneur Mohamed Dekkak",
   ],
   alternates: {
     canonical: `${BASE_URL}/gallery`,

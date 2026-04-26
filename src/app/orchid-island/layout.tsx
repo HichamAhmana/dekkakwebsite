@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     "landmark development",
     "Dekkak property investment",
     "architectural excellence",
+    "serial entrepreneur Mohamed Dekkak",
   ],
   alternates: {
     canonical: `${BASE_URL}/orchid-island`,

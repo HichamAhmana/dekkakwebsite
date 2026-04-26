@@ -58,7 +58,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <div style={{
               position: "absolute",
               top: "50%",
-              width: "100vw",
+              width: "100%",
               height: "1px",
               background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)`,
               animation: "bridgeDraw 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",

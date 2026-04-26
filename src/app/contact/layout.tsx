@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     "Adgeco Group contact",
     "business partnership UAE",
     "media request Mohamed Dekkak",
+    "serial entrepreneur Mohamed Dekkak",
   ],
   alternates: {
     canonical: `${BASE_URL}/contact`,

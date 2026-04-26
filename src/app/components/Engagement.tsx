@@ -290,7 +290,9 @@ function ParticleField() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
       {particles.map((p) => (<div key={p.id} style={{ position: "absolute", left: `${p.x}%`, top: `${p.y}%`, width: `${p.size}px`, height: `${p.size}px`, borderRadius: "50%", background: GOLD, opacity: p.opacity, animation: `engagementFloat${(p.id % 3) + 1} ${p.duration}s ${p.delay}s infinite ease-in-out` }} />))}
-      <div style={{ position: "absolute", width: "800px", height: "800px", borderRadius: "50%", background: `radial-gradient(circle, ${GOLD}06 0%, transparent 70%)`, top: "-300px", right: "-200px", animation: "orbFloat1 14s infinite ease-in-out" }} />
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", width: "800px", height: "800px", borderRadius: "50%", background: `radial-gradient(circle, ${GOLD}06 0%, transparent 70%)`, top: "-300px", right: "-200px", animation: "orbFloat1 14s infinite ease-in-out" }} />
+      </div>
     </div>
   );
 }
