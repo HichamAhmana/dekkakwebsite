@@ -297,6 +297,9 @@ function ParticleField() {
   );
 }
 
+/* ─────────────────────────────────────────────
+   DESKTOP: original horizontal scroll animation
+───────────────────────────────────────────── */
 function EngagementDesktop() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
@@ -346,6 +349,10 @@ function EngagementDesktop() {
   );
 }
 
+/* ─────────────────────────────────────────────
+   MOBILE: cards slide in from right via
+   IntersectionObserver — no scroll pinning
+───────────────────────────────────────────── */
 function MobileSlideCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -355,21 +362,18 @@ function MobileSlideCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; 
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); else setVisible(false); },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(80px)",
-        transition: `opacity 0.6s ease ${index * 0.05}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${index * 0.05}s`,
-      }}
-    >
+    <div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateX(0)" : "translateX(80px)",
+      transition: `opacity 0.65s ease ${index * 0.06}s, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${index * 0.06}s`,
+    }}>
       <EngagementCard item={item} index={index} />
     </div>
   );
@@ -392,7 +396,7 @@ function EngagementMobile() {
       </div>
 
       {/* Cards slide in from the right as they enter the viewport */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "40px", padding: "0 20px", position: "relative", zIndex: 1 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "40px", padding: "0 20px", position: "relative", zIndex: 1, overflow: "hidden" }}>
         {ENGAGEMENT_ITEMS.map((item, i) => (
           <MobileSlideCard key={item.id} item={item} index={i} />
         ))}
@@ -411,6 +415,10 @@ function EngagementMobile() {
   );
 }
 
+/* ─────────────────────────────────────────────
+   ROUTER: detect mobile on client, render
+   the appropriate layout
+───────────────────────────────────────────── */
 export default function Engagement() {
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -423,8 +431,6 @@ export default function Engagement() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Render nothing until mounted to avoid SSR mismatch
   if (!mounted) return null;
-
   return isMobile ? <EngagementMobile /> : <EngagementDesktop />;
 }
