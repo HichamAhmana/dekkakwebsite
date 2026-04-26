@@ -297,51 +297,41 @@ function ParticleField() {
   );
 }
 
-export default function Engagement() {
+function EngagementDesktop() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.333%"]);
 
   return (
-    <>
-      <style>{`
-        @media (max-width: 768px) {
-          .engagement-section { height: auto !important; }
-          .engagement-sticky { position: relative !important; height: auto !important; display: block !important; padding: 60px 0 !important; overflow: hidden !important; }
-          .engagement-motion { width: 100% !important; height: auto !important; display: flex !important; flex-direction: column !important; transform: none !important; gap: 80px !important; }
-          .engagement-slide { width: 100% !important; height: auto !important; padding: 0 24px !important; }
-          .engagement-scroll-indicator { display: none !important; }
-        }
-      `}</style>
-      <section className="engagement-section" ref={targetRef} style={{ height: "450vh", position: "relative", background: "var(--bg-color)" }}>
-        <div className="engagement-sticky" style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", display: "flex", alignItems: "center" }}>
-          <ParticleField />
-          <motion.div className="engagement-motion" style={{ x, display: "flex", height: "100%", width: "600vw" }}>
+    <section ref={targetRef} style={{ height: "450vh", position: "relative", background: "var(--bg-color)" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", display: "flex", alignItems: "center" }}>
+        <ParticleField />
+        <motion.div style={{ x, display: "flex", height: "100%", width: "600vw" }}>
 
-            {/* SLIDE 0: Intro */}
-            <div className="engagement-slide" style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
-                <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
-                <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
-                <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
-              </div>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(50px, 8vw, 110px)", fontWeight: 300, color: CREAM, margin: "0 0 20px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
-              <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
-              <div className="engagement-scroll-indicator" style={{ position: "absolute", bottom: "10%", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", opacity: 0.5 }}>
-                <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD }}>Scroll</span>
-                <div style={{ width: "1px", height: "40px", background: `linear-gradient(to bottom, ${GOLD}, transparent)` }} />
-              </div>
+          {/* SLIDE 0: Intro */}
+          <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
+              <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
+              <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
+              <div style={{ width: "48px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
             </div>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(50px, 8vw, 110px)", fontWeight: 300, color: CREAM, margin: "0 0 20px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
+            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
+            <div style={{ position: "absolute", bottom: "10%", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", opacity: 0.5 }}>
+              <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD }}>Scroll</span>
+              <div style={{ width: "1px", height: "40px", background: `linear-gradient(to bottom, ${GOLD}, transparent)` }} />
+            </div>
+          </div>
 
           {/* SLIDES 1-4: Cards */}
           {ENGAGEMENT_ITEMS.map((item, i) => (
-            <div key={item.id} className="engagement-slide" style={{ width: "100vw", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5vw", position: "relative", zIndex: 1 }}>
+            <div key={item.id} style={{ width: "100vw", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5vw", position: "relative", zIndex: 1 }}>
               <EngagementCard item={item} index={i} />
             </div>
           ))}
 
           {/* SLIDE 5: Outro */}
-          <div className="engagement-slide" style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
+          <div style={{ width: "100vw", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 300, color: CREAM, margin: "0 0 32px", lineHeight: 1 }}>Discover Our Impact</h2>
             <Link href="/impact" style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, border: `1px solid ${GOLD}44`, padding: "20px 56px", transition: "all 0.3s ease" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = GOLD; (e.currentTarget as HTMLAnchorElement).style.color = "var(--bg-color)"; }}
@@ -353,6 +343,83 @@ export default function Engagement() {
         </motion.div>
       </div>
     </section>
-    </>
   );
+}
+
+function MobileSlideCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); else setVisible(false); },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateX(0)" : "translateX(80px)",
+      transition: `opacity 0.65s ease ${index * 0.06}s, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${index * 0.06}s`,
+    }}>
+      <EngagementCard item={item} index={index} />
+    </div>
+  );
+}
+
+function EngagementMobile() {
+  return (
+    <section style={{ position: "relative", background: "var(--bg-color)", padding: "80px 0", overflow: "hidden" }}>
+      <ParticleField />
+
+      {/* Intro */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "40px 24px 60px", position: "relative", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
+          <div style={{ width: "32px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />
+          <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>Get to Know Us</span>
+          <div style={{ width: "32px", height: "1px", background: `linear-gradient(90deg, ${GOLD}, transparent)` }} />
+        </div>
+        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(44px, 12vw, 60px)", fontWeight: 300, color: CREAM, margin: "0 0 16px", lineHeight: 0.95, letterSpacing: "-0.02em" }}>Engagement</h2>
+        <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", letterSpacing: "0.05em", color: CREAM, opacity: 0.6, fontStyle: "italic" }}>From compassion to action</p>
+      </div>
+
+      {/* Cards slide in from the right as they enter the viewport */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "40px", padding: "0 20px", position: "relative", zIndex: 1, overflow: "hidden" }}>
+        {ENGAGEMENT_ITEMS.map((item, i) => (
+          <MobileSlideCard key={item.id} item={item} index={i} />
+        ))}
+      </div>
+
+      {/* Outro */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "80px 24px 40px", position: "relative", zIndex: 1 }}>
+        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(30px, 8vw, 40px)", fontWeight: 300, color: CREAM, margin: "0 0 32px", lineHeight: 1, textAlign: "center" }}>Discover Our Impact</h2>
+        <Link href="/impact" style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, border: `1px solid ${GOLD}44`, padding: "20px 40px", transition: "all 0.3s ease" }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = GOLD; (e.currentTarget as HTMLAnchorElement).style.color = "var(--bg-color)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}>
+          View All Engagements
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export default function Engagement() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    setMounted(true);
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  if (!mounted) return null;
+  return isMobile ? <EngagementMobile /> : <EngagementDesktop />;
 }
