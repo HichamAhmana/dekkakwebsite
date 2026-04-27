@@ -93,25 +93,26 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Name</label>
-                  <input type="text" required style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <label htmlFor="contact-name" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Name</label>
+                  <input id="contact-name" type="text" required title="Your name" placeholder="Your full name" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Email</label>
-                  <input type="email" required style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <label htmlFor="contact-email" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Email</label>
+                  <input id="contact-email" type="email" required title="Your email address" placeholder="your@email.com" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Subject</label>
-                  <select style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
+                  <label htmlFor="contact-subject" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Subject</label>
+                  <select id="contact-subject" title="Select inquiry type" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
                     <option style={{ background: "#111" }}>Business Alliance</option>
+                    <option style={{ background: "#111" }}>Client</option>
                     <option style={{ background: "#111" }}>Philanthropic Inquiry</option>
                     <option style={{ background: "#111" }}>Press / Media</option>
                     <option style={{ background: "#111" }}>General Information</option>
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Message</label>
-                  <textarea required rows={4} style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", resize: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <label htmlFor="contact-message" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Message</label>
+                  <textarea id="contact-message" required rows={4} title="Your message" placeholder="Write your message here..." style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", resize: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
                 </div>
                 
                 <button type="submit" disabled={formState === "submitting"} style={{

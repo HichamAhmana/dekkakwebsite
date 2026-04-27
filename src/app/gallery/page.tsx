@@ -10,6 +10,12 @@ const CREAM = "var(--text-color)";
 import { getFlickrPhotos } from "../actions/flickr";
 import { useMobile } from "../hooks/useMobile";
 
+type FlickrItem = {
+  title: string;
+  media?: { m?: string };
+  link?: string;
+};
+
 type GalleryItem = {
   id: string;
   category: string;
@@ -33,7 +39,7 @@ export default function GalleryPage() {
       const items = await getFlickrPhotos();
       if (!items) return;
       
-      const formatted = items.map((item: any, i: number) => {
+      const formatted = items.map((item: FlickrItem, i: number) => {
         // Randomize aspect ratio slightly for masonry feel
         const aspects = ["aspect-[4/5]", "aspect-[16/9]", "aspect-[4/3]"];
         const aspect = aspects[i % aspects.length];

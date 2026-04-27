@@ -3,18 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-function useMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return isMobile;
-}
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -121,7 +110,7 @@ export default function ImpactPage() {
             fontSize: isMobile ? "15px" : "20px", fontWeight: 300, lineHeight: 1.6,
             color: CREAM, margin: "0 0 32px", fontStyle: "italic"
           }}>
-            "A boy from Marrakech built a global business empire — and never forgot where he came from."
+            &ldquo;A boy from Marrakech built a global business empire — and never forgot where he came from.&rdquo;
           </h2>
           <div style={{ width: "60px", height: "1px", background: GOLD, margin: "0 auto 32px" }} />
           <p style={{

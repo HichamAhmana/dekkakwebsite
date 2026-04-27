@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -60,20 +61,21 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 }
 
 export default function Footer() {
+  const isMobile = useMobile();
   return (
     <footer style={{
       width: "100%",
       borderTop: "1px solid rgba(201,168,76,0.12)",
-      padding: "64px 40px 40px",
+      padding: isMobile ? "48px 20px 32px" : "64px 40px 40px",
     }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
 
         {/* Top row */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1.5fr 2fr",
-          gap: "80px",
-          marginBottom: "64px",
+          gridTemplateColumns: isMobile ? "1fr" : "1.5fr 2fr",
+          gap: isMobile ? "40px" : "80px",
+          marginBottom: "48px",
         }}>
           {/* Left */}
           <div>
@@ -111,7 +113,7 @@ export default function Footer() {
           </div>
 
           {/* Right — three link columns */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "40px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
             <div>
               <div style={{
                 fontFamily: "var(--font-dm-sans), sans-serif",
