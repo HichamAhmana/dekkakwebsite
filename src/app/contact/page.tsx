@@ -17,11 +17,40 @@ export default function ContactPage() {
     return () => clearTimeout(t);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormState("submitting");
-    setTimeout(() => setFormState("success"), 1500);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setFormState("submitting");
+
+  const form = e.target as HTMLFormElement;
+
+  const data = {
+    name: (form.elements.namedItem("contact-name") as HTMLInputElement).value,
+    email: (form.elements.namedItem("contact-email") as HTMLInputElement).value,
+    subject: (form.elements.namedItem("contact-subject") as HTMLSelectElement).value,
+    message: (form.elements.namedItem("contact-message") as HTMLTextAreaElement).value,
   };
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      setFormState("success");
+    } else {
+      setFormState("idle");
+      alert("Failed to send message");
+    }
+  } catch (err) {
+    console.error(err);
+    setFormState("idle");
+  }
+};
+
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
