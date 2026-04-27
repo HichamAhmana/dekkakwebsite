@@ -14,12 +14,26 @@ const COMPANIES = [
     description: "Founded in 1992 in Abu Dhabi, Adgeco Group has successfully grown many startup foreign businesses and ventures into full-fledged companies across Arab Countries, Europe, Africa, and North America. Key projects include Abu Dhabi International Airport runway, Civil Works for Oil Terminal 2 at Port Fujairah, and System Floats Concrete at Khalifa Port.",
     link: "adgeco.com"
   },
+   {
+    name: "Orchid Island Real Estates Agency",
+    role: "Founder & Chairman",
+    sector: "Real Estate — UAE",
+    description: "A premier real estate agency managing luxury and commercial property portfolios, providing high-end brokerage and property management services.",
+    link:"orchidisland.immo"
+  },
   {
     name: "Gate One Properties",
     role: "President",
     sector: "Real Estate — UAE",
     description: "One of the leading real estate firms in the UAE, offering property services to investors and companies across a diverse portfolio.",
     link: "gateone.ae"
+  },
+  {
+    name: "Horizonte Invertido",
+    role: "Founding Partner",
+    sector: "Consulting • Real Estate • Hospitality • Investment — Spain",
+    description: "A strategic Spanish holding and consultancy firm focused on bridging high-value real estate, premium hospitality, and structured investment opportunities between European and MENA markets.",
+    link:"horizonteinvertido.com"  
   },
   {
     name: "The American University – Marrakech",
@@ -38,7 +52,7 @@ const COMPANIES = [
     role: "Founding Partner",
     sector: "Technology Infrastructure",
     description: "Strategic investment in advanced data infrastructure, supporting the digital transformation of the region.",
-  }
+  },
 ];
 
 const ALLIANCES = [

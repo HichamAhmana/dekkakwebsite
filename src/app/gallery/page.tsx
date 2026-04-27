@@ -7,55 +7,54 @@ import Footer from "../components/Footer";
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
-const GALLERY_ITEMS = [
-  { 
-    id: 1, 
-    category: "Diplomacy", 
-    aspect: "aspect-[4/5]", 
-    caption: "Marrakech International Film Festival", 
-    event: "Cultural Diplomacy & Arts",
-    src: "/dekkak-cinema-marrakech-festival.png" 
-  },
-  { 
-    id: 2, 
-    category: "Philanthropy", 
-    aspect: "aspect-[4/5]", 
-    caption: "Anouar Association Initiative", 
-    event: "Community Welfare Event",
-    src: "/mohamed-dekkak-anouar-association.png" 
-  },
-  { 
-    id: 3, 
-    category: "Business", 
-    aspect: "aspect-[4/5]", 
-    caption: "Adgeco Group Leadership", 
-    event: "Strategic Corporate Meeting",
-    src: "/mohamed-dekkak-adgeco-group.png" 
-  },
-  { 
-    id: 4, 
-    category: "Business", 
-    aspect: "aspect-[4/5]", 
-    caption: "AmCham Abu Dhabi", 
-    event: "International Business Council",
-    src: "/mohamed-dekkak-amcham.png" 
-  },
-];
+import { getFlickrPhotos } from "../actions/flickr";
 
-const CATEGORIES = ["All", "Business", "Philanthropy", "Diplomacy"];
+type GalleryItem = {
+  id: string;
+  category: string;
+  aspect: string;
+  caption: string;
+  event: string;
+  src: string;
+  link: string;
+};
+
+const CATEGORIES = ["All", "Photos"];
 
 export default function GalleryPage() {
   const [loaded, setLoaded] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 120);
-    return () => clearTimeout(t);
+    async function loadGallery() {
+      const items = await getFlickrPhotos();
+      if (!items) return;
+      
+      const formatted = items.map((item: any, i: number) => {
+        // Randomize aspect ratio slightly for masonry feel
+        const aspects = ["aspect-[4/5]", "aspect-[16/9]", "aspect-[4/3]"];
+        const aspect = aspects[i % aspects.length];
+        
+        return {
+          id: `gallery-${i}`,
+          category: "Photos",
+          aspect: aspect,
+          caption: item.title,
+          event: "Flickr Upload",
+          src: item.media?.m?.replace("_m.jpg", "_b.jpg") || "",
+          link: item.link
+        };
+      });
+      setGalleryItems(formatted);
+      setTimeout(() => setLoaded(true), 120);
+    }
+    loadGallery();
   }, []);
 
   const filteredItems = activeCategory === "All" 
-    ? GALLERY_ITEMS 
-    : GALLERY_ITEMS.filter(item => item.category === activeCategory);
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === activeCategory);
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
@@ -123,9 +122,7 @@ export default function GalleryPage() {
       <section style={{ padding: "0 40px 120px" }}>
         <div style={{
           maxWidth: "1400px", margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-          gap: "24px", alignItems: "start"
-        }}>
+        }} className="masonry-grid">
           {filteredItems.map((item, i) => {
             // Determine aspect ratio inline styles for placeholder
             let pb = "100%"; // square
@@ -141,7 +138,11 @@ export default function GalleryPage() {
                 transform: loaded ? "translateY(0)" : "translateY(30px)",
                 transition: `all 0.8s ease ${0.4 + (i % 4) * 0.1}s`,
                 cursor: "pointer",
+                breakInside: "avoid",
+                pageBreakInside: "avoid",
+                marginBottom: "24px",
               }}
+              onClick={() => window.open(item.link, "_blank")}
               onMouseEnter={(e) => {
                 const overlay = e.currentTarget.querySelector('.overlay') as HTMLElement;
                 if (overlay) overlay.style.opacity = "1";

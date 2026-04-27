@@ -4,17 +4,51 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { events } from "../data/events";
+import { getFlickrPhotos } from "../actions/flickr";
 
+type BlogPost = {
+  id: string;
+  title: string;
+  description: string;
+  image: string | null;
+  shortDate: string;
+  monthYear: string;
+  href: string;
+  location: string;
+  date: string;
+};
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
 export default function BlogPage() {
   const [loaded, setLoaded] = useState(false);
+  const [events, setEvents] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 80);
-    return () => clearTimeout(t);
+    async function loadPosts() {
+      const items = await getFlickrPhotos();
+      if (!items) return;
+      
+      const formatted = items.map((item: any, i: number) => {
+        const date = new Date(item.date_taken || item.published);
+        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        
+        return {
+          id: `flickr-${i}`,
+          title: item.title || "Photo Update",
+          description: item.title.length > 10 ? item.title : "Mohammed Dekkak Flickr Gallery Update.",
+          image: item.media?.m?.replace("_m.jpg", "_b.jpg") || null,
+          shortDate: date.getDate().toString().padStart(2, "0"),
+          monthYear: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
+          href: item.link || "https://www.flickr.com/photos/adgeco/",
+          location: "Abu Dhabi",
+          date: `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+        };
+      });
+      setEvents(formatted);
+      setTimeout(() => setLoaded(true), 80);
+    }
+    loadPosts();
   }, []);
 
   return (
@@ -129,7 +163,7 @@ export default function BlogPage() {
   );
 }
 
-function PostCard({ event, idx, loaded }: { event: typeof events[0]; idx: number; loaded: boolean }) {
+function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded: boolean }) {
   const [hovered, setHovered] = useState(false);
 
   return (

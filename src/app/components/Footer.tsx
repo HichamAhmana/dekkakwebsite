@@ -30,6 +30,7 @@ const SOCIALS = [
   { label: "Facebook",      href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#" },
   { label: "Pinterest",     href: "https://www.pinterest.com/dekkak/" },
   { label: "YouTube",       href: "https://www.youtube.com/user/AdgecoGroup" },
+  { label: "Flickr",       href: "https://www.flickr.com/photos/adgeco/" },
 ];
 
 function FooterLink({ label, href }: { label: string; href: string }) {
