@@ -87,7 +87,7 @@ const ENGAGEMENT_ITEMS = [
     icon: "◈",
     image: "/mohamed-dekkak-adgeco-group.png",
     imagePosition: "center 18%",
-    
+
   },
   {
     id: "amcham",
@@ -95,7 +95,7 @@ const ENGAGEMENT_ITEMS = [
     tag: "Global Diplomacy",
     body: "American Business Group (AmCham) Abu Dhabi boosts United Arab Emirates' connectivity and business opportunities, bridging the east and west through strategic commercial diplomacy.",
     href: "/about",
-    accent: "#6A9FCB",
+    accent: "#C9A84C",
     icon: "◇",
     image: "/mohamed-dekkak-amcham.png",
     imagePosition: "center center",
@@ -106,7 +106,7 @@ const ENGAGEMENT_ITEMS = [
     tag: "Philanthropy",
     body: "The Anouar Association is a nonprofit organization that has been working for the poor and downtrodden for a long time, delivering education, healthcare and dignity to those in need.",
     href: "/impact",
-    accent: "#8BC4A8",
+    accent: "#C9A84C",
     icon: "◉",
     image: "/mohamed-dekkak-anouar-association.png",
     imagePosition: "center top",
@@ -117,7 +117,7 @@ const ENGAGEMENT_ITEMS = [
     tag: "Health & Wellness",
     body: "Pioneering state-of-the-art medical facilities and fostering global health partnerships to ensure accessible, world-class care for communities across the region.",
     href: "/healthcare",
-    accent: "#E07A5F",
+    accent: "#C9A84C",
     icon: "✚",
     image: null as string | null,
     imagePosition: "center center",
