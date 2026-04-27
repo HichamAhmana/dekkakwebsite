@@ -3,6 +3,18 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+function useMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
+
 const GOLD = "#C9A84C";
 const CREAM = "#F5F0E8";
 
@@ -74,6 +86,7 @@ const COUNCILS = [
 
 export default function BusinessPage() {
   const [loaded, setLoaded] = useState(false);
+  const isMobile = useMobile();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
@@ -126,32 +139,32 @@ export default function BusinessPage() {
       </section>
 
       {/* Owned Companies Section */}
-      <section style={{ padding: "80px 40px" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gap: "40px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "80px 40px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gap: isMobile ? "24px" : "40px" }}>
           {COMPANIES.map((company, i) => (
             <div key={i} style={{
               background: "rgba(255,255,255,0.02)",
               border: "1px solid rgba(255,255,255,0.05)",
-              padding: "60px",
+              padding: isMobile ? "28px 20px" : "60px",
               display: "grid",
-              gridTemplateColumns: "1fr 2fr",
-              gap: "40px",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr",
+              gap: isMobile ? "20px" : "40px",
               opacity: loaded ? 1 : 0,
               transform: loaded ? "translateY(0)" : "translateY(20px)",
               transition: `all 0.8s ease ${0.4 + i * 0.1}s`
             }}>
               <div>
-                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "36px", fontWeight: 400, color: CREAM, margin: "0 0 16px" }}>{company.name}</h3>
-                <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "8px" }}>{company.role}</div>
-                <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: CREAM, opacity: 0.5 }}>{company.sector}</div>
+                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: isMobile ? "26px" : "36px", fontWeight: 400, color: CREAM, margin: "0 0 12px", lineHeight: 1.2 }}>{company.name}</h3>
+                <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, marginBottom: "6px" }}>{company.role}</div>
+                <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: CREAM, opacity: 0.5, lineHeight: 1.5 }}>{company.sector}</div>
               </div>
               <div>
-                <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "15px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.8, margin: "0 0 24px" }}>
+                <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: isMobile ? "13px" : "15px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.8, margin: "0 0 20px" }}>
                   {company.description}
                 </p>
                 {company.link && (
                   <a href={`http://${company.link}`} target="_blank" rel="noreferrer" style={{
-                    fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, borderBottom: `1px solid ${GOLD}44`, paddingBottom: "4px"
+                    fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, borderBottom: `1px solid ${GOLD}44`, paddingBottom: "4px", wordBreak: "break-all"
                   }}>
                     Visit {company.link}
                   </a>
@@ -163,7 +176,7 @@ export default function BusinessPage() {
       </section>
 
       {/* Strategic Alliances */}
-      <section style={{ padding: "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "80px" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", fontWeight: 300, color: CREAM, margin: "0 0 16px" }}>Strategic Alliances</h2>
@@ -183,7 +196,7 @@ export default function BusinessPage() {
       </section>
 
       {/* Council Memberships Logo Wall (Text based for now) */}
-      <section style={{ padding: "80px 40px", overflow: "hidden" }}>
+      <section style={{ padding: isMobile ? "50px 20px" : "80px 40px", overflow: "hidden" }}>
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "36px", fontWeight: 300, color: CREAM, margin: "0" }}>Global Network</h2>
         </div>
