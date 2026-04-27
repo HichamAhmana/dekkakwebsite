@@ -36,11 +36,9 @@ function PlaceholderPattern({
 function CardBackground({
   item,
   hovered,
-  scanKey,
 }: {
   item: (typeof ENGAGEMENT_ITEMS)[0];
   hovered: boolean;
-  scanKey: number;
 }) {
   return (
     <>
@@ -65,9 +63,6 @@ function CardBackground({
       )}
       <div style={{ position: "absolute", inset: 0, zIndex: 1, background: hovered ? "linear-gradient(135deg, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.55) 100%)" : "linear-gradient(135deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.78) 100%)", transition: "background 1s ease" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `radial-gradient(ellipse at 50% 90%, ${item.accent}20 0%, transparent 65%)`, opacity: hovered ? 1 : 0.3, transition: "opacity 0.9s ease" }} />
-      {hovered && (
-        <div key={scanKey} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, transparent 0%, ${item.accent} 40%, #fff 50%, ${item.accent} 60%, transparent 100%)`, animation: "imageScanline 1.4s ease-out forwards", zIndex: 6, pointerEvents: "none" }} />
-      )}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 6, padding: "12px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s", borderTop: `1px solid ${item.accent}22`, background: "linear-gradient(to top, rgba(10,10,10,0.8), transparent)" }}>
         <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "8px", fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: item.accent }}>{item.tag}</span>
         <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "8px", letterSpacing: "0.25em", textTransform: "uppercase", color: CREAM, opacity: 0.35 }}>{item.image ? "Abu Dhabi · Est. 1992" : "Photo Coming Soon"}</span>
@@ -127,7 +122,6 @@ const ENGAGEMENT_ITEMS = [
 function EngagementCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [scanKey, setScanKey] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -135,8 +129,6 @@ function EngagementCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; i
     if (!rect) return;
     setMousePos({ x: ((e.clientX - rect.left) / rect.width) * 100, y: ((e.clientY - rect.top) / rect.height) * 100 });
   };
-
-  useEffect(() => { if (hovered) setScanKey((k) => k + 1); }, [hovered]);
 
   return (
     <div
@@ -164,7 +156,7 @@ function EngagementCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; i
         textAlign: "center",
       }}
     >
-      <CardBackground item={item} hovered={hovered} scanKey={scanKey} />
+      <CardBackground item={item} hovered={hovered} />
       {hovered && (
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: `radial-gradient(circle 300px at ${mousePos.x}% ${mousePos.y}%, ${item.accent}15, transparent 70%)`, pointerEvents: "none", transition: "none" }} />
       )}
