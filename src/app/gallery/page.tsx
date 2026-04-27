@@ -8,6 +8,7 @@ const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
 import { getFlickrPhotos } from "../actions/flickr";
+import { useMobile } from "../hooks/useMobile";
 
 type GalleryItem = {
   id: string;
@@ -24,6 +25,7 @@ const CATEGORIES = ["All", "Photos"];
 export default function GalleryPage() {
   const [loaded, setLoaded] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
+  const isMobile = useMobile();
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function GalleryPage() {
 
       {/* Hero Section */}
       <section style={{
-        padding: "200px 40px 80px",
+        padding: isMobile ? "130px 20px 48px" : "200px 40px 80px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -119,7 +121,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Masonry Grid (Approximated with CSS Grid) */}
-      <section style={{ padding: "0 40px 120px" }}>
+      <section style={{ padding: isMobile ? "0 16px 80px" : "0 40px 120px" }}>
         <div style={{
           maxWidth: "1400px", margin: "0 auto",
         }} className="masonry-grid">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getFlickrPhotos } from "../actions/flickr";
+import { useMobile } from "../hooks/useMobile";
 
 type BlogPost = {
   id: string;
@@ -23,6 +24,7 @@ const CREAM = "var(--text-color)";
 export default function BlogPage() {
   const [loaded, setLoaded] = useState(false);
   const [events, setEvents] = useState<BlogPost[]>([]);
+  const isMobile = useMobile();
 
   useEffect(() => {
     async function loadPosts() {
@@ -57,7 +59,7 @@ export default function BlogPage() {
 
       {/* ── Page Hero ── */}
       <header style={{
-        padding: "180px 60px 80px",
+        padding: isMobile ? "120px 20px 48px" : "180px 60px 80px",
         maxWidth: "1200px",
         margin: "0 auto",
         opacity: loaded ? 1 : 0,
@@ -87,8 +89,8 @@ export default function BlogPage() {
         const featured = events.find(e => e.image);
         if (!featured) return null;
         return (
-          <section style={{ padding: "0 60px 80px", maxWidth: "1200px", margin: "0 auto" }}>
-            <Link href={featured.href} style={{ display: "block", position: "relative", overflow: "hidden", height: "520px" }}>
+          <section style={{ padding: isMobile ? "0 16px 40px" : "0 60px 80px", maxWidth: "1200px", margin: "0 auto" }}>
+            <Link href={featured.href} style={{ display: "block", position: "relative", overflow: "hidden", height: isMobile ? "260px" : "520px" }}>
               <Image
                 src={featured.image!}
                 alt={featured.title}
@@ -108,11 +110,11 @@ export default function BlogPage() {
                 background: `linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%)`,
               }} />
 
-              {/* Corner accents */}
-              <div style={{ position: "absolute", top: "24px", left: "24px", width: "48px", height: "1px", background: GOLD }} />
-              <div style={{ position: "absolute", top: "24px", left: "24px", width: "1px", height: "48px", background: GOLD }} />
+              {/* Corner accents - hide on mobile */}
+              {!isMobile && <div style={{ position: "absolute", top: "24px", left: "24px", width: "48px", height: "1px", background: GOLD }} />}
+              {!isMobile && <div style={{ position: "absolute", top: "24px", left: "24px", width: "1px", height: "48px", background: GOLD }} />}
 
-              <div style={{ position: "absolute", bottom: "56px", left: "56px", right: "56px", zIndex: 2 }}>
+              <div style={{ position: "absolute", bottom: isMobile ? "24px" : "56px", left: isMobile ? "20px" : "56px", right: isMobile ? "20px" : "56px", zIndex: 2 }}>
                 <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
                   Featured · {featured.location} · {featured.date}
                 </div>
@@ -139,7 +141,7 @@ export default function BlogPage() {
       })()}
 
       {/* ── All Posts Grid ── */}
-      <section style={{ padding: "0 60px 120px", maxWidth: "1200px", margin: "0 auto" }}>
+      <section style={{ padding: isMobile ? "0 16px 60px" : "0 60px 120px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "48px" }}>
           <div style={{ width: "32px", height: "1px", background: GOLD }} />
           <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: GOLD }}>

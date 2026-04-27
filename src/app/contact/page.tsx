@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -9,6 +10,7 @@ const CREAM = "var(--text-color)";
 export default function ContactPage() {
   const [loaded, setLoaded] = useState(false);
   const [formState, setFormState] = useState("idle");
+  const isMobile = useMobile();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
@@ -26,13 +28,13 @@ export default function ContactPage() {
       <Navbar />
 
       <section style={{
-        padding: "240px 40px 140px",
+        padding: isMobile ? "130px 20px 60px" : "240px 40px 140px",
         display: "flex",
         justifyContent: "center",
       }}>
         <div style={{
           maxWidth: "1200px", width: "100%",
-          display: "grid", gridTemplateColumns: "1fr 1fr", gap: "100px",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "100px",
         }}>
           
           {/* Left: Info */}
@@ -62,7 +64,7 @@ export default function ContactPage() {
               <a href="mailto:contact@dekkak.com" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "18px", color: CREAM, textDecoration: "none" }}>contact@dekkak.com</a>
             </div>
 
-            <div style={{ display: "flex", gap: "80px" }}>
+            <div style={{ display: "flex", gap: isMobile ? "32px" : "80px", flexWrap: "wrap" }}>
               <div>
                 <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Abu Dhabi</div>
                 <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: CREAM, opacity: 0.7, lineHeight: 1.6 }}>United Arab Emirates</div>
@@ -81,7 +83,7 @@ export default function ContactPage() {
             transition: "all 1s ease 0.4s",
             background: "rgba(255,255,255,0.02)",
             border: "1px solid rgba(255,255,255,0.05)",
-            padding: "60px"
+            padding: isMobile ? "28px 20px" : "60px"
           }}>
             {formState === "success" ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
