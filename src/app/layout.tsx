@@ -54,7 +54,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohamed Dekkak | Chairman, Investor, Philanthropist",
     description:
-      "Official website of Mohamed Dekkak — Chairman & Founder of Adgeco Group, global investor, and philanthropist.",
+      "Mohamed Dekkak has spent three decades building a cross-continental business empire across the Middle East, Africa, and beyond.",
+    images: ["/og-image.jpg"],
+    creator: "@MohamedDekkak1",
   },
   robots: {
     index: true,
