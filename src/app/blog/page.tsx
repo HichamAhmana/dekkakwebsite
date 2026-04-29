@@ -18,6 +18,14 @@ type BlogPost = {
   location: string;
   date: string;
 };
+
+type FlickrItem = {
+  date_taken?: string;
+  published?: string;
+  title: string;
+  media?: { m?: string };
+  link?: string;
+};
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
@@ -31,8 +39,8 @@ export default function BlogPage() {
       const items = await getFlickrPhotos();
       if (!items) return;
       
-      const formatted = items.map((item: any, i: number) => {
-        const date = new Date(item.date_taken || item.published);
+      const formatted = items.map((item: FlickrItem, i: number) => {
+        const date = new Date(item.date_taken || item.published || Date.now());
         const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         
         return {

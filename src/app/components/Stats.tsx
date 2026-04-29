@@ -1,64 +1,120 @@
 "use client";
 
 const GOLD = "#C9A84C";
-const CREAM = "var(--text-color)";
+const TEXT = "var(--text-color)";
 
 const STATS = [
-  { number: "30+",  label: "Years of Experience" },
+  { number: "30+", label: "Years of Experience" },
   { number: "1992", label: "Adgeco Founded" },
-  { number: "15+",  label: "Countries" },
-  { number: "8",    label: "Foundations" },
-  { number: "17",   label: "Councils" },
+  { number: "15+", label: "Countries" },
+  { number: "8", label: "Foundations" },
+  { number: "17", label: "Councils" },
 ];
 
 export default function Stats() {
   return (
-    <section style={{
-      width: "100%",
-      borderTop: "1px solid rgba(201,168,76,0.12)",
-      borderBottom: "1px solid rgba(201,168,76,0.12)",
-      background: "rgba(201,168,76,0.03)",
-      padding: "48px 0",
-    }}>
-      <div style={{
+    <section
+      style={{
         width: "100%",
-        overflow: "hidden",
-        display: "flex",
-        padding: "10px 0"
-      }}>
-        <div style={{
+        padding: "60px 0",
+        borderTop: "1px solid rgba(201,168,76,0.15)",
+        borderBottom: "1px solid rgba(201,168,76,0.15)",
+        background:
+          "radial-gradient(circle at center, rgba(201,168,76,0.05), transparent 60%)",
+        position: "relative",
+      }}
+    >
+      {/* edge fade illusion */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          background:
+            "linear-gradient(90deg, rgba(0,0,0,0.85), transparent 15%, transparent 85%, rgba(0,0,0,0.85))",
+        }}
+      />
+
+      <div
+        style={{
+          overflow: "hidden",
           display: "flex",
-          whiteSpace: "nowrap",
-          animation: "marquee 25s linear infinite",
-          width: "max-content",
-        }}>
-          {[...STATS, ...STATS, ...STATS, ...STATS].map((s, idx) => (
-            <div key={`${s.label}-${idx}`} style={{ textAlign: "center", padding: "0 80px", minWidth: "250px" }}>
-              <div style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: "52px",
-                fontWeight: 300,
-                color: GOLD,
-                lineHeight: 1,
-                marginBottom: "10px",
-              }}>
-                {s.number}
-              </div>
-              <div style={{
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                fontSize: "11px",
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase" as const,
-                color: CREAM,
-                opacity: 0.45,
-              }}>
-                {s.label}
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: "max-content",
+            animation: "marquee 28s linear infinite",
+            alignItems: "center",
+          }}
+        >
+          {[...STATS, ...STATS].map((s, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "0 70px",
+                minWidth: "260px",
+                position: "relative",
+              }}
+            >
+              {/* separator line */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  height: "40px",
+                  width: "1px",
+                  background: "rgba(201,168,76,0.15)",
+                }}
+              />
+
+              <div style={{ textAlign: "left" }}>
+                <div
+                  style={{
+                    fontFamily: "var(--font-cormorant), serif",
+                    fontSize: "54px",
+                    fontWeight: 300,
+                    color: GOLD,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {s.number}
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "6px",
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    fontSize: "11px",
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: TEXT,
+                    opacity: 0.55,
+                  }}
+                >
+                  {s.label}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* animation */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }
