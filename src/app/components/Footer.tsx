@@ -103,12 +103,6 @@ export default function Footer() {
               Abu Dhabi, United Arab Emirates<br />
               Madrid, Spain<br />
               The World
-              <br /> <br />
-              <a
-                href={`mailto:${String.fromCharCode(99, 111, 110, 116, 97, 99, 116, 64, 100, 101, 107, 107, 97, 107, 46, 99, 111, 109)}`}
-                style={{ color: "inherit", opacity: 1, transition: "color 0.3s" }}
-                dangerouslySetInnerHTML={{ __html: "&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#100;&#101;&#107;&#107;&#97;&#107;&#46;&#99;&#111;&#109;" }}
-              />
             </address>
           </div>
 

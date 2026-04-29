@@ -142,7 +142,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Mohamed Dekkak",
-  "email": "contact@dekkak.com",
+  "email": "info@dekkak.com",
   "address": [
     {
       "@type": "PostalAddress",
