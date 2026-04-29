@@ -1,11 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
 
 const MARRAKECH_TERRACOTTA = "#B86A51"; // Adding a subtle warm tone for Orchid Island
-const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
 export default function OrchidIslandPage() {
@@ -80,7 +78,7 @@ export default function OrchidIslandPage() {
             fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 300, fontStyle: "italic", lineHeight: 1.4,
             color: CREAM, opacity: 0.9, maxWidth: "600px", margin: "0 auto"
           }}>
-            "Rooted in the city of his birth, a vision of excellence, hospitality, and the belief that beauty itself is a form of leadership."
+            &quot;Rooted in the city of his birth, a vision of excellence, hospitality, and the belief that beauty itself is a form of leadership.&quot;
           </p>
         </div>
       </section>
@@ -94,7 +92,7 @@ export default function OrchidIslandPage() {
           <div>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", fontWeight: 300, color: CREAM, margin: "0 0 32px" }}>The Philosophy</h2>
             <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: "0 0 24px" }}>
-              Orchid Island Real Estate Marrakech is Mohamed Dekkak's luxury real estate brand rooted in his home city. The connection between founder and location is deeply personal — born in Marrakech, he is now investing in its architectural and cultural future.
+              Orchid Island Real Estate Marrakech is Mohamed Dekkak&apos;s luxury real estate brand rooted in his home city. The connection between founder and location is deeply personal — born in Marrakech, he is now investing in its architectural and cultural future.
             </p>
             <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: 0 }}>
               These curated ventures embody an unparalleled standard of living, blending traditional Moroccan craftsmanship with global luxury standards.
