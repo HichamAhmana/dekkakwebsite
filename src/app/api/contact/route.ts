@@ -4,18 +4,19 @@ import { Resend } from 'resend';
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-// Simple in-memory rate limiter
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+// TODO: Replace with Upstash Redis or similar Edge-compatible KV store for production rate-limiting.
+// WARNING: In-memory rate limiting is ineffective in serverless environments as state resets frequently.
+const fallbackRateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const windowMs = 60 * 60 * 1000; // 1 hour
+async function checkRateLimit(ip: string): Promise<boolean> {
   const limit = 3;
+  const windowMs = 60 * 60 * 1000; // 1 hour
 
-  let record = rateLimitMap.get(ip);
+  const now = Date.now();
+  let record = fallbackRateLimitMap.get(ip);
   if (!record) {
     record = { count: 0, resetTime: now + windowMs };
-    rateLimitMap.set(ip, record);
+    fallbackRateLimitMap.set(ip, record);
   }
 
   if (now > record.resetTime) {
@@ -27,15 +28,31 @@ function checkRateLimit(ip: string): boolean {
   return record.count <= limit;
 }
 
-// Debug: Log whether API key exists
-console.log('[DEBUG] RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.error('TURNSTILE_SECRET_KEY is not set');
+    return false;
+  }
+
+  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret, response: token, remoteip: ip }),
+  });
+
+  const result = await res.json();
+  return result.success === true;
+}
 
 export async function POST(request: Request) {
   // Rate limiting check
-  const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-  if (!checkRateLimit(ip)) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
+  const isRateLimited = !(await checkRateLimit(ip));
+
+  if (isRateLimited) {
     return NextResponse.json(
-      { error: "Too many requests. Please try again later." },
+      { error: 'Too many requests. Please try again later.' },
       { status: 429 }
     );
   }
@@ -51,11 +68,21 @@ export async function POST(request: Request) {
 
   try {
     const data = await request.json();
-    const { name, email, subject, message, website } = data;
+    const { name, email, subject, message, website, captchaToken } = data;
 
     // Honeypot check
     if (website) {
       return NextResponse.json({ success: true });
+    }
+
+    // Turnstile CAPTCHA verification
+    if (!captchaToken) {
+      return NextResponse.json({ error: 'CAPTCHA validation required' }, { status: 400 });
+    }
+
+    const captchaValid = await verifyTurnstile(captchaToken, ip);
+    if (!captchaValid) {
+      return NextResponse.json({ error: 'CAPTCHA validation failed' }, { status: 400 });
     }
 
     // Input validation
@@ -73,52 +100,36 @@ export async function POST(request: Request) {
     }
 
     const allowedSubjects = [
-      "Business Alliance",
-      "Client",
-      "Philanthropic Inquiry",
-      "Press / Media",
-      "General Information"
+      'Business Alliance',
+      'Client',
+      'Philanthropic Inquiry',
+      'Press / Media',
+      'General Information',
     ];
     if (subject && !allowedSubjects.includes(subject)) {
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     }
 
-    // Debug: Log what data is being sent to Resend
-    console.log('[DEBUG] Sending to Resend:', {
-      from: 'onboarding@resend.dev',
-      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
-      subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
-    });
+    const contactEmail = process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com';
 
-    // Send the email using Resend
-    console.log('Attempting to send email with:', {
-      hasApiKey: !!process.env.RESEND_API_KEY,
+    const { error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
-    });
-
-    const { data: emailData, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Use Resend's test domain (no domain verification needed)
-      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
+      to: contactEmail,
       subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
     });
 
-    console.log('Resend response:', JSON.stringify(emailData));
-    console.log('Resend error:', JSON.stringify(error));
-
     if (error) {
-      // Debug: Log full error response from Resend
-      console.error('[DEBUG] Resend full error response:', JSON.stringify(error, null, 2));
+      console.error('Resend error:', error.name);
       return NextResponse.json(
-        { error: "Failed to send message. Please try again." },
+        { error: 'Failed to send message. Please try again.' },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true, data: emailData });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Contact API Error:', error);
-    return NextResponse.json({ error: "Failed to send message. Please try again." }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to send message. Please try again.' }, { status: 500 });
   }
 }

@@ -14,14 +14,22 @@ const COORDS = "34°01′N 6°50′W  ·  24°28′N 54°22′E";
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
   const [btnHover, setBtnHover] = useState<"primary" | "secondary" | null>(null);
-  const [mouse, setMouse] = useState({ x: -600, y: -600 });
+  const glowRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
-    const onMove = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
+    const onMove = (e: MouseEvent) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        if (glowRef.current) {
+          glowRef.current.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
+        }
+      });
+    };
     window.addEventListener("mousemove", onMove);
 
     // Cycle through roles
@@ -36,6 +44,7 @@ export default function Hero() {
     return () => {
       clearTimeout(t);
       window.removeEventListener("mousemove", onMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (roleTimer.current) clearInterval(roleTimer.current);
     };
   }, []);
@@ -53,11 +62,13 @@ export default function Hero() {
 
       <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
         {/* ── Interactive mouse-following gold glow ── */}
-        <div style={{
+        <div 
+          ref={glowRef}
+          style={{
           position: "absolute", left: 0, top: 0,
           width: "520px", height: "520px",
           background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 68%)",
-          transform: `translate(${mouse.x - 260}px, ${mouse.y - 260}px)`,
+          transform: `translate(-600px, -600px)`,
           transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
           pointerEvents: "none", zIndex: 1,
         }} />
