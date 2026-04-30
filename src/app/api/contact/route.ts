@@ -28,14 +28,14 @@ export async function POST(request: Request) {
 
     // Debug: Log what data is being sent to Resend
     console.log('[DEBUG] Sending to Resend:', {
-      from: 'noreply@dekkak.com',
+      from: 'onboarding@resend.dev',
       to: 'info@dekkak.com',
       subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
     });
 
     // Send the email using Resend
     const { data: emailData, error } = await resend.emails.send({
-      from: 'noreply@dekkak.com', // Must be a verified domain in Resend
+      from: 'onboarding@resend.dev', // Use Resend's test domain (no domain verification needed)
       to: 'info@dekkak.com',
       subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
