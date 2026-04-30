@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
@@ -114,7 +115,7 @@ const ENGAGEMENT_ITEMS = [
     href: "/healthcare",
     accent: "#C9A84C",
     icon: "✚",
-    image: null as string | null,
+    image: "/Mohamed-dekkak-healthcare.png",
     imagePosition: "center center",
   },
 ];
