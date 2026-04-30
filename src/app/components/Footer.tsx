@@ -11,7 +11,7 @@ const NAVIGATE = [
   { label: "Impact",        href: "/impact" },
   { label: "Services",      href: "/services" },
   { label: "Gallery",       href: "/gallery" },
-  { label: "Blog",      href: "/blog" },
+  { label: "Blog",          href: "/blog" },
   { label: "About",         href: "/about" },
   { label: "Orchid Island", href: "/orchid-island" },
   { label: "Contact",       href: "/contact" },
@@ -20,21 +20,23 @@ const NAVIGATE = [
 const VENTURES = [
   { label: "Adgeco Group",  href: "/business" },
   { label: "Foundations",   href: "/impact" },
-  { label: "Orchid Island", href: "/orchid-island" }, 
+  { label: "Orchid Island", href: "/orchid-island" },
   { label: "Advisory Work", href: "/about" },
 ];
 
 const SOCIALS = [
-  { label: "LinkedIn",      href: "https://www.linkedin.com/in/mohameddekkak/" },
-  { label: "Instagram",     href: "https://www.instagram.com/mohameddekkak/" },
-  { label: "X",             href: "https://x.com/MohamedDekkak1" },
-  { label: "Facebook",      href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#" },
-  { label: "Pinterest",     href: "https://www.pinterest.com/dekkak/" },
-  { label: "YouTube",       href: "https://www.youtube.com/user/AdgecoGroup" },
-  { label: "Flickr",       href: "https://www.flickr.com/photos/adgeco/" },
+  { label: "WhatsApp",  href: "/api/whatsapp", color: "#25D366" },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/mohameddekkak/",                              color: "#0A66C2" },
+  { label: "Instagram", href: "https://www.instagram.com/mohameddekkak/",                                color: "#E1306C" },
+  { label: "X",         href: "https://x.com/MohamedDekkak1",                                           color: "#ffffff" },
+  { label: "Facebook",  href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",            color: "#1877F2" },
+  { label: "Pinterest", href: "https://www.pinterest.com/dekkak/",                                       color: "#E60023" },
+  { label: "YouTube",   href: "https://www.youtube.com/user/AdgecoGroup",                                color: "#FF0000" },
+  { label: "Flickr",    href: "https://www.flickr.com/photos/adgeco/",                                   color: "#FF0084" },
+                                                            
 ];
 
-function FooterLink({ label, href }: { label: string; href: string }) {
+function FooterLink({ label, href, hoverColor }: { label: string; href: string; hoverColor?: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
@@ -49,7 +51,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
         fontSize: "12px",
         fontWeight: 400,
         letterSpacing: "0.1em",
-        color: hovered ? GOLD : CREAM,
+        color: hovered ? (hoverColor || GOLD) : CREAM,
         opacity: hovered ? 1 : 0.5,
         marginBottom: "14px",
         transition: "color 0.3s ease, opacity 0.3s ease",
@@ -148,7 +150,9 @@ export default function Footer() {
               }}>
                 Connect
               </div>
-              {SOCIALS.map((l) => <FooterLink key={l.href + l.label} label={l.label} href={l.href} />)}
+              {SOCIALS.map((l) => (
+                <FooterLink key={l.href + l.label} label={l.label} href={l.href} hoverColor={l.color} />
+              ))}
             </div>
           </div>
         </div>

@@ -40,6 +40,18 @@ export const metadata: Metadata = {
     "Anouar Association",
     "AmCham",
     "real estate UAE",
+    "business UAE",
+    "business Morocco",
+    "business Spain",
+    "business Africa",
+    "business Middle East",
+    "Arab Peace Corps Foundation",
+    "CARLAC",
+    "New Arab Foundation",
+    "Ibn Battuta Association",
+    "Sahara Spirit Foundation",
+    "Union Road Association",
+    
   ],
   openGraph: {
     type: "website",
