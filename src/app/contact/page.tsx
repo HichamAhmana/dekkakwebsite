@@ -281,9 +281,94 @@ export default function ContactPage() {
             padding: isMobile ? "28px 20px" : "60px"
           }}>
             {formState === "success" ? (
-              <div style={{ textAlign: "center", padding: "40px 0" }}>
-                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: GOLD, margin: "0 0 16px" }}>Message Received</h3>
-                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: CREAM, opacity: 0.7 }}>Thank you for reaching out. A representative will contact you shortly.</p>
+              <div style={{ textAlign: "center", padding: "60px 20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <style>{`
+                  @keyframes letterDrop {
+                    0%   { opacity: 0; transform: translateY(-32px); filter: blur(4px); }
+                    60%  { opacity: 1; filter: blur(0); }
+                    80%  { transform: translateY(4px); }
+                    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+                  }
+                  @keyframes lineExpand {
+                    from { transform: scaleX(0); opacity: 0; }
+                    to   { transform: scaleX(1); opacity: 1; }
+                  }
+                  @keyframes successFadeUp {
+                    from { opacity: 0; transform: translateY(14px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                  }
+                  @keyframes goldShimmer {
+                    0%   { background-position: -300% center; }
+                    100% { background-position: 300% center; }
+                  }
+                  @keyframes glowPulse {
+                    0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.2); }
+                    50%       { text-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.1); }
+                  }
+                `}</style>
+
+                {/* DEKKAK letter-by-letter */}
+                <div style={{ display: "flex", gap: isMobile ? "6px" : "10px", marginBottom: "20px" }}>
+                  {["D","E","K","K","A","K"].map((letter, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontFamily: "var(--font-cormorant), serif",
+                        fontSize: isMobile ? "clamp(40px, 12vw, 64px)" : "clamp(52px, 6vw, 80px)",
+                        fontWeight: 300,
+                        letterSpacing: "0.05em",
+                        background: `linear-gradient(90deg, #a07830, ${GOLD}, #f5e090, ${GOLD}, #a07830)`,
+                        backgroundSize: "300% auto",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        opacity: 0,
+                        display: "inline-block",
+                        animation: `letterDrop 0.7s cubic-bezier(0.22,1,0.36,1) ${0.1 + i * 0.09}s forwards, goldShimmer 4s linear ${0.9 + i * 0.09}s infinite`,
+                      }}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Gold hairline */}
+                <div style={{
+                  width: "100%",
+                  height: "1px",
+                  background: `linear-gradient(90deg, transparent, ${GOLD}, transparent)`,
+                  marginBottom: "32px",
+                  transformOrigin: "center",
+                  animation: "lineExpand 0.8s cubic-bezier(0.22,1,0.36,1) 0.7s both",
+                }} />
+
+                {/* Message Received */}
+                <p style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  margin: "0 0 16px",
+                  opacity: 0,
+                  animation: "successFadeUp 0.6s ease-out 1s forwards",
+                }}>
+                  Message Received
+                </p>
+
+                {/* Body */}
+                <p style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "14px",
+                  lineHeight: 1.9,
+                  color: CREAM,
+                  opacity: 0,
+                  maxWidth: "280px",
+                  animation: "successFadeUp 0.6s ease-out 1.15s forwards",
+                }}>
+                  Thank you for reaching out.<br />A representative will be in contact shortly.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
