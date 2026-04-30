@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     // Debug: Log what data is being sent to Resend
     console.log('[DEBUG] Sending to Resend:', {
       from: 'onboarding@resend.dev',
-      to: 'info@dekkak.com',
+      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
       subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
     });
 
@@ -37,12 +37,12 @@ export async function POST(request: Request) {
     console.log('Attempting to send email with:', {
       hasApiKey: !!process.env.RESEND_API_KEY,
       from: 'onboarding@resend.dev',
-      to: 'info@dekkak.com',
+      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
     });
 
     const { data: emailData, error } = await resend.emails.send({
       from: 'onboarding@resend.dev', // Use Resend's test domain (no domain verification needed)
-      to: 'info@dekkak.com',
+      to: process.env.CONTACT_EMAIL || 'hichamahmana@gmail.com',
       subject: `New Inquiry via Dekkak.com: ${subject || 'General Information'}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
     });
