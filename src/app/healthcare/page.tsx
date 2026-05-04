@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -66,18 +67,29 @@ export default function HealthcarePage() {
             </p>
           </div>
 
-          {/* Hero Image Placeholder */}
-          <div style={{
-            width: "100%", aspectRatio: "4/3", background: "#111", border: `1px solid rgba(201,168,76,0.2)`,
-            position: "relative", overflow: "hidden",
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "translateX(0)" : "translateX(20px)",
-            transition: "all 1s ease 0.4s",
-            display: "flex", alignItems: "center", justifyContent: "center"
-          }}>
-            <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, rgba(201,168,76,0.1))` }} />
-            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, opacity: 0.5 }}>[Medical Facility Photo]</span>
-          </div>
+          {/* Hero Image  */}
+                <div style={{
+                    width: "100%",
+                    aspectRatio: "4/3",
+                    position: "relative",
+                    overflow: "hidden",
+                    opacity: loaded ? 1 : 0,
+                    transform: loaded ? "translateX(0)" : "translateX(20px)",
+                        transition: "all 1s ease 0.4s",
+                            }}>
+                <Image
+                    src="/Mohamed-Dekkak-healthcare.png"
+                    alt="Mohamed Dekkak healthcare"
+                      fill
+                    style={{ 
+                    objectFit: "cover",
+                    border: `1px solid rgba(201,168,76,0.2)`,
+                    borderRadius: "4px", // optional
+                            }}
+                      onLoad={() => setLoaded(true)}
+                      priority
+                     />
+        </div>
         </div>
       </section>
 

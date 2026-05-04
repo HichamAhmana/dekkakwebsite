@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Link from "next/link";
+
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -55,6 +56,11 @@ const SERVICES = [
   {
     title: "Global Presence",
     description: "Operating with deep local expertise and a global mindset from key strategic hubs in Marrakech, Abu Dhabi, and Madrid to serve an international clientele."
+  },
+  {
+    title: "Healthcare",
+    description: "Pioneering state-of-the-art medical infrastructure and transformative healthcare delivery systems across emerging markets, anchored by The American Medical City - Marrakesh."
+    
   }
 ];
 
@@ -112,28 +118,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
+      
       <section style={{ padding: "80px 40px 120px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
-          
-          {SERVICES.map((service, i) => (
-            <div key={i} style={{
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.05)",
-              padding: "48px 40px",
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(20px)",
-              transition: `all 0.8s ease ${0.3 + (i % 3) * 0.1}s`,
-            }}>
-              <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", fontWeight: 400, color: CREAM, margin: "0 0 16px" }}>
-                {service.title}
-              </h3>
-              <div style={{ width: "30px", height: "1px", background: GOLD, marginBottom: "24px", opacity: 0.5 }} />
-              <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "14px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: 0 }}>
-                {service.description}
-              </p>
-            </div>
-          ))}
-
           {/* Healthcare specific link card */}
           <div style={{
             background: "rgba(201,168,76,0.05)",
@@ -157,7 +144,28 @@ export default function ServicesPage() {
             }}>
               Explore Healthcare →
             </Link>
-          </div>
+          </div> 
+
+          {SERVICES.map((service, i) => (
+            <div key={i} style={{
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.05)",
+              padding: "48px 40px",
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? "translateY(0)" : "translateY(20px)",
+              transition: `all 0.8s ease ${0.3 + (i % 3) * 0.1}s`,
+            }}>
+              <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", fontWeight: 400, color: CREAM, margin: "0 0 16px" }}>
+                {service.title}
+              </h3>
+              <div style={{ width: "30px", height: "1px", background: GOLD, marginBottom: "24px", opacity: 0.5 }} />
+              <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "14px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: 0 }}>
+                {service.description}
+              </p>
+            </div>
+          ))}
+
+          
 
         </div>
       </section>

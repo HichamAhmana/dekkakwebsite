@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
 
+
 const GOLD = "#C9A84C";
 const CREAM = "#F5F0E8";
 
@@ -21,6 +22,13 @@ const COMPANIES = [
     sector: "Real Estate — UAE",
     description: "A premier real estate agency managing luxury and commercial property portfolios, providing high-end brokerage and property management services.",
     link:"orchidisland.immo"
+  },
+  {
+    name: "US Data Center",
+    role: "Founding Partner",
+    sector: "Technology Infrastructure",
+    description: "Strategic investment in advanced data infrastructure, supporting the digital transformation of the region.",
+    link:"usdatacenter.com"
   },
   {
     name: "Gate One Properties",
@@ -48,12 +56,7 @@ const COMPANIES = [
     sector: "Healthcare",
     description: "A massive healthcare infrastructure initiative bringing advanced medical facilities and research to the Marrakech region.",
   },
-  {
-    name: "US Data Center",
-    role: "Founding Partner",
-    sector: "Technology Infrastructure",
-    description: "Strategic investment in advanced data infrastructure, supporting the digital transformation of the region.",
-  },
+  
 ];
 
 const ALLIANCES = [
