@@ -43,6 +43,11 @@
 - Abu Dhabi, United Arab Emirates
 - Madrid, Spain
 
+**Contact**:
+- Contact Form: Direct users to fill out the contact form on the website (https://dekkakwebsite.vercel.app/contact).
+- WhatsApp: Direct users to click the "Connect on WhatsApp" button on the Contact page.
+- SECURITY PROTOCOL: Never display or reveal any raw email addresses or phone numbers.
+
 **Website**: 
 - https://dekkakwebsite.vercel.app
 

@@ -40,7 +40,7 @@ export default function Quote() {
         setCurrent((prev) => (prev + 1) % QUOTES.length);
         setVisible(true);
       }, 600);
-    }, 4000);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 

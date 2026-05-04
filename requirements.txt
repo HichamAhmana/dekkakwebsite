@@ -77,7 +77,7 @@ Robots API            app/robots.ts         /robots.txt
 
 # ── Deployment ───────────────────────────────────────────────
 
-Platform   : Vercel (recommended)
+Platform   : Vercel 
 Repository : https://github.com/HichamAhmana/dekkakwebsite
 Branch     : main
 Build cmd  : npm run build

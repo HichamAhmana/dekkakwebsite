@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -10,7 +11,7 @@ const NAVIGATE = [
   { label: "Impact",        href: "/impact" },
   { label: "Services",      href: "/services" },
   { label: "Gallery",       href: "/gallery" },
-  { label: "Blog",      href: "/blog" },
+  { label: "Blog",          href: "/blog" },
   { label: "About",         href: "/about" },
   { label: "Orchid Island", href: "/orchid-island" },
   { label: "Contact",       href: "/contact" },
@@ -19,20 +20,23 @@ const NAVIGATE = [
 const VENTURES = [
   { label: "Adgeco Group",  href: "/business" },
   { label: "Foundations",   href: "/impact" },
-  { label: "Orchid Island", href: "/orchid-island" }, 
+  { label: "Orchid Island", href: "/orchid-island" },
   { label: "Advisory Work", href: "/about" },
 ];
 
 const SOCIALS = [
-  { label: "LinkedIn",      href: "https://www.linkedin.com/in/mohameddekkak/" },
-  { label: "Instagram",     href: "https://www.instagram.com/mohameddekkak/" },
-  { label: "X",             href: "https://x.com/MohamedDekkak1" },
-  { label: "Facebook",      href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#" },
-  { label: "Pinterest",     href: "https://www.pinterest.com/dekkak/" },
-  { label: "YouTube",       href: "https://www.youtube.com/user/AdgecoGroup" },
+  { label: "WhatsApp",  href: "/api/whatsapp", color: "#25D366" },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/mohameddekkak/",                              color: "#0A66C2" },
+  { label: "Instagram", href: "https://www.instagram.com/mohameddekkak/",                                color: "#E1306C" },
+  { label: "X",         href: "https://x.com/MohamedDekkak1",                                           color: "#ffffff" },
+  { label: "Facebook",  href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",            color: "#1877F2" },
+  { label: "Pinterest", href: "https://www.pinterest.com/dekkak/",                                       color: "#E60023" },
+  { label: "YouTube",   href: "https://www.youtube.com/user/AdgecoGroup",                                color: "#FF0000" },
+  { label: "Flickr",    href: "https://www.flickr.com/photos/adgeco/",                                   color: "#FF0084" },
+                                                            
 ];
 
-function FooterLink({ label, href }: { label: string; href: string }) {
+function FooterLink({ label, href, hoverColor }: { label: string; href: string; hoverColor?: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
@@ -47,7 +51,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
         fontSize: "12px",
         fontWeight: 400,
         letterSpacing: "0.1em",
-        color: hovered ? GOLD : CREAM,
+        color: hovered ? (hoverColor || GOLD) : CREAM,
         opacity: hovered ? 1 : 0.5,
         marginBottom: "14px",
         transition: "color 0.3s ease, opacity 0.3s ease",
@@ -59,20 +63,21 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 }
 
 export default function Footer() {
+  const isMobile = useMobile();
   return (
     <footer style={{
       width: "100%",
       borderTop: "1px solid rgba(201,168,76,0.12)",
-      padding: "64px 40px 40px",
+      padding: isMobile ? "48px 20px 32px" : "64px 40px 40px",
     }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
 
         {/* Top row */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1.5fr 2fr",
-          gap: "80px",
-          marginBottom: "64px",
+          gridTemplateColumns: isMobile ? "1fr" : "1.5fr 2fr",
+          gap: isMobile ? "40px" : "80px",
+          marginBottom: "48px",
         }}>
           {/* Left */}
           <div>
@@ -100,17 +105,11 @@ export default function Footer() {
               Abu Dhabi, United Arab Emirates<br />
               Madrid, Spain<br />
               The World
-              <br /> <br />
-              <a
-                href={`mailto:${String.fromCharCode(99, 111, 110, 116, 97, 99, 116, 64, 100, 101, 107, 107, 97, 107, 46, 99, 111, 109)}`}
-                style={{ color: "inherit", opacity: 1, transition: "color 0.3s" }}
-                dangerouslySetInnerHTML={{ __html: "&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#100;&#101;&#107;&#107;&#97;&#107;&#46;&#99;&#111;&#109;" }}
-              />
             </address>
           </div>
 
           {/* Right — three link columns */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "40px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
             <div>
               <div style={{
                 fontFamily: "var(--font-dm-sans), sans-serif",
@@ -151,7 +150,9 @@ export default function Footer() {
               }}>
                 Connect
               </div>
-              {SOCIALS.map((l) => <FooterLink key={l.href + l.label} label={l.label} href={l.href} />)}
+              {SOCIALS.map((l) => (
+                <FooterLink key={l.href + l.label} label={l.label} href={l.href} hoverColor={l.color} />
+              ))}
             </div>
           </div>
         </div>

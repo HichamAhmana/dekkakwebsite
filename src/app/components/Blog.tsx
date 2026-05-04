@@ -6,8 +6,17 @@ import Link from "next/link";
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
-import { events } from "../data/events";
+import { getFlickrPhotos } from "../actions/flickr";
 
+type BlogPost = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  shortDate: string;
+  monthYear: string;
+  href: string;
+};
 function useIntersectionObserver(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -29,7 +38,7 @@ function BlogCard({
   index,
   visible,
 }: {
-  post: (typeof events)[0];
+  post: BlogPost;
   index: number;
   visible: boolean;
 }) {
@@ -210,6 +219,35 @@ export default function Blog() {
   const { ref, visible } = useIntersectionObserver(0.1);
   const titleRef = useRef<HTMLDivElement>(null);
   const [titleVisible, setTitleVisible] = useState(false);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    async function loadFlickr() {
+      const items = await getFlickrPhotos();
+      if (!items) return;
+      
+      const formatted = items.map((item: any, index: number) => {
+        const date = new Date(item.date_taken || item.published);
+        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        
+        // Use title as description, but provide a fallback if it's too short
+        const description = item.title.length > 10 ? item.title : "Mohammed Dekkak Flickr Gallery Update.";
+        
+        return {
+          id: `flickr-${index}`,
+          title: item.title || "Photo Update",
+          description: description,
+          // Get higher quality image by changing _m.jpg to _b.jpg
+          image: item.media?.m?.replace("_m.jpg", "_b.jpg") || "",
+          shortDate: date.getDate().toString().padStart(2, "0"),
+          monthYear: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
+          href: item.link || "https://www.flickr.com/photos/adgeco/"
+        };
+      });
+      setPosts(formatted);
+    }
+    loadFlickr();
+  }, []);
 
   useEffect(() => {
     const el = titleRef.current;
@@ -292,7 +330,7 @@ export default function Blog() {
             gap: "32px",
           }}
         >
-          {events.slice(0, 3).map((post, i) => (
+          {posts.slice(0, 3).map((post, i) => (
             <BlogCard key={post.id} post={post} index={i} visible={visible} />
           ))}
         </div>

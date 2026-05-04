@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { useMobile } from "../hooks/useMobile";
 
 const MARRAKECH_TERRACOTTA = "#B86A51"; // Adding a subtle warm tone for Orchid Island
-const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
 export default function OrchidIslandPage() {
   const [loaded, setLoaded] = useState(false);
+  const isMobile = useMobile();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
@@ -26,7 +26,7 @@ export default function OrchidIslandPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0 40px",
+        padding: isMobile ? "0 20px" : "0 40px",
       }}>
         {/* Cinematic Background Placeholder */}
         <div style={{
@@ -78,21 +78,21 @@ export default function OrchidIslandPage() {
             fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 300, fontStyle: "italic", lineHeight: 1.4,
             color: CREAM, opacity: 0.9, maxWidth: "600px", margin: "0 auto"
           }}>
-            "Rooted in the city of his birth, a vision of excellence, hospitality, and the belief that beauty itself is a form of leadership."
+            &quot;Rooted in the city of his birth, a vision of excellence, hospitality, and the belief that beauty itself is a form of leadership.&quot;
           </p>
         </div>
       </section>
 
       {/* Vision & Philosophy */}
-      <section style={{ padding: "120px 40px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px" }}>
         <div style={{
           maxWidth: "1200px", margin: "0 auto",
-          display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center"
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "32px" : "80px", alignItems: "center"
         }}>
           <div>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", fontWeight: 300, color: CREAM, margin: "0 0 32px" }}>The Philosophy</h2>
             <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: "0 0 24px" }}>
-              Orchid Island Real Estate Marrakech is Mohamed Dekkak's luxury real estate brand rooted in his home city. The connection between founder and location is deeply personal — born in Marrakech, he is now investing in its architectural and cultural future.
+              Orchid Island Real Estate Marrakech is Mohamed Dekkak&apos;s luxury real estate brand rooted in his home city. The connection between founder and location is deeply personal — born in Marrakech, he is now investing in its architectural and cultural future.
             </p>
             <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: 0 }}>
               These curated ventures embody an unparalleled standard of living, blending traditional Moroccan craftsmanship with global luxury standards.
@@ -109,7 +109,7 @@ export default function OrchidIslandPage() {
       </section>
 
       {/* Minimal Footer for this standalone experience */}
-      <footer style={{ padding: "80px 40px", borderTop: `1px solid rgba(184,106,81,0.1)`, textAlign: "center" }}>
+      <footer style={{ padding: isMobile ? "48px 20px" : "80px 40px", borderTop: `1px solid rgba(184,106,81,0.1)`, textAlign: "center" }}>
         <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", fontWeight: 300, letterSpacing: "0.2em", textTransform: "uppercase", color: CREAM, margin: "0 0 24px" }}>Orchid Island</h2>
         <a href="https://www.orchidisland.immo/" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: MARRAKECH_TERRACOTTA, borderBottom: `1px solid ${MARRAKECH_TERRACOTTA}44`, paddingBottom: "4px" }}>
           Visit Official Site

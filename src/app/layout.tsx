@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
-import Cursor from "./components/Cursor";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -40,6 +40,18 @@ export const metadata: Metadata = {
     "Anouar Association",
     "AmCham",
     "real estate UAE",
+    "business UAE",
+    "business Morocco",
+    "business Spain",
+    "business Africa",
+    "business Middle East",
+    "Arab Peace Corps Foundation",
+    "CARLAC",
+    "New Arab Foundation",
+    "Ibn Battuta Association",
+    "Sahara Spirit Foundation",
+    "Union Road Association",
+    
   ],
   openGraph: {
     type: "website",
@@ -54,7 +66,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohamed Dekkak | Chairman, Investor, Philanthropist",
     description:
-      "Official website of Mohamed Dekkak — Chairman & Founder of Adgeco Group, global investor, and philanthropist.",
+      "Mohamed Dekkak has spent three decades building a cross-continental business empire across the Middle East, Africa, and beyond.",
+    images: ["/og-image.jpg"],
+    creator: "@MohamedDekkak1",
   },
   robots: {
     index: true,
@@ -140,7 +154,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Mohamed Dekkak",
-  "email": "contact@dekkak.com",
+  "email": "info@dekkak.com",
   "address": [
     {
       "@type": "PostalAddress",
@@ -192,6 +206,13 @@ export default function RootLayout({
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
+        <Script
+          id="chatbase-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="f1gn0pAoTs_SS_O9euCWl";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();`,
+          }}
+        />
       </body>
     </html>
   );

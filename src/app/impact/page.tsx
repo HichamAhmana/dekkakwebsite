@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -70,6 +71,7 @@ const FOUNDATIONS = [
 
 export default function ImpactPage() {
   const [loaded, setLoaded] = useState(false);
+  const isMobile = useMobile();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
@@ -82,7 +84,7 @@ export default function ImpactPage() {
 
       {/* Hero Section */}
       <section style={{
-        padding: "200px 40px 120px",
+        padding: isMobile ? "140px 20px 80px" : "200px 40px 120px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -105,10 +107,10 @@ export default function ImpactPage() {
           </h1>
           <h2 style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
-            fontSize: "20px", fontWeight: 300, lineHeight: 1.6,
+            fontSize: isMobile ? "15px" : "20px", fontWeight: 300, lineHeight: 1.6,
             color: CREAM, margin: "0 0 32px", fontStyle: "italic"
           }}>
-            "A boy from Marrakech built a global business empire — and never forgot where he came from."
+            &ldquo;A boy from Marrakech built a global business empire — and never forgot where he came from.&rdquo;
           </h2>
           <div style={{ width: "60px", height: "1px", background: GOLD, margin: "0 auto 32px" }} />
           <p style={{
@@ -122,23 +124,23 @@ export default function ImpactPage() {
       </section>
 
       {/* Foundations Grid */}
-      <section style={{ padding: "80px 40px 140px", background: "linear-gradient(180deg, var(--bg-color) 0%, #0D0C0A 100%)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "2px", background: "rgba(201,168,76,0.15)" }}>
+      <section style={{ padding: isMobile ? "40px 16px 80px" : "80px 40px 140px", background: "linear-gradient(180deg, var(--bg-color) 0%, #0D0C0A 100%)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(400px, 1fr))", gap: "2px", background: "rgba(201,168,76,0.15)" }}>
           {FOUNDATIONS.map((f, i) => (
             <div key={i} style={{
               background: "var(--bg-color)",
-              padding: "60px 48px",
+              padding: isMobile ? "32px 20px" : "60px 48px",
               display: "flex",
               flexDirection: "column"
             }}>
-              <div style={{ width: "40px", height: "2px", background: f.accent, marginBottom: "32px" }} />
-              <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", fontWeight: 400, color: CREAM, margin: "0 0 16px" }}>{f.name}</h3>
-              <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: f.accent, marginBottom: "8px" }}>{f.role}</div>
-              <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: CREAM, opacity: 0.5, marginBottom: "24px" }}>{f.focus}</div>
+              <div style={{ width: "40px", height: "2px", background: f.accent, marginBottom: "24px" }} />
+              <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: isMobile ? "26px" : "32px", fontWeight: 400, color: CREAM, margin: "0 0 12px", lineHeight: 1.2 }}>{f.name}</h3>
+              <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: f.accent, marginBottom: "6px" }}>{f.role}</div>
+              <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: CREAM, opacity: 0.5, marginBottom: "20px", lineHeight: 1.5 }}>{f.focus}</div>
 
               {/* Photo — real image or styled placeholder */}
               <div style={{
-                width: "100%", height: "220px",
+                width: "100%", height: isMobile ? "180px" : "220px",
                 background: "#111", border: `1px solid rgba(255,255,255,0.05)`,
                 marginBottom: "32px", position: "relative", overflow: "hidden",
                 display: "flex", alignItems: "center", justifyContent: "center"

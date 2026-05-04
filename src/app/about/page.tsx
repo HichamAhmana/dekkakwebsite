@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -20,6 +21,7 @@ const TIMELINE = [
 
 export default function AboutPage() {
   const [loaded, setLoaded] = useState(false);
+  const isMobile = useMobile();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
@@ -33,8 +35,8 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section style={{
         position: "relative",
-        padding: "180px 40px 100px",
-        minHeight: "80vh",
+        padding: isMobile ? "130px 20px 60px" : "180px 40px 100px",
+        minHeight: isMobile ? "auto" : "80vh",
         display: "flex",
         alignItems: "center",
       }}>
@@ -49,8 +51,8 @@ export default function AboutPage() {
           margin: "0 auto",
           width: "100%",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "80px",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          gap: isMobile ? "40px" : "80px",
           alignItems: "center"
         }}>
           {/* Left: Text */}
@@ -132,44 +134,44 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section style={{ padding: "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
-            fontSize: "48px", fontWeight: 300, color: CREAM,
-            margin: "0 0 80px", textAlign: "center"
+            fontSize: isMobile ? "36px" : "48px", fontWeight: 300, color: CREAM,
+            margin: isMobile ? "0 0 40px" : "0 0 80px", textAlign: "center"
           }}>The Journey</h2>
 
           <div style={{ position: "relative" }}>
-            {/* Vertical Line */}
-            <div style={{
+            {/* Vertical Line — hide on mobile */}
+            {!isMobile && <div style={{
               position: "absolute", left: "50%", top: 0, bottom: 0, width: "1px",
               background: `linear-gradient(to bottom, transparent, ${GOLD}44, transparent)`,
               transform: "translateX(-50%)"
-            }} />
+            }} />}
 
             {TIMELINE.map((item, i) => (
               <div key={i} style={{
                 display: "flex",
-                justifyContent: i % 2 === 0 ? "flex-start" : "flex-end",
-                marginBottom: "60px",
+                justifyContent: isMobile ? "flex-start" : (i % 2 === 0 ? "flex-start" : "flex-end"),
+                marginBottom: "32px",
                 position: "relative",
                 opacity: loaded ? 1 : 0,
                 transform: loaded ? "translateY(0)" : "translateY(20px)",
                 transition: `all 0.8s ease ${0.6 + i * 0.1}s`
               }}>
-                {/* Dot */}
-                <div style={{
+                {/* Dot — hide on mobile for cleanliness */}
+                {!isMobile && <div style={{
                   position: "absolute", left: "50%", top: "50%",
                   width: "12px", height: "12px", borderRadius: "50%",
                   background: GOLD, transform: "translate(-50%, -50%)",
                   boxShadow: `0 0 0 4px #0D0C0A, 0 0 0 5px ${GOLD}66`
-                }} />
+                }} />}
 
                 <div style={{
-                  width: "calc(50% - 60px)",
-                  textAlign: i % 2 === 0 ? "right" : "left",
-                  padding: "24px",
+                  width: isMobile ? "100%" : "calc(50% - 60px)",
+                  textAlign: isMobile ? "left" : (i % 2 === 0 ? "right" : "left"),
+                  padding: isMobile ? "16px" : "24px",
                   background: "rgba(255,255,255,0.02)",
                   border: "1px solid rgba(255,255,255,0.05)",
                   position: "relative"
@@ -192,8 +194,8 @@ export default function AboutPage() {
       </section>
 
       {/* Awards & Memberships Section */}
-      <section style={{ padding: "80px 40px 120px", background: "var(--bg-color)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "80px" }}>
+      <section style={{ padding: isMobile ? "50px 20px 60px" : "80px 40px 120px", background: "var(--bg-color)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(400px, 1fr))", gap: isMobile ? "48px" : "80px" }}>
           
           {/* Awards */}
           <div style={{
