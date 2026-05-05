@@ -151,7 +151,9 @@ export default function Navbar() {
             {NAV_LINKS.map((l) => <NavLink key={l.href} href={l.href} label={l.label} />)}
           </div>
 
-          <ThemeToggle />
+          <div className="desktop-only">
+            <ThemeToggle />
+          </div>
 
           {/* Hamburger */}
           <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)}
@@ -217,7 +219,7 @@ export default function Navbar() {
         </button>
 
         {/* Theme Toggle Far Right */}
-        <div style={{ position: "absolute", right: "48px", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease 0.3s" }}>
+        <div className="desktop-only" style={{ position: "absolute", right: "48px", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease 0.3s" }}>
           <ThemeToggle />
         </div>
 
@@ -248,6 +250,11 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           }}>{l.label}</Link>
         </div>
       ))}
+      <div style={{ height: "1px", background: "rgba(201,168,76,0.18)", margin: "8px 0 20px" }} />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-color)", opacity: 0.85 }}>THEME</span>
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
