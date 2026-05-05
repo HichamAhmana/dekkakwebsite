@@ -5,9 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
-import dynamic from "next/dynamic";
-
-const Cursor = dynamic(() => import("./components/Cursor"), { ssr: false });
+import Cursor from "./components/Cursor";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
