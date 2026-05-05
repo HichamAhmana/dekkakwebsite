@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
+import CookieBanner from "./components/CookieBanner";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -206,6 +207,7 @@ export default function RootLayout({
           {children}
           <Analytics />
           <SpeedInsights />
+          <CookieBanner />
         </ThemeProvider>
         <Script
           id="chatbase-script"

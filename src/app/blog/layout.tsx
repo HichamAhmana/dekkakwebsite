@@ -22,10 +22,35 @@ export const metadata: Metadata = {
   },
 };
 
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Mohamed Dekkak — Insights & Perspectives",
+  "description": "Dispatches from the intersection of diplomacy, enterprise, and humanitarian action across three continents.",
+  "url": "https://dekkakwebsite.vercel.app/blog",
+  "author": {
+    "@type": "Person",
+    "name": "Mohamed Dekkak"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dekkak",
+    "url": "https://dekkakwebsite.vercel.app"
+  }
+};
+
 export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      {children}
+    </>
+  );
 }
