@@ -167,17 +167,6 @@ body::after {
   100% { transform: translateX(-50%); }
 }
 
-/* Custom Cursor Overrides (Disabled) */
-/*
-@media (pointer: fine) {
-  body, a, button, h1, h2, h3, h4, p, span, div, img, svg {
-    cursor: none !important;
-  }
-  input, textarea {
-    cursor: text !important;
-  }
-}
-*/
 
 .masonry-grid {
   column-count: 3;
