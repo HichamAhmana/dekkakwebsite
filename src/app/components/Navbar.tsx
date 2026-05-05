@@ -151,9 +151,7 @@ export default function Navbar() {
             {NAV_LINKS.map((l) => <NavLink key={l.href} href={l.href} label={l.label} />)}
           </div>
 
-          <div className="desktop-only">
-            <ThemeToggle />
-          </div>
+          <ThemeToggle />
 
           {/* Hamburger */}
           <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)}
@@ -209,14 +207,17 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Hamburger (mobile only) */}
-        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", flexDirection: "column", gap: "5px" }}>
-          <span style={{ ...barBase, transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }} />
-          <span style={{ ...barBase, opacity: menuOpen ? 0 : 1 }} />
-          <span style={{ ...barBase, transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }} />
-        </button>
+        {/* Mobile Controls (Hamburger + Theme Toggle) */}
+        <div className="nav-hamburger" style={{ alignItems: "center", gap: "24px" }}>
+          <ThemeToggle />
+          <button onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "5px" }}>
+            <span style={{ ...barBase, transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }} />
+            <span style={{ ...barBase, opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ ...barBase, transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }} />
+          </button>
+        </div>
 
         {/* Theme Toggle Far Right */}
         <div className="desktop-only" style={{ position: "absolute", right: "48px", opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease 0.3s" }}>
@@ -250,11 +251,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           }}>{l.label}</Link>
         </div>
       ))}
-      <div style={{ height: "1px", background: "rgba(201,168,76,0.18)", margin: "8px 0 20px" }} />
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-color)", opacity: 0.85 }}>THEME</span>
-        <ThemeToggle />
-      </div>
     </div>
   );
 }
