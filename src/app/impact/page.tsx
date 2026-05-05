@@ -141,7 +141,7 @@ export default function ImpactPage() {
               {/* Photo — real image or styled placeholder */}
               <div style={{
                 width: "100%", height: isMobile ? "180px" : "220px",
-                background: "#111", border: `1px solid rgba(255,255,255,0.05)`,
+                background: "var(--bg-secondary)", border: `1px solid rgba(255,255,255,0.05)`,
                 marginBottom: "32px", position: "relative", overflow: "hidden",
                 display: "flex", alignItems: "center", justifyContent: "center"
               }}>

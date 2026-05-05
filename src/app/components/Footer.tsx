@@ -28,7 +28,7 @@ const SOCIALS = [
   { label: "WhatsApp",  href: "/api/whatsapp", color: "#25D366" },
   { label: "LinkedIn",  href: "https://www.linkedin.com/in/mohameddekkak/",                              color: "#0A66C2" },
   { label: "Instagram", href: "https://www.instagram.com/mohameddekkak/",                                color: "#E1306C" },
-  { label: "X",         href: "https://x.com/MohamedDekkak1",                                           color: "#ffffff" },
+  { label: "X",         href: "https://x.com/MohamedDekkak1",                                           color: "var(--text-color)" },
   { label: "Facebook",  href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",            color: "#1877F2" },
   { label: "Pinterest", href: "https://www.pinterest.com/dekkak/",                                       color: "#E60023" },
   { label: "YouTube",   href: "https://www.youtube.com/user/AdgecoGroup",                                color: "#FF0000" },
@@ -67,6 +67,7 @@ export default function Footer() {
   return (
     <footer style={{
       width: "100%",
+      background: "var(--bg-color)",
       borderTop: "1px solid rgba(201,168,76,0.12)",
       padding: isMobile ? "48px 20px 32px" : "64px 40px 40px",
     }}>

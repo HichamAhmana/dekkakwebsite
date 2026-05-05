@@ -80,7 +80,7 @@ export default function BlogPostPage() {
         ) : (
           <div style={{
             position: "absolute", inset: 0,
-            background: `radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%), #0A0A0A`,
+            background: `radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%), var(--bg-color)`,
           }} />
         )}
 

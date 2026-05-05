@@ -190,6 +190,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://live.staticflickr.com" />
+        <link rel="preconnect" href="https://api.flickr.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -201,7 +203,6 @@ export default function RootLayout({
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
         <ThemeProvider>
-          {/* <Cursor /> */}
           {children}
           <Analytics />
           <SpeedInsights />

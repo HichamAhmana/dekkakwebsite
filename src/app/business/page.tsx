@@ -6,7 +6,7 @@ import { useMobile } from "../hooks/useMobile";
 
 
 const GOLD = "#C9A84C";
-const CREAM = "#F5F0E8";
+const CREAM = "var(--text-color)";
 
 const COMPANIES = [
   {
@@ -86,7 +86,12 @@ export default function BusinessPage() {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
+      <style>{`
+        .light-theme nav {
+          background: var(--bg-color) !important;
+        }
+      `}</style>
       <Navbar />
 
       {/* Hero Section */}
@@ -168,7 +173,7 @@ export default function BusinessPage() {
       </section>
 
       {/* Strategic Alliances */}
-      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "var(--bg-secondary)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "80px" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", fontWeight: 300, color: CREAM, margin: "0 0 16px" }}>Strategic Alliances</h2>

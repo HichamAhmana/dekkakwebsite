@@ -41,7 +41,7 @@ function Card({ card }: { card: typeof CARDS[0] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#0F0E0C" : "var(--bg-color)",
+        background: hovered ? "var(--bg-secondary)" : "var(--bg-color)",
         padding: "56px 48px",
         transition: "background 0.4s ease",
         display: "flex",
