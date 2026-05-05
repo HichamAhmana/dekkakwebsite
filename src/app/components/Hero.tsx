@@ -21,7 +21,7 @@ export default function Hero() {
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 120);
+    const t = setTimeout(() => setLoaded(true), 0);
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -173,8 +173,10 @@ export default function Hero() {
           src="/dekkak-cinema-marrakech-festival.png"
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           style={{ objectFit: "cover", objectPosition: "60% center" }}
           priority
+          fetchPriority="high"
         />
       </div>
 

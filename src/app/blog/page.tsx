@@ -103,6 +103,8 @@ export default function BlogPage() {
                 src={featured.image!}
                 alt={featured.title}
                 fill
+                priority
+                fetchPriority="high"
                 sizes="(max-width: 768px) 100vw, 1140px"
                 style={{
                   objectFit: "cover",
@@ -206,7 +208,8 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
               src={event.image}
               alt={event.title}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
                 objectFit: "cover",
                 objectPosition: event.id === "adgeco-group" ? "center 20%" : "center center",

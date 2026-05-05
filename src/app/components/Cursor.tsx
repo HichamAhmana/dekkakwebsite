@@ -3,6 +3,20 @@
 import { useEffect, useState, useRef } from "react";
 
 export default function Cursor() {
+  const [isFinePointer, setIsFinePointer] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(pointer: fine)').matches) {
+      setIsFinePointer(true);
+    }
+  }, []);
+
+  if (!isFinePointer) return null;
+
+  return <InnerCursor />;
+}
+
+function InnerCursor() {
   const [isMounted, setIsMounted] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 

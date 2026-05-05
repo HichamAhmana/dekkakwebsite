@@ -5,6 +5,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
+import dynamic from "next/dynamic";
+
+const Cursor = dynamic(() => import("./components/Cursor"), { ssr: false });
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -190,6 +193,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://live.staticflickr.com" />
+        <link rel="preconnect" href="https://api.flickr.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -201,7 +206,7 @@ export default function RootLayout({
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
         <ThemeProvider>
-          {/* <Cursor /> */}
+          <Cursor />
           {children}
           <Analytics />
           <SpeedInsights />

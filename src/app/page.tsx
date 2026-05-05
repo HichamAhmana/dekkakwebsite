@@ -3,13 +3,13 @@
 import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Stats from "./components/Stats";
-import ThreePaths from "./components/ThreePaths";
 import Footer from "./components/Footer";
 
-const Engagement = dynamic(() => import("./components/Engagement"));
-const Quote = dynamic(() => import("./components/Quote"));
-const Blog = dynamic(() => import("./components/Blog"));
+const Stats = dynamic(() => import("./components/Stats"), { ssr: false });
+const ThreePaths = dynamic(() => import("./components/ThreePaths"), { ssr: false });
+const Engagement = dynamic(() => import("./components/Engagement"), { ssr: false });
+const Quote = dynamic(() => import("./components/Quote"), { ssr: false });
+const Blog = dynamic(() => import("./components/Blog"), { ssr: false });
 
 export default function Home() {
   return (

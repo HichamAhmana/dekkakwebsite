@@ -81,7 +81,8 @@ function BlogCard({
               src={post.image}
               alt={post.title}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
                 objectFit: "cover",
                 objectPosition: post.id === "adgeco-group" ? "center 20%" : "center center",

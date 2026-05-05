@@ -169,6 +169,7 @@ export default function GalleryPage() {
                       src={item.src}
                       alt={item.caption}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       style={{ objectFit: "cover", filter: "brightness(0.85)" }}
                     />
