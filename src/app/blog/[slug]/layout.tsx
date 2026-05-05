@@ -43,10 +43,44 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default function BlogPostLayout({
+export default async function BlogPostLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ slug: string }>;
 }) {
-  return <>{children}</>;
+  const { slug } = await params;
+  const post = events.find((e) => e.id === slug);
+
+  const articleSchema = post
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "image": post.image ?? undefined,
+        "datePublished": post.date ?? undefined,
+        "author": {
+          "@type": "Person",
+          "name": "Mohamed Dekkak"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Dekkak",
+          "url": "https://dekkakwebsite.vercel.app"
+        }
+      }
+    : null;
+
+  return (
+    <>
+      {articleSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+      )}
+      {children}
+    </>
+  );
 }
