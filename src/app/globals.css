@@ -1,3 +1,10 @@
+@property --bg-color { syntax: '<color>'; inherits: true; initial-value: #0A0A0A; }
+@property --bg-secondary { syntax: '<color>'; inherits: true; initial-value: #111; }
+@property --text-color { syntax: '<color>'; inherits: true; initial-value: #F5F0E8; }
+@property --nav-bg { syntax: '<color>'; inherits: true; initial-value: rgba(10, 10, 10, 0.93); }
+@property --border-color { syntax: '<color>'; inherits: true; initial-value: rgba(201, 168, 76, 0.15); }
+@property --nav-text { syntax: '<color>'; inherits: true; initial-value: #F5F0E8; }
+
 :root {
   --gold: #C9A84C;
   --gold-light: #E8C97A;
@@ -31,7 +38,7 @@ body {
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: --bg-color 0.6s ease, --bg-secondary 0.6s ease, --text-color 0.6s ease, --nav-bg 0.6s ease, --border-color 0.6s ease, --nav-text 0.6s ease, background-color 0.6s ease, color 0.6s ease;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, a, div {
