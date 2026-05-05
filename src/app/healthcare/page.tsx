@@ -78,7 +78,7 @@ export default function HealthcarePage() {
                         transition: "all 1s ease 0.4s",
                             }}>
                 <Image
-                    src="/Mohamed-Dekkak-healthcare.png"
+                    src="/Mohamed-dekkak-healthcare.png"
                     alt="Mohamed Dekkak healthcare"
                       fill
                     style={{ 
