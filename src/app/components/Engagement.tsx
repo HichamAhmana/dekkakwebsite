@@ -26,7 +26,7 @@ function PlaceholderPattern({
   const pattern = patterns[id] ?? patterns["amcham"];
   return (
     <>
-      <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "#0A0A0A" }} />
+      <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "var(--bg-color)" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 0, background: `radial-gradient(ellipse at 50% 50%, ${accent}22 0%, transparent 70%)`, opacity: hovered ? 1 : 0.4, transition: "opacity 1.1s ease" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: pattern, backgroundSize: id === "healthcare" ? "48px 48px" : id === "amcham" ? "60px 60px" : "80px 80px", opacity: hovered ? 0.55 : 0.2, transition: "opacity 1.1s ease" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 0, background: `repeating-linear-gradient(135deg, transparent 0px, transparent 40px, ${accent}06 40px, ${accent}06 41px)`, opacity: hovered ? 1 : 0.4, transition: "opacity 0.8s ease" }} />
@@ -62,9 +62,9 @@ function CardBackground({
       ) : (
         <PlaceholderPattern id={item.id} accent={item.accent} hovered={hovered} />
       )}
-      <div style={{ position: "absolute", inset: 0, zIndex: 1, background: hovered ? "linear-gradient(135deg, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.55) 100%)" : "linear-gradient(135deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.78) 100%)", transition: "background 1s ease" }} />
+      <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "var(--bg-color)", opacity: hovered ? 0.6 : 0.85, transition: "opacity 1s ease" }} />
       <div style={{ position: "absolute", inset: 0, zIndex: 1, background: `radial-gradient(ellipse at 50% 90%, ${item.accent}20 0%, transparent 65%)`, opacity: hovered ? 1 : 0.3, transition: "opacity 0.9s ease" }} />
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 6, padding: "12px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s", borderTop: `1px solid ${item.accent}22`, background: "linear-gradient(to top, rgba(10,10,10,0.8), transparent)" }}>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 6, padding: "12px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s", borderTop: `1px solid ${item.accent}22`, background: "linear-gradient(to top, var(--bg-color), transparent)" }}>
         <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "8px", fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: item.accent }}>{item.tag}</span>
         <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "8px", letterSpacing: "0.25em", textTransform: "uppercase", color: CREAM, opacity: 0.35 }}>{item.image ? "Abu Dhabi · Est. 1992" : "Photo Coming Soon"}</span>
       </div>

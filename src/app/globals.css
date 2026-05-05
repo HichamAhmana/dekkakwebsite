@@ -1,18 +1,17 @@
 :root {
   --gold: #C9A84C;
   --gold-light: #E8C97A;
-}
-
-[data-theme='dark'] {
   --bg-color: #0A0A0A;
+  --bg-secondary: #111;
   --text-color: #F5F0E8;
   --nav-bg: rgba(10, 10, 10, 0.93);
   --border-color: rgba(201, 168, 76, 0.15);
   --nav-text: #F5F0E8;
 }
 
-[data-theme='light'] {
+.light-theme {
   --bg-color: #FFFFFF;
+  --bg-secondary: #F5F0E8;
   --text-color: #0A0A0A;
   --nav-bg: rgba(255, 255, 255, 0.93);
   --border-color: rgba(10, 10, 10, 0.15);

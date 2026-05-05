@@ -31,12 +31,26 @@ export default function OrchidIslandPage() {
         {/* Cinematic Background Placeholder */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "#111", // Would be a stunning Marrakech estate photo
+          background: "var(--bg-secondary)", // Would be a stunning Marrakech estate photo
           zIndex: 0
         }}>
           {/* Gradients to blend image into the dark theme */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.4) 50%, var(--bg-color) 100%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at center, transparent 0%, rgba(10,10,10,0.8) 100%)` }} />
+          <style>{`
+            .orchid-hero-overlay-1 {
+              background: linear-gradient(to bottom, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.4) 50%, var(--bg-color) 100%);
+            }
+            .orchid-hero-overlay-2 {
+              background: radial-gradient(circle at center, transparent 0%, rgba(10,10,10,0.8) 100%);
+            }
+            .light-theme .orchid-hero-overlay-1 {
+              background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+            }
+            .light-theme .orchid-hero-overlay-2 {
+              background: none;
+            }
+          `}</style>
+          <div className="orchid-hero-overlay-1" style={{ position: "absolute", inset: 0 }} />
+          <div className="orchid-hero-overlay-2" style={{ position: "absolute", inset: 0 }} />
         </div>
 
         <div style={{
@@ -99,7 +113,7 @@ export default function OrchidIslandPage() {
             </p>
           </div>
           <div style={{
-            width: "100%", aspectRatio: "4/5", background: "#111", border: `1px solid rgba(184,106,81,0.2)`,
+            width: "100%", aspectRatio: "4/5", background: "var(--bg-secondary)", border: `1px solid rgba(184,106,81,0.2)`,
             position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"
           }}>
              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, rgba(184,106,81,0.1))` }} />

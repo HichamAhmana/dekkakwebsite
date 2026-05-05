@@ -161,7 +161,7 @@ export default function GalleryPage() {
               }}
               >
                 <div style={{
-                  width: "100%", paddingBottom: pb, background: "#111",
+                  width: "100%", paddingBottom: pb, background: "var(--bg-secondary)",
                   border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden"
                 }}>
                   {item.src ? (

@@ -112,7 +112,7 @@ export default function AboutPage() {
               {/* Cinematic gold overlay */}
               <div style={{
                 position: "absolute", inset: 0,
-                background: `linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.7) 100%), linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%)`,
+                background: `linear-gradient(to bottom, transparent 50%, var(--bg-color) 100%), linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%)`,
               }} />
               {/* Bottom label */}
               <div style={{
@@ -134,7 +134,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "#0D0C0A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", background: "var(--bg-secondary)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
@@ -165,7 +165,7 @@ export default function AboutPage() {
                   position: "absolute", left: "50%", top: "50%",
                   width: "12px", height: "12px", borderRadius: "50%",
                   background: GOLD, transform: "translate(-50%, -50%)",
-                  boxShadow: `0 0 0 4px #0D0C0A, 0 0 0 5px ${GOLD}66`
+                  boxShadow: `0 0 0 4px var(--bg-secondary), 0 0 0 5px ${GOLD}66`
                 }} />}
 
                 <div style={{

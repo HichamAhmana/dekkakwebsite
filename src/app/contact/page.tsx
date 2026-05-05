@@ -152,6 +152,10 @@ export default function ContactPage() {
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
+      <style>{`
+        .light-theme nav { background: var(--bg-color) !important; }
+        .contact-input::placeholder { color: color-mix(in srgb, var(--text-color) 40%, transparent) !important; }
+      `}</style>
       <Navbar />
 
       <section style={{
@@ -222,7 +226,7 @@ export default function ContactPage() {
                         fontWeight: 600,
                         letterSpacing: "0.15em",
                         textTransform: "uppercase",
-                        color: isHovered ? social.color : "rgba(245,240,232,0.45)",
+                        color: isHovered ? social.color : "color-mix(in srgb, var(--text-color) 60%, transparent)",
                         background: isHovered ? `${social.color}10` : "transparent",
                         border: `1px solid ${isHovered ? social.color : "transparent"}`,
                         borderRadius: "2px",
@@ -232,7 +236,7 @@ export default function ContactPage() {
                       }}
                     >
                       <span style={{
-                        color: isHovered ? social.color : "rgba(245,240,232,0.3)",
+                        color: isHovered ? social.color : "color-mix(in srgb, var(--text-color) 40%, transparent)",
                         transition: "color 0.3s ease",
                         display: "flex",
                         alignItems: "center",
@@ -276,8 +280,8 @@ export default function ContactPage() {
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateX(0)" : "translateX(20px)",
             transition: "all 1s ease 0.4s",
-            background: "rgba(255,255,255,0.02)",
-            border: "1px solid rgba(255,255,255,0.05)",
+            background: "color-mix(in srgb, var(--text-color) 2%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--text-color) 5%, transparent)",
             padding: isMobile ? "28px 20px" : "60px"
           }}>
             {formState === "success" ? (
@@ -374,25 +378,25 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
                 <div>
                   <label htmlFor="contact-name" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Name</label>
-                  <input id="contact-name" type="text" required title="Your name" placeholder="Your full name" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <input id="contact-name" className="contact-input" type="text" required title="Your name" placeholder="Your full name" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "color-mix(in srgb, var(--text-color) 20%, transparent)"} />
                 </div>
                 <div>
                   <label htmlFor="contact-email" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Email</label>
-                  <input id="contact-email" type="email" required title="Your email address" placeholder="your@email.com" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <input id="contact-email" className="contact-input" type="email" required title="Your email address" placeholder="your@email.com" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "color-mix(in srgb, var(--text-color) 20%, transparent)"} />
                 </div>
                 <div>
                   <label htmlFor="contact-subject" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Subject</label>
-                  <select id="contact-subject" title="Select inquiry type" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
-                    <option style={{ background: "#111" }}>Business Alliance</option>
-                    <option style={{ background: "#111" }}>Client</option>
-                    <option style={{ background: "#111" }}>Philanthropic Inquiry</option>
-                    <option style={{ background: "#111" }}>Press / Media</option>
-                    <option style={{ background: "#111" }}>General Information</option>
+                  <select id="contact-subject" className="contact-input" title="Select inquiry type" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
+                    <option style={{ background: "var(--bg-secondary)" }}>Business Alliance</option>
+                    <option style={{ background: "var(--bg-secondary)" }}>Client</option>
+                    <option style={{ background: "var(--bg-secondary)" }}>Philanthropic Inquiry</option>
+                    <option style={{ background: "var(--bg-secondary)" }}>Press / Media</option>
+                    <option style={{ background: "var(--bg-secondary)" }}>General Information</option>
                   </select>
                 </div>
                 <div>
                   <label htmlFor="contact-message" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Message</label>
-                  <textarea id="contact-message" required rows={4} title="Your message" placeholder="Write your message here..." style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", resize: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.2)"} />
+                  <textarea id="contact-message" className="contact-input" required rows={4} title="Your message" placeholder="Write your message here..." style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none", resize: "none", transition: "border-color 0.3s" }} onFocus={(e) => e.target.style.borderColor = GOLD} onBlur={(e) => e.target.style.borderColor = "color-mix(in srgb, var(--text-color) 20%, transparent)"} />
                 </div>
 
                 <div>

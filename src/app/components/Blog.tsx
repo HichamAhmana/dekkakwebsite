@@ -50,8 +50,8 @@ function BlogCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative",
-        background: hovered ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.01)",
-        border: `1px solid ${hovered ? GOLD + "44" : "rgba(255,255,255,0.05)"}`,
+        background: hovered ? "rgba(201,168,76,0.03)" : "color-mix(in srgb, var(--text-color) 1%, transparent)",
+        border: `1px solid ${hovered ? GOLD + "44" : "color-mix(in srgb, var(--text-color) 5%, transparent)"}`,
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
@@ -70,7 +70,7 @@ function BlogCard({
         style={{
           width: "100%",
           height: "240px",
-          background: "#111",
+          background: "var(--bg-secondary)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -93,7 +93,7 @@ function BlogCard({
             {/* Gold gradient overlay */}
             <div style={{
               position: "absolute", inset: 0,
-              background: `linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 60%), linear-gradient(45deg, ${GOLD}1A, transparent)`,
+              background: `linear-gradient(to top, var(--bg-color) 0%, transparent 60%), linear-gradient(45deg, ${GOLD}1A, transparent)`,
             }} />
           </>
         ) : (
@@ -114,7 +114,7 @@ function BlogCard({
             position: "absolute",
             top: "20px",
             left: "20px",
-            background: hovered ? GOLD : "#1A1A1A",
+            background: hovered ? GOLD : "var(--bg-secondary)",
             border: `1px solid ${GOLD}44`,
             display: "flex",
             flexDirection: "column",
@@ -132,13 +132,13 @@ function BlogCard({
               fontSize: "20px",
               fontWeight: 600,
               lineHeight: 1,
-              color: hovered ? "#000" : CREAM,
+              color: "color-mix(in srgb, var(--text-color) 50%, transparent)",
               transition: "color 0.3s ease",
             }}
           >
             {post.shortDate}
           </span>
-          <div style={{ height: "1px", width: "30px", background: hovered ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.2)", margin: "4px 0" }} />
+          <div style={{ height: "1px", width: "30px", background: hovered ? "rgba(0,0,0,0.2)" : "color-mix(in srgb, var(--text-color) 20%, transparent)", margin: "4px 0" }} />
           <span
             style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
@@ -196,7 +196,7 @@ function BlogCard({
             alignItems: "center",
             justifyContent: "space-between",
             paddingTop: "20px",
-            borderTop: `1px solid rgba(255,255,255,0.05)`,
+            borderTop: `1px solid color-mix(in srgb, var(--text-color) 5%, transparent)`,
             transition: "color 0.3s ease",
           }}
         >

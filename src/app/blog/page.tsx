@@ -113,10 +113,15 @@ export default function BlogPage() {
                 onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
               />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: `linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%)`,
-              }} />
+              <style>{`
+                .blog-featured-overlay {
+                  background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
+                }
+                .light-theme .blog-featured-overlay {
+                  background: linear-gradient(to top, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.1) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
+                }
+              `}</style>
+              <div className="blog-featured-overlay" style={{ position: "absolute", inset: 0 }} />
 
               {/* Corner accents - hide on mobile */}
               {!isMobile && <div style={{ position: "absolute", top: "24px", left: "24px", width: "48px", height: "1px", background: GOLD }} />}
@@ -184,9 +189,9 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
       style={{
         display: "flex",
         flexDirection: "column",
-        border: `1px solid ${hovered ? GOLD + "44" : "rgba(255,255,255,0.06)"}`,
+        border: `1px solid ${hovered ? GOLD + "44" : "color-mix(in srgb, var(--text-color) 6%, transparent)"}`,
         overflow: "hidden",
-        background: hovered ? "rgba(201,168,76,0.03)" : "rgba(255,255,255,0.01)",
+        background: hovered ? "rgba(201,168,76,0.03)" : "color-mix(in srgb, var(--text-color) 1%, transparent)",
         transform: loaded ? (hovered ? "translateY(-6px)" : "translateY(0)") : "translateY(30px)",
         opacity: loaded ? 1 : 0,
         transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.07}s`,
@@ -194,7 +199,7 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
       }}
     >
       {/* Image */}
-      <div style={{ height: "220px", position: "relative", overflow: "hidden", background: "#111" }}>
+      <div style={{ height: "220px", position: "relative", overflow: "hidden", background: "var(--bg-secondary)" }}>
         {event.image ? (
           <>
             <Image
@@ -212,7 +217,7 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
             />
             <div style={{
               position: "absolute", inset: 0,
-              background: `linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 60%)`,
+              background: `linear-gradient(to top, var(--bg-color) 0%, transparent 60%)`,
             }} />
           </>
         ) : (
@@ -225,7 +230,7 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
         {/* Date badge */}
         <div style={{
           position: "absolute", top: "16px", left: "16px",
-          background: hovered ? GOLD : "rgba(10,10,10,0.85)",
+          background: hovered ? GOLD : "var(--bg-secondary)",
           border: `1px solid ${GOLD}55`,
           padding: "10px 14px",
           display: "flex", flexDirection: "column", alignItems: "center",
@@ -233,7 +238,7 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
           backdropFilter: "blur(8px)",
           zIndex: 2,
         }}>
-          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 600, lineHeight: 1, color: hovered ? "#000" : CREAM }}>{event.shortDate}</span>
+          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 600, lineHeight: 1, color: "color-mix(in srgb, var(--text-color) 50%, transparent)" }}>{event.shortDate}</span>
           <div style={{ height: "1px", width: "24px", background: hovered ? "rgba(0,0,0,0.2)" : GOLD + "55", margin: "4px 0" }} />
           <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "7px", fontWeight: 700, letterSpacing: "0.15em", color: hovered ? "#000" : GOLD }}>{event.monthYear}</span>
         </div>
@@ -257,7 +262,7 @@ function PostCard({ event, idx, loaded }: { event: BlogPost; idx: number; loaded
         </p>
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          paddingTop: "16px", borderTop: "1px solid rgba(255,255,255,0.05)",
+          paddingTop: "16px", borderTop: "1px solid color-mix(in srgb, var(--text-color) 5%, transparent)",
         }}>
           <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD }}>
             {event.location}

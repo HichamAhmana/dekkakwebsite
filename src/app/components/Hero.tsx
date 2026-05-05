@@ -57,21 +57,21 @@ export default function Hero() {
       flexDirection: "column",
       justifyContent: "center",
       overflow: "hidden",
-      background: "radial-gradient(ellipse at 65% 40%, #1a1410 0%, var(--bg-color) 70%)",
+      background: "radial-gradient(ellipse at 65% 40%, var(--bg-secondary) 0%, var(--bg-color) 70%)",
     }}>
 
       <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
         {/* ── Interactive mouse-following gold glow ── */}
-        <div 
+        <div
           ref={glowRef}
           style={{
-          position: "absolute", left: 0, top: 0,
-          width: "520px", height: "520px",
-          background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 68%)",
-          transform: `translate(-600px, -600px)`,
-          transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
-          pointerEvents: "none", zIndex: 1,
-        }} />
+            position: "absolute", left: 0, top: 0,
+            width: "520px", height: "520px",
+            background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 68%)",
+            transform: `translate(-600px, -600px)`,
+            transition: "transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+            pointerEvents: "none", zIndex: 1,
+          }} />
 
         {/* ── Floating ambient orbs ── */}
         <div style={{
@@ -131,7 +131,7 @@ export default function Hero() {
       {/* ── Bottom vignette overlay ── */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 55%, rgba(10,10,10,0.96) 100%)",
+        background: "linear-gradient(to bottom, transparent 0%, transparent 55%, var(--bg-color) 100%)",
       }} />
 
       {/* ── Editorial Cinematic Portrait ── */}
@@ -166,11 +166,11 @@ export default function Hero() {
         }} />
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
-          background: "rgba(10, 10, 10, 0.45)", // Semi-transparent black wash
+          background: "var(--bg-color)", opacity: 0.45,
         }} />
-        
-        <Image 
-          src="/dekkak-cinema-marrakech-festival.png" 
+
+        <Image
+          src="/dekkak-cinema-marrakech-festival.png"
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
           style={{ objectFit: "cover", objectPosition: "60% center" }}
@@ -342,7 +342,7 @@ export default function Hero() {
               display: "inline-flex", alignItems: "center",
               padding: "15px 36px",
               background: btnHover === "primary" ? GOLD_LIGHT : GOLD,
-              color: "#000",
+              color: "var(--bg-color)",
               fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "11px", fontWeight: 500,
               letterSpacing: "0.2em", textTransform: "uppercase",

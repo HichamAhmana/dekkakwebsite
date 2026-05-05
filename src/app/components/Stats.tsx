@@ -31,7 +31,7 @@ export default function Stats() {
           inset: 0,
           pointerEvents: "none",
           background:
-            "linear-gradient(90deg, rgba(0,0,0,0.85), transparent 15%, transparent 85%, rgba(0,0,0,0.85))",
+            "linear-gradient(90deg, var(--bg-color), transparent 15%, transparent 85%, var(--bg-color))",
         }}
       />
 
