@@ -14,35 +14,35 @@ const COMPANIES = [
     role: "Chairman & Founder",
     sector: "Holding Company — Oil & Gas, EPC, Construction, Marine, Desalination",
     description: "Founded in 1992 in Abu Dhabi, Adgeco Group has successfully grown many startup foreign businesses and ventures into full-fledged companies across Arab Countries, Europe, Africa, and North America. Key projects include Abu Dhabi International Airport runway, Civil Works for Oil Terminal 2 at Port Fujairah, and System Floats Concrete at Khalifa Port.",
-    link: "adgeco.com"
+    link: "http://adgeco.com"
   },
    {
     name: "Orchid Island Real Estates Agency",
     role: "Founder & Chairman",
     sector: "Real Estate — UAE",
     description: "A premier real estate agency managing luxury and commercial property portfolios, providing high-end brokerage and property management services.",
-    link:"orchidisland.immo"
+    link: "https://orchidisland.immo"
   },
   {
     name: "US Data Center",
     role: "Founding Partner",
     sector: "Technology Infrastructure",
     description: "Strategic investment in advanced data infrastructure, supporting the digital transformation of the region.",
-    link:"usdatacenter.com"
+    link: "https://usdatacenter.com"
   },
   {
     name: "Gate One Properties",
     role: "President",
     sector: "Real Estate — UAE",
     description: "One of the leading real estate firms in the UAE, offering property services to investors and companies across a diverse portfolio.",
-    link: "gateone.ae"
+    link: "http://gateone.ae"
   },
   {
     name: "Horizonte Invertido",
     role: "Founding Partner",
     sector: "Consulting • Real Estate • Hospitality • Investment — Spain",
     description: "A strategic Spanish holding and consultancy firm focused on bridging high-value real estate, premium hospitality, and structured investment opportunities between European and MENA markets.",
-    link:"horizonteinvertido.com"  
+    link: "https://horizonteinvertido.com"
   },
   {
     name: "The American University – Marrakech",
@@ -69,11 +69,21 @@ const ALLIANCES = [
 ];
 
 const COUNCILS = [
-  "AmCham Abu Dhabi", "Canadian Business Council", "Benelux Business Council",
-  "British Business Group", "German Emirati Joint Council", "French Business Group",
-  "Spanish Business Council", "Belgian Business Council", "Swiss Business Council",
-  "Netherlands Business Council", "Danish Business Council", "Singapore Business Council",
-  "Australian Business Council", "Malaysian Business Council", "Arab Business Club"
+  { name: "AmCham Abu Dhabi",                              url: "https://amchamabudhabi.org" },
+  { name: "Canadian Business Council",                     url: "https://www.cbc-dubai.com" },
+  { name: "Benelux Business Council" },
+  { name: "British Business Group" },
+  { name: "German Emirati Joint Council",                  url: "https://vae.ahk.de/en" },
+  { name: "French Business Group" },
+  { name: "Spanish Business Council",                      url: "http://spanishbusinesscouncil.ae/en" },
+  { name: "Belgian Business Council" },
+  { name: "Swiss Business Council",                        url: "https://www.swissbcuae.com" },
+  { name: "Netherlands Business Council",                  url: "https://www.nlbcuae.com" },
+  { name: "Danish Business Council",                       url: "https://danishbusinesscouncil.com" },
+  { name: "Singapore Business Council" },
+  { name: "Australian Business Council",                   url: "https://www.abcduae.com" },
+  { name: "Malaysian Business Council" },
+  { name: "Arab Business Club",                            url: "https://arabbusinessclub.org" },
 ];
 
 export default function BusinessPage() {
@@ -160,10 +170,10 @@ export default function BusinessPage() {
                   {company.description}
                 </p>
                 {company.link && (
-                  <a href={`http://${company.link}`} target="_blank" rel="noreferrer" style={{
+                  <a href={company.link} target="_blank" rel="noreferrer" style={{
                     fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, borderBottom: `1px solid ${GOLD}44`, paddingBottom: "4px", wordBreak: "break-all"
                   }}>
-                    Visit {company.link}
+                    Visit {company.link.replace(/^https?:\/\//, "")}
                   </a>
                 )}
               </div>
@@ -199,12 +209,22 @@ export default function BusinessPage() {
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "16px", maxWidth: "1000px", margin: "0 auto" }}>
           {COUNCILS.map((council, i) => (
-            <span key={i} style={{
-              fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase",
-              padding: "12px 24px", border: "1px solid rgba(255,255,255,0.1)", color: CREAM, opacity: 0.6
-            }}>
-              {council}
-            </span>
+            council.url ? (
+              <a key={i} href={council.url} target="_blank" rel="noreferrer" style={{
+                fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase",
+                padding: "12px 24px", border: "1px solid rgba(201,168,76,0.25)", color: GOLD, opacity: 0.8,
+                textDecoration: "none", transition: "opacity 0.2s ease"
+              }}>
+                {council.name}
+              </a>
+            ) : (
+              <span key={i} style={{
+                fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase",
+                padding: "12px 24px", border: "1px solid rgba(255,255,255,0.1)", color: CREAM, opacity: 0.6
+              }}>
+                {council.name}
+              </span>
+            )
           ))}
         </div>
       </section>

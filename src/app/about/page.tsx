@@ -239,34 +239,36 @@ export default function AboutPage() {
             
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "16px" }}>
               {[
-                "Chairman & Founder of Adgeco Group (adgeco.com)",
-                "President of Gate One Properties (gateone.ae)",
-                "Chairman of Arab Peace Corp Foundation (arabpeacecorps.org)",
-                "Chief Financial Officer and Founding Member of CARLAC (carlac.net)",
-                "President/Executive Director of New Arab Foundation (newarabfoundation.org)",
-                "Honorary President – Ibn Battuta Association (ibnbattuta.ma)",
-                "Chairman of Anouar Association (anouar.org.ma)",
-                "Executive President of Sahara Spirit Foundation (saharaspirit.org)",
-                "Honorary President – Union Road Association (unionroad.org)",
-                "Member of AmCham Abu Dhabi (amchamabudhabi.org)",
-                "Member of Australian Business Council Dubai (abcduae.com)",
-                "Member of Singapore Business Council (sbcuae.org)",
-                "Member of Danish Business Council Dubai",
-                "Member of Netherlands Business Council",
-                "Member of Canadian Business Council (cbc-dubai.com)",
-                "Member of German Emirati Joint Council for Industry & Commerce",
-                "Member of British Business Group Abu Dhabi (britishbusiness.org)",
-                "Member of Benelux Business Council",
-                "Member of Arab Business Club (arabbusinessclub.org)",
-                "Member of Chambre Française de Commerce et d'Industrie du Maroc (cfcim.org)",
-                "Member of French Chamber of Commerce Abu Dhabi (fbgabudhabi.com)",
-                "Member of Spanish Business Council (spanishbusinesscouncil.ae)",
-                "Member of Swiss Business Council (swissbcuae.com)"
+                { text: "Chairman & Founder of Adgeco Group", url: "http://adgeco.com", label: "adgeco.com" },
+                { text: "President of Gate One Properties", url: "http://gateone.ae", label: "gateone.ae" },
+                { text: "Chairman & Founder of Orchid Island Real Estate Agency", url: "https://orchidisland.immo", label: "orchidisland.immo" },
+                { text: "Chairman of Arab Peace Corps Foundation" },
+                { text: "Chief Financial Officer and Founding Member of CARLAC" },
+                { text: "President/Executive Director of New Arab Foundation" },
+                { text: "Honorary President – Ibn Battuta Association" },
+                { text: "Chairman of Anouar Association" },
+                { text: "Executive President of Sahara Spirit Foundation" },
+                { text: "Honorary President – Union Road Association" },
+                { text: "Member of AmCham Abu Dhabi", url: "https://amchamabudhabi.org", label: "amchamabudhabi.org" },
+                { text: "Member of Australian Business Council Dubai", url: "https://www.abcduae.com", label: "abcduae.com" },
+                { text: "Member of Singapore Business Council" },
+                { text: "Member of Danish Business Council Dubai", url: "https://danishbusinesscouncil.com", label: "danishbusinesscouncil.com" },
+                { text: "Member of Netherlands Business Council", url: "https://www.nlbcuae.com", label: "nlbcuae.com" },
+                { text: "Member of Canadian Business Council", url: "https://www.cbc-dubai.com", label: "cbc-dubai.com" },
+                { text: "Member of German Emirati Joint Council for Industry & Commerce", url: "https://vae.ahk.de/en", label: "vae.ahk.de" },
+                { text: "Member of British Business Group Abu Dhabi" },
+                { text: "Member of Benelux Business Council" },
+                { text: "Member of Arab Business Club", url: "https://arabbusinessclub.org", label: "arabbusinessclub.org" },
+                { text: "Member of Chambre Française de Commerce et d'Industrie du Maroc", url: "https://www.cfcim.org", label: "cfcim.org" },
+                { text: "Member of Spanish Business Council", url: "http://spanishbusinesscouncil.ae/en", label: "spanishbusinesscouncil.ae" },
+                { text: "Member of Swiss Business Council", url: "https://www.swissbcuae.com", label: "swissbcuae.com" },
               ].map((membership, i) => (
                 <li key={i} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                   <div style={{ marginTop: "6px", minWidth: "4px", height: "4px", background: GOLD, borderRadius: "50%" }} />
                   <span style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "14px", color: CREAM, opacity: 0.75, lineHeight: 1.5 }}>
-                    {membership}
+                    {membership.text}{membership.url ? (
+                      <> — <a href={membership.url} target="_blank" rel="noreferrer" style={{ color: GOLD, opacity: 1, textDecoration: "none", borderBottom: `1px solid ${GOLD}44` }}>{membership.label}</a></>
+                    ) : null}
                   </span>
                 </li>
               ))}

@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+import { GOLD, CREAM } from "../constants";
 
-const GOLD = "#C9A84C";
-const CREAM = "var(--text-color)";
 
 function PlaceholderPattern({
   id,
@@ -222,26 +221,6 @@ function ParticleField() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   DESKTOP: horizontal scroll
-
-   THE ROOT CAUSE OF ALL PREVIOUS BUGS:
-   framer-motion's `x` motion value only accepts
-   NUMBERS (pixels). Passing "0vw" / "-500vw" or
-   "0%" / "-83%" are silently ignored or produce
-   wrong results depending on the fm version.
-
-   FIX: read window.innerWidth as pixels and
-   multiply. On resize we update so it stays
-   correct. slideWidthPx * 5 = the total distance
-   to travel across 6 slides.
-
-   Also: overflow: hidden on the sticky wrapper
-   breaks position:sticky in some browsers by
-   creating a new scroll container. Use
-   overflow: clip instead — same visual result,
-   no new scroll context.
-───────────────────────────────────────────── */
 function EngagementDesktop() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({

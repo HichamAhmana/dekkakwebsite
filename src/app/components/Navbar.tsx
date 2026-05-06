@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { GOLD } from "../constants";
 
-
-const GOLD = "#C9A84C";
 const CREAM = "var(--nav-text)";
 
 function ThemeToggle() {

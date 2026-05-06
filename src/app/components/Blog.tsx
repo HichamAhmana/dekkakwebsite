@@ -3,8 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const GOLD = "#C9A84C";
-const CREAM = "var(--text-color)";
+import { GOLD, CREAM } from "../constants";
 
 import { getFlickrPhotos } from "../actions/flickr";
 
