@@ -7,7 +7,8 @@ export default function CookieBanner() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent");
+    if (typeof window === "undefined") return;
+    const consent = window.localStorage.getItem("cookie-consent");
     if (!consent) {
       const t = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(t);
@@ -15,7 +16,7 @@ export default function CookieBanner() {
   }, []);
 
   const dismiss = (choice: "accepted" | "declined") => {
-    localStorage.setItem("cookie-consent", choice);
+    if (typeof window !== "undefined") window.localStorage.setItem("cookie-consent", choice);
     setDismissed(true);
     setTimeout(() => setVisible(false), 500);
   };

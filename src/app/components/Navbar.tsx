@@ -12,7 +12,8 @@ function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage.getItem("theme");
+    if (typeof window === "undefined") return;
+    const saved = window.localStorage.getItem("theme");
     if (saved === "light") {
       setIsLight(true);
       document.body.classList.add("light-theme");
@@ -22,11 +23,13 @@ function ThemeToggle() {
   const toggle = () => {
     if (isLight) {
       document.body.classList.remove("light-theme");
-      localStorage.setItem("theme", "dark");
+      void document.body.offsetHeight; // force repaint for Mi Browser / WebViews
+      if (typeof window !== "undefined") window.localStorage.setItem("theme", "dark");
       setIsLight(false);
     } else {
       document.body.classList.add("light-theme");
-      localStorage.setItem("theme", "light");
+      void document.body.offsetHeight; // force repaint for Mi Browser / WebViews
+      if (typeof window !== "undefined") window.localStorage.setItem("theme", "light");
       setIsLight(true);
     }
   };
@@ -135,6 +138,7 @@ export default function Navbar() {
         padding: "0 48px", height: "64px",
         background: "var(--nav-bg)",
         backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
         borderBottom: "1px solid var(--border-color)",
         transition: "all 0.4s ease",
       }}>
@@ -237,7 +241,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   return (
     <div style={{
       position: "absolute", top: "100%", left: 0, width: "100%",
-      background: "var(--nav-bg)", backdropFilter: "blur(14px)",
+      background: "var(--nav-bg)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)",
       padding: "24px 40px 32px",
     }}>
       {NAV_LINKS.map((l, i) => (

@@ -1,5 +1,22 @@
 import type { NextConfig } from "next";
 
+// Node.js 22+ exposes a built-in `localStorage` global when Next.js passes
+// `--localstorage-file` (even without a valid path). The resulting object has
+// `getItem`/`setItem` missing or broken, crashing SSR. We replace it with a
+// safe no-op so server-side code never throws.
+if (typeof globalThis.localStorage !== "undefined") {
+  const _store: Record<string, string> = {};
+ 
+  globalThis.localStorage = {
+    getItem: (key: string) => _store[key] ?? null,
+    setItem: (key: string, value: string) => { _store[key] = value; },
+    removeItem: (key: string) => { delete _store[key]; },
+    clear: () => { Object.keys(_store).forEach((k) => delete _store[k]); },
+    key: (index: number) => Object.keys(_store)[index] ?? null,
+    get length() { return Object.keys(_store).length; },
+  };
+}
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -41,3 +58,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

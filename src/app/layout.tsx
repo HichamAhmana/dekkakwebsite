@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeProvider";
+
 import CookieBanner from "./components/CookieBanner";
 
 const cormorant = Cormorant_Garamond({
@@ -191,6 +191,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          try {
+            if (localStorage.getItem('theme') === 'light') {
+              document.body.classList.add('light-theme');
+            }
+          } catch(e) {}
+        `}} />
         <link rel="preconnect" href="https://live.staticflickr.com" />
         <link rel="preconnect" href="https://api.flickr.com" />
         <script
@@ -203,12 +210,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
-        <ThemeProvider>
-          {children}
-          <Analytics />
-          <SpeedInsights />
-          <CookieBanner />
-        </ThemeProvider>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <CookieBanner />
         <Script
           id="chatbase-script"
           strategy="afterInteractive"
