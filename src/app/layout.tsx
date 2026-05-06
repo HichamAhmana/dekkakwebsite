@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
 });
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://dekkakwebsite.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
