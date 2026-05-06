@@ -240,7 +240,9 @@ export default function Hero() {
           </div>
 
           {/* DEKKAK — letters reveal one by one */}
-          <h1 style={{
+          <h1
+            aria-label="Mohamed Dekkak — Chairman of Adgeco Group, Investor &amp; Philanthropist"
+            style={{
             fontFamily: "var(--font-cormorant), serif",
             fontWeight: 300,
             fontSize: "clamp(80px, 14vw, 190px)",
@@ -322,9 +324,16 @@ export default function Hero() {
           maxWidth: "580px", margin: "0 0 44px",
           transition: "opacity 1s ease 1.35s, transform 1s ease 1.35s",
         }}>
-          Mohamed Dekkak has spent three decades building a cross-continental business empire —
-          forging connections between cultures, capitals, and communities across the Middle East,
-          Africa, and beyond.
+          Mohamed Dekkak is a Moroccan chairman, investor, and philanthropist — best known as the
+          Chairman and Founder of Adgeco Group, a multi-sector holding company established in Abu Dhabi in 1992.
+          Over three decades, he has built a cross-continental business empire spanning oil &amp; gas,
+          engineering, construction, real estate, and technology across the Middle East, Africa, Europe,
+          and Latin America. As President of Gate One Properties and Chairman of Orchid Island Real Estate,
+          Dekkak shapes landmark infrastructure across the UAE and Morocco. He is also a dedicated
+          philanthropist, leading foundations focused on peace, education, and cultural diplomacy — from
+          the Anouar Association in Marrakech to the Arab Peace Corps Foundation and Sahara Spirit Foundation.
+          An active member of over a dozen international business councils, Dekkak bridges cultures,
+          capitals, and communities worldwide.
         </p>
 
         {/* CTA Buttons */}
@@ -338,6 +347,7 @@ export default function Hero() {
             href="/about"
             onMouseEnter={() => setBtnHover("primary")}
             onMouseLeave={() => setBtnHover(null)}
+            aria-label="About Mohamed Dekkak — Biography and career story"
             style={{
               display: "inline-flex", alignItems: "center",
               padding: "15px 36px",
@@ -356,6 +366,7 @@ export default function Hero() {
             href="/business"
             onMouseEnter={() => setBtnHover("secondary")}
             onMouseLeave={() => setBtnHover(null)}
+            aria-label="Mohamed Dekkak business ventures and investment portfolio"
             style={{
               display: "inline-flex", alignItems: "center",
               padding: "15px 36px",
@@ -369,7 +380,7 @@ export default function Hero() {
               transition: "border-color 0.3s ease, color 0.3s ease, transform 0.3s ease",
             }}
           >
-            View Ventures
+            Investment Portfolio
           </Link>
         </div>
       </div>
