@@ -11,56 +11,51 @@ const CREAM = "var(--text-color)";
 const SERVICES = [
   {
     title: "Real Estate Services",
-    description: "Comprehensive advisory and management for high-value property portfolios, from landmark developments to ultra-luxury residential assets across the UAE, Morocco, and Europe."
+    description: "We source and deliver premium real estate investment opportunities, specializing in upscale and luxury assets across both residential and commercial sectors. Our capabilities span office developments, retail destinations, healthcare properties, industrial assets, hospitality projects, and data centers allowing us to build well-balanced and resilient portfolios. From initial acquisition through to strategic repositioning, we uncover potential, enhance asset performance, and generate value aligned with institutional standards."
   },
   {
     title: "Consulting",
-    description: "Strategic insights and cross-continental business intelligence to help enterprises scale, optimize operations, and penetrate emerging markets in the Middle East and Africa."
+    description: "Our advisory services guide clients through market entry, growth initiatives, and strategic transformation. We provide expertise in cross-border structuring, regulatory alignment, operational efficiency, and overall business strategy helping organizations expand effectively within complex and evolving markets. By blending deep local insight with a global outlook, we deliver actionable, performance-focused solutions that drive growth while minimizing execution risk."
   },
   {
     title: "Mergers & Acquisitions (M&A)",
-    description: "Expert facilitation of complex corporate transactions, leveraging a deep global network to structure profitable acquisitions, mergers, and strategic joint ventures."
+    description: "We deliver comprehensive advisory services for both buy-side and sell-side M&A transactions, covering everything from opportunity sourcing and valuation to negotiation and closing. Our methodology combines financial, operational, and strategic due diligence to provide clear insights and informed decision-making throughout the process. We design transaction structures that capture synergies, maximize asset value, and strengthen long-term strategic positioning."
   },
   {
     title: "Investment Structuring",
-    description: "Designing bespoke, tax-efficient, and risk-adjusted investment vehicles tailored for institutional capital, sovereign wealth, and high-net-worth family offices."
+    description: "We develop customized investment frameworks, including joint ventures, private equity platforms, and institutional-grade vehicles. Each solution is structured to enhance capital efficiency, strengthen governance, and balance risk allocation while ensuring alignment among all stakeholders. Our approach prioritizes flexibility, scalability, and full compliance with international standards."
   },
   {
     title: "Capital Raising",
-    description: "Securing funding for multi-million dollar infrastructure, real estate, and tech projects through an exclusive syndicate of international banking and private equity partners."
+    description: "We link projects with a broad range of global capital providers, including institutional investors, sovereign wealth funds, family offices, and private equity groups. By crafting strong investment narratives, positioning opportunities effectively, and engaging the right investors, we facilitate funding that aligns closely with each project's objectives. Our extensive network provides access to both conventional and alternative sources of capital."
   },
   {
     title: "Standard, LBO & Innovative Financing",
-    description: "Providing robust financing architectures including leveraged buyouts (LBOs), mezzanine finance, and innovative credit solutions for expansive growth objectives."
+    description: "We structure both conventional leveraged buyouts (LBOs) and bespoke financing solutions designed for complex transactions. By integrating structured debt, mezzanine capital, and hybrid instruments, we build efficient capital stacks that maximize returns while preserving financial flexibility. Our approach enables clients to access opportunities that demand creative and sophisticated financial structuring."
   },
   {
     title: "Hospitality Advisory",
-    description: "End-to-end consulting for luxury hotel and resort developments, from conceptualization and brand positioning to operational excellence and asset management."
+    description: "We operate at the crossroads of hospitality investment and destination creation, developing hotels, restaurants, beach clubs, and nightlife venues. Our approach goes beyond real estate, blending brand strategy, concept development, operations, and guest experience. We create lifestyle destinations where luxury stays, premium dining, and vibrant entertainment come together building strong identities and diversified revenue streams."
   },
   {
     title: "Value & Risk",
-    description: "Sophisticated risk mitigation and value-creation strategies to protect capital and ensure sustainable, long-term returns in volatile global markets."
+    description: "We provide advanced valuation and risk analysis, combining financial modeling with market intelligence to assess opportunities with precision. Our methodology identifies key value drivers, stress-tests assumptions, and anticipates potential risks. This ensures informed decision-making, capital protection, and optimized performance across all investment stages."
   },
   {
     title: "Capital Flows",
-    description: "Navigating cross-border capital mobility, foreign direct investment (FDI) frameworks, and regulatory compliance between the West and the Arab world."
+    description: "We track and harness global capital flows to position assets and opportunities with precision. By analyzing liquidity trends, investor demand, and macroeconomic shifts, we connect projects to the most relevant funding sources. This strategy improves capital alignment, accelerates timing, and strengthens overall investment appeal."
   },
   {
     title: "Industries We Serve",
-    description: "A diverse portfolio spanning Oil & Gas, Engineering & Construction, Real Estate, Healthcare, Education, Hospitality, and Next-Generation Technologies."
+    description: "We operate across high-growth, resilient sectors including Hospitality (hotels, restaurants, lifestyle destinations), Healthcare (hospitals, clinics, integrated medical platforms), Data Centers (AI-driven, energy-linked infrastructure), Retail (commercial centers, mixed-use projects), Industrial & Offices (institutional-grade assets), Logistics (strategic hubs and supply chain infrastructure), and Private Clients (wealth structuring and bespoke real estate). Our cross-sector perspective allows us to capture synergies between real estate, technology, and capital markets."
   },
   {
     title: "Investment Approach",
-    description: "A patient, value-driven philosophy that prioritizes legacy-building infrastructure, rigorous due diligence, and absolute alignment of interest with our partners."
+    description: "Our investment philosophy is built on discipline, innovation, and long-term value creation. We identify high-potential opportunities, structure them with optimized capital strategies, and execute with institutional rigor. By combining market intelligence, financial structuring, and operational expertise, we deliver investments that generate strong returns, resilient cash flows, and sustainable growth."
   },
   {
     title: "Global Presence",
-    description: "Operating with deep local expertise and a global mindset from key strategic hubs in Marrakech, Abu Dhabi, and Madrid to serve an international clientele."
-  },
-  {
-    title: "Healthcare",
-    description: "Pioneering state-of-the-art medical infrastructure and transformative healthcare delivery systems across emerging markets, anchored by The American Medical City - Marrakesh."
-    
+    description: "Our activities extend across Europe, the Middle East, and Africa, connecting global capital with high-potential regional opportunities. Operating in both mature and emerging markets, we provide strategic access, local expertise, and seamless cross-border execution."
   }
 ];
 

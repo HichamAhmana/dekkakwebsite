@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeProvider";
+
 import CookieBanner from "./components/CookieBanner";
 
 const cormorant = Cormorant_Garamond({
@@ -127,27 +127,27 @@ const personSchema = {
   "memberOf": [
     { "@type": "Organization", "name": "Adgeco Group", "url": "http://adgeco.com" },
     { "@type": "Organization", "name": "Gate One Properties", "url": "http://gateone.ae" },
-    { "@type": "Organization", "name": "Arab Peace Corp Foundation", "url": "http://arabpeacecorps.org" },
-    { "@type": "Organization", "name": "CARLAC", "url": "http://carlac.net" },
-    { "@type": "Organization", "name": "New Arab Foundation", "url": "http://newarabfoundation.org" },
-    { "@type": "Organization", "name": "Ibn Battuta Association", "url": "http://ibnbattuta.ma" },
-    { "@type": "Organization", "name": "Anouar Association", "url": "http://anouar.org.ma" },
-    { "@type": "Organization", "name": "Sahara Spirit Foundation", "url": "http://saharaspirit.org" },
-    { "@type": "Organization", "name": "Union Road Association", "url": "http://unionroad.org" },
-    { "@type": "Organization", "name": "AmCham Abu Dhabi", "url": "http://amchamabudhabi.org" },
-    { "@type": "Organization", "name": "Australian Business Council Dubai", "url": "http://abcduae.com" },
-    { "@type": "Organization", "name": "Singapore Business Council", "url": "http://sbcuae.org" },
-    { "@type": "Organization", "name": "Danish Business Council Dubai" },
-    { "@type": "Organization", "name": "Netherlands Business Council" },
-    { "@type": "Organization", "name": "Canadian Business Council", "url": "http://cbc-dubai.com" },
-    { "@type": "Organization", "name": "German Emirati Joint Council for Industry & Commerce" },
-    { "@type": "Organization", "name": "British Business Group Abu Dhabi", "url": "http://britishbusiness.org" },
+    { "@type": "Organization", "name": "Arab Peace Corps Foundation" },
+    { "@type": "Organization", "name": "CARLAC" },
+    { "@type": "Organization", "name": "New Arab Foundation" },
+    { "@type": "Organization", "name": "Ibn Battuta Association" },
+    { "@type": "Organization", "name": "Anouar Association" },
+    { "@type": "Organization", "name": "Sahara Spirit Foundation" },
+    { "@type": "Organization", "name": "Union Road Association" },
+    { "@type": "Organization", "name": "AmCham Abu Dhabi", "url": "https://amchamabudhabi.org" },
+    { "@type": "Organization", "name": "Australian Business Council Dubai", "url": "https://www.abcduae.com" },
+    { "@type": "Organization", "name": "Singapore Business Council" },
+    { "@type": "Organization", "name": "Danish Business Council Dubai", "url": "https://danishbusinesscouncil.com" },
+    { "@type": "Organization", "name": "Netherlands Business Council", "url": "https://www.nlbcuae.com" },
+    { "@type": "Organization", "name": "Canadian Business Council", "url": "https://www.cbc-dubai.com" },
+    { "@type": "Organization", "name": "German Emirati Joint Council for Industry & Commerce", "url": "https://vae.ahk.de/en" },
+    { "@type": "Organization", "name": "British Business Group Abu Dhabi" },
     { "@type": "Organization", "name": "Benelux Business Council" },
-    { "@type": "Organization", "name": "Arab Business Club", "url": "http://arabbusinessclub.org" },
-    { "@type": "Organization", "name": "Chambre Française de Commerce et d'Industrie du Maroc", "url": "http://cfcim.org" },
-    { "@type": "Organization", "name": "French Chamber of Commerce Abu Dhabi", "url": "http://fbgabudhabi.com" },
-    { "@type": "Organization", "name": "Spanish Business Council", "url": "http://spanishbusinesscouncil.ae" },
-    { "@type": "Organization", "name": "Swiss Business Council", "url": "http://swissbcuae.com" }
+    { "@type": "Organization", "name": "Arab Business Club", "url": "https://arabbusinessclub.org" },
+    { "@type": "Organization", "name": "Chambre Française de Commerce et d'Industrie du Maroc", "url": "https://www.cfcim.org" },
+    { "@type": "Organization", "name": "French Chamber of Commerce Abu Dhabi" },
+    { "@type": "Organization", "name": "Spanish Business Council", "url": "http://spanishbusinesscouncil.ae/en" },
+    { "@type": "Organization", "name": "Swiss Business Council", "url": "https://www.swissbcuae.com" }
   ]
 };
 
@@ -191,6 +191,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          try {
+            if (localStorage.getItem('theme') === 'light') {
+              document.body.classList.add('light-theme');
+            }
+          } catch(e) {}
+        `}} />
         <link rel="preconnect" href="https://live.staticflickr.com" />
         <link rel="preconnect" href="https://api.flickr.com" />
         <script
@@ -203,12 +210,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${dmSans.variable}`}>
-        <ThemeProvider>
-          {children}
-          <Analytics />
-          <SpeedInsights />
-          <CookieBanner />
-        </ThemeProvider>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <CookieBanner />
         <Script
           id="chatbase-script"
           strategy="afterInteractive"

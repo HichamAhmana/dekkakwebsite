@@ -3,9 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const GOLD = "#C9A84C";
-const GOLD_LIGHT = "#E8C97A";
-const CREAM = "var(--text-color)";
+import { GOLD, GOLD_LIGHT, CREAM } from "../constants";
 
 const NAME_LETTERS = ["D", "E", "K", "K", "A", "K"];
 const ROLES = ["Chairman", "Investor", "Philanthropist", "Statesman", "Visionary"];

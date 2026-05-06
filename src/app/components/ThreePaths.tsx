@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { CREAM } from "../constants";
 
 const GOLD = "rgba(201, 167, 74, 1)";
-const CREAM = "var(--text-color)";
 
 const CARDS = [
   {

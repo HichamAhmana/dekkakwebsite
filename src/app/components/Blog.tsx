@@ -3,10 +3,17 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const GOLD = "#C9A84C";
-const CREAM = "var(--text-color)";
+import { GOLD, CREAM } from "../constants";
 
 import { getFlickrPhotos } from "../actions/flickr";
+
+type FlickrItem = {
+  title: string;
+  link: string;
+  date_taken: string;
+  published: string;
+  media?: { m?: string };
+};
 
 type BlogPost = {
   id: string;
@@ -227,7 +234,7 @@ export default function Blog() {
       const items = await getFlickrPhotos();
       if (!items) return;
       
-      const formatted = items.map((item: any, index: number) => {
+      const formatted = items.map((item: FlickrItem, index: number) => {
         const date = new Date(item.date_taken || item.published);
         const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         
