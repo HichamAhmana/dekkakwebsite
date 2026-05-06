@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useMobile } from "../hooks/useMobile";
+import Footer from '../components/Footer';
 
 const MARRAKECH_TERRACOTTA = "#B86A51"; // Adding a subtle warm tone for Orchid Island
 const CREAM = "var(--text-color)";
@@ -97,8 +98,15 @@ export default function OrchidIslandPage() {
         </div>
       </section>
 
+{/* Minimal Footer for this standalone experience */}
+      <footer style={{ padding: isMobile ? "48px 20px" : "10px 10px", borderTop: `1px solid rgba(184,106,81,0.1)`, textAlign: "center" }}>
+        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", fontWeight: 300, letterSpacing: "0.2em", textTransform: "uppercase", color: CREAM, margin: "0 0 24px" }}>Orchid Island</h2>
+        <a href="https://www.orchidisland.immo/" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: MARRAKECH_TERRACOTTA, borderBottom: `1px solid ${MARRAKECH_TERRACOTTA}44`, paddingBottom: "4px" }}>
+         - Visit Official Site -
+        </a>
+      </footer>
       {/* Vision & Philosophy */}
-      <section style={{ padding: isMobile ? "60px 20px" : "120px 40px" }}>
+      <section style={{ padding: isMobile ? "10px 20px" : "60px 20px" }}>
         <div style={{
           maxWidth: "1200px", margin: "0 auto",
           display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "32px" : "80px", alignItems: "center"
@@ -121,15 +129,8 @@ export default function OrchidIslandPage() {
           </div>
         </div>
       </section>
-
-      {/* Minimal Footer for this standalone experience */}
-      <footer style={{ padding: isMobile ? "48px 20px" : "80px 40px", borderTop: `1px solid rgba(184,106,81,0.1)`, textAlign: "center" }}>
-        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", fontWeight: 300, letterSpacing: "0.2em", textTransform: "uppercase", color: CREAM, margin: "0 0 24px" }}>Orchid Island</h2>
-        <a href="https://www.orchidisland.immo/" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: MARRAKECH_TERRACOTTA, borderBottom: `1px solid ${MARRAKECH_TERRACOTTA}44`, paddingBottom: "4px" }}>
-          Visit Official Site
-        </a>
-      </footer>
-
+          
+      <Footer />
     </main>
   );
 }
