@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useMobile } from "../hooks/useMobile";
 import Footer from '../components/Footer';
 
+
 const MARRAKECH_TERRACOTTA = "#B86A51"; // Adding a subtle warm tone for Orchid Island
 const CREAM = "var(--text-color)";
 
@@ -106,29 +107,82 @@ export default function OrchidIslandPage() {
         </a>
       </footer>
       {/* Vision & Philosophy */}
-      <section style={{ padding: isMobile ? "10px 20px" : "60px 20px" }}>
-        <div style={{
-          maxWidth: "1200px", margin: "0 auto",
-          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "32px" : "80px", alignItems: "center"
-        }}>
-          <div>
-            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", fontWeight: 300, color: CREAM, margin: "0 0 32px" }}>The Philosophy</h2>
-            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: "0 0 24px" }}>
-              Orchid Island Real Estate Marrakech is Mohamed Dekkak&apos;s luxury real estate brand rooted in his home city. The connection between founder and location is deeply personal — born in Marrakech, he is now investing in its architectural and cultural future.
-            </p>
-            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "16px", fontWeight: 300, lineHeight: 1.8, color: CREAM, opacity: 0.7, margin: 0 }}>
-              These curated ventures embody an unparalleled standard of living, blending traditional Moroccan craftsmanship with global luxury standards.
-            </p>
-          </div>
-          <div style={{
-            width: "100%", aspectRatio: "4/5", background: "var(--bg-secondary)", border: `1px solid rgba(184,106,81,0.2)`,
-            position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"
-          }}>
-             <div style={{ position: "absolute", inset: 0, background: `linear-gradient(45deg, transparent, rgba(184,106,81,0.1))` }} />
-             <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: MARRAKECH_TERRACOTTA, opacity: 0.5 }}>[Estate Detail Photo]</span>
-          </div>
-        </div>
-      </section>
+<section style={{ padding: isMobile ? "10px 20px" : "60px 20px" }}>
+  <div style={{
+    maxWidth: "1200px",
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: isMobile ? "32px" : "80px",
+    alignItems: "center"
+  }}>
+    
+    {/* LEFT TEXT */}
+    <div>
+      <h2 style={{
+        fontFamily: "var(--font-cormorant), serif",
+        fontSize: "48px",
+        fontWeight: 300,
+        color: CREAM,
+        margin: "0 0 32px"
+      }}>
+        The Philosophy
+      </h2>
+
+      <p style={{
+        fontFamily: "var(--font-dm-sans), sans-serif",
+        fontSize: "16px",
+        fontWeight: 300,
+        lineHeight: 1.8,
+        color: CREAM,
+        opacity: 0.7,
+        margin: "0 0 24px"
+      }}>
+        Orchid Island Real Estate Marrakech is Mohamed Dekkak&apos;s luxury real estate brand rooted in his home city...
+      </p>
+
+      <p style={{
+        fontFamily: "var(--font-dm-sans), sans-serif",
+        fontSize: "16px",
+        fontWeight: 300,
+        lineHeight: 1.8,
+        color: CREAM,
+        opacity: 0.7,
+        margin: 0
+      }}>
+        These curated ventures embody an unparalleled standard of living...
+      </p>
+    </div>
+
+    {/* RIGHT IMAGE (UPDATED) */}
+    <div style={{
+      width: "100%",
+      aspectRatio: "4/5",
+      border: `1px solid rgba(184,106,81,0.2)`,
+      position: "relative",
+      overflow: "hidden"
+    }}>
+      
+      {/* TODO: Replace this image URL whenever you want */}
+      <img
+        src="/dekkak-cinema-marrakech-festival.png"
+        alt="Luxury Marrakech Real Estate"
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover"
+        }}
+      />
+
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        background: `linear-gradient(45deg, transparent, rgba(184,106,81,0.1))`
+      }} />
+    </div>
+
+  </div>
+</section>
           
       <Footer />
     </main>

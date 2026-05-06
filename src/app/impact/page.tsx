@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
 
+
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
@@ -23,6 +24,7 @@ const FOUNDATIONS = [
     role: "Executive President",
     focus: "Regional Development — Healthcare, Education, Economy",
     description: "Dedicated to the development of the Moroccan Sahara region. The foundation views the Sahara not just as geography, but as a deep cultural identity requiring sustainable economic and social advancement.",
+    image: "/impact/Mohamed-dekkak-sahara-foundation.png",
     accent: "#8BC4A8"
   },
   {
@@ -44,6 +46,7 @@ const FOUNDATIONS = [
     role: "Honorary President",
     focus: "Peace Through Travel",
     description: "Spreading peace and tolerance through travel, rooted in the legacy of the great Moroccan explorer Ibn Battuta. Organizer of the International Ibn Battuta Festival in Tangier.",
+    image: "/impact/Mohamed-dekkak-ibn-battuta-association.png",
     accent: "#D68D6A"
   },
   {
@@ -58,6 +61,7 @@ const FOUNDATIONS = [
     role: "President / Executive Director",
     focus: "Regional Reform & Advancement",
     description: "Focusing on Arab world development, reform, and community advancement across the region.",
+    image: "/impact/Mohamed-dekkak-New-arab-foundation.png",
     accent: "#7A8A9E"
   },
   {
