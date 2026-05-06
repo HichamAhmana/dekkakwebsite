@@ -46,7 +46,7 @@ const FOUNDATIONS = [
     role: "Honorary President",
     focus: "Peace Through Travel",
     description: "Spreading peace and tolerance through travel, rooted in the legacy of the great Moroccan explorer Ibn Battuta. Organizer of the International Ibn Battuta Festival in Tangier.",
-    image: "/impact/Mohamed-dekkak-ibn-battuta-association.png",
+    image: "/impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
     accent: "#D68D6A"
   },
   {
