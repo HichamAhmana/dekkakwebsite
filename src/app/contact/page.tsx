@@ -153,7 +153,7 @@ export default function ContactPage() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <style>{`
-        .light-theme nav { background: var(--bg-color) !important; }
+        [data-theme="light"] nav { background: var(--bg-color) !important; }
         .contact-input::placeholder { color: color-mix(in srgb, var(--text-color) 40%, transparent) !important; }
       `}</style>
       <Navbar />

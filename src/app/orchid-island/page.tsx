@@ -44,10 +44,10 @@ export default function OrchidIslandPage() {
             .orchid-hero-overlay-2 {
               background: radial-gradient(circle at center, transparent 0%, rgba(10,10,10,0.8) 100%);
             }
-            .light-theme .orchid-hero-overlay-1 {
+            [data-theme="light"] .orchid-hero-overlay-1 {
               background: linear-gradient(to bottom, #f5f5f5, #ffffff);
             }
-            .light-theme .orchid-hero-overlay-2 {
+            [data-theme="light"] .orchid-hero-overlay-2 {
               background: none;
             }
           `}</style>
