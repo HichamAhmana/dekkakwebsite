@@ -33,9 +33,7 @@ export default function Quote() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Fade out
       setVisible(false);
-      // After fade out (0.6s), change quote and fade back in
       setTimeout(() => {
         setCurrent((prev) => (prev + 1) % QUOTES.length);
         setVisible(true);
@@ -101,29 +99,74 @@ export default function Quote() {
           — {q.author}
         </cite>
 
-        {/* Dot indicators */}
+        {/* Elegant indicator — thin gold line with diamond */}
         <div style={{
-          display: "flex", justifyContent: "center",
-          gap: "10px", marginTop: "48px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px",
+          marginTop: "48px",
         }}>
+          {/* Left line */}
+          <div style={{
+            height: "1px",
+            width: "48px",
+            background: `linear-gradient(to right, transparent, rgba(201,168,76,0.3))`,
+          }} />
+
+          {/* Dots */}
           {QUOTES.map((_, i) => (
             <button
               key={i}
-              onClick={() => { setVisible(false); setTimeout(() => { setCurrent(i); setVisible(true); }, 300); }}
+              onClick={() => {
+                setVisible(false);
+                setTimeout(() => { setCurrent(i); setVisible(true); }, 300);
+              }}
               aria-label={`Quote ${i + 1}`}
               style={{
-                width: i === current ? "24px" : "6px",
-                height: "6px",
+                width: i === current ? "20px" : "4px",
+                height: "1px",
                 background: i === current ? GOLD : "rgba(201,168,76,0.3)",
                 border: "none",
                 cursor: "pointer",
-                padding: "20px",
-                boxSizing: "content-box",
+                padding: 0,
+                margin: 0,
                 transition: "width 0.4s ease, background 0.4s ease",
+                position: "relative",
+                // Invisible touch area around tiny element
+                outline: "none",
               }}
-            />
+            >
+              {/* Invisible large touch target */}
+              <span style={{
+                position: "absolute",
+                inset: "-20px",
+                display: "block",
+              }} />
+            </button>
           ))}
+
+          {/* Right line */}
+          <div style={{
+            height: "1px",
+            width: "48px",
+            background: `linear-gradient(to left, transparent, rgba(201,168,76,0.3))`,
+          }} />
         </div>
+
+        {/* Quote counter */}
+        <div style={{
+          marginTop: "20px",
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          fontSize: "10px",
+          fontWeight: 500,
+          letterSpacing: "0.2em",
+          color: GOLD,
+          opacity: 0.3,
+        }}>
+          {String(current + 1).padStart(2, "0")} / {String(QUOTES.length).padStart(2, "0")}
+        </div>
+
       </div>
     </section>
   );
