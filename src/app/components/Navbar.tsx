@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { GOLD } from "../constants";
 
@@ -45,7 +45,7 @@ function ThemeToggle() {
         background: "none",
         border: "none",
         cursor: "pointer",
-        padding: "8px",
+        padding: "12px 8px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -104,6 +104,9 @@ function NavLink({ href, label }: { href: string; label: string }) {
         color: hovered ? GOLD : CREAM,
         opacity: hovered ? 1 : 0.7,
         whiteSpace: "nowrap",
+        minHeight: "44px",
+        display: "flex",
+        alignItems: "center",
         transition: "color 0.3s ease, opacity 0.3s ease",
       }}
     >
@@ -118,8 +121,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 80);
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const t = setTimeout(() => startTransition(() => setLoaded(true)), 80);
+    const onScroll = () => startTransition(() => setScrolled(window.scrollY > 60));
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { clearTimeout(t); window.removeEventListener("scroll", onScroll); };
   }, []);

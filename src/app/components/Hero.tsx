@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { GOLD, GOLD_LIGHT, CREAM } from "../constants";
 
 const NAME_LETTERS = ["D", "E", "K", "K", "A", "K"];
-const ROLES = ["Chairman", "Investor", "Philanthropist", "Statesman", "Visionary"];
+const ROLES = ["Chairman", "Investor", "Philanthropist", "Statesman", "Visionary", "Serial Entrepreneur"];
 const COORDS = "34°01′N 6°50′W  ·  24°28′N 54°22′E";
 
 export default function Hero() {
@@ -19,7 +19,9 @@ export default function Hero() {
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 0);
+    // Mark as loaded immediately — no setTimeout delay for faster FCP
+    startTransition(() => setLoaded(true));
+
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -40,7 +42,6 @@ export default function Hero() {
     }, 2800);
 
     return () => {
-      clearTimeout(t);
       window.removeEventListener("mousemove", onMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (roleTimer.current) clearInterval(roleTimer.current);
@@ -171,10 +172,11 @@ export default function Hero() {
           src="/dekkak-cinema-marrakech-festival.png"
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "60% center" }}
           priority
           fetchPriority="high"
+          quality={85}
         />
       </div>
 
@@ -293,7 +295,7 @@ export default function Hero() {
               letterSpacing: "0.25em",
               textTransform: "uppercase",
               color: CREAM,
-              opacity: 0.35,
+              opacity: 0.6,
               whiteSpace: "nowrap",
             }}>
               {COORDS}
@@ -324,16 +326,10 @@ export default function Hero() {
           maxWidth: "580px", margin: "0 0 44px",
           transition: "opacity 1s ease 1.35s, transform 1s ease 1.35s",
         }}>
-          Mohamed Dekkak is a Moroccan chairman, investor, and philanthropist — best known as the
-          Chairman and Founder of Adgeco Group, a multi-sector holding company established in Abu Dhabi in 1992.
-          Over three decades, he has built a cross-continental business empire spanning oil &amp; gas,
-          engineering, construction, real estate, and technology across the Middle East, Africa, Europe,
-          and Latin America. As President of Gate One Properties and Chairman of Orchid Island Real Estate,
-          Dekkak shapes landmark infrastructure across the UAE and Morocco. He is also a dedicated
-          philanthropist, leading foundations focused on peace, education, and cultural diplomacy — from
-          the Anouar Association in Marrakech to the Arab Peace Corps Foundation and Sahara Spirit Foundation.
-          An active member of over a dozen international business councils, Dekkak bridges cultures,
-          capitals, and communities worldwide.
+          Mohamed Dekkak is a Moroccan chairman, investor, and philanthropist, best known as the
+          Chairman and Founder of Adgeco Group, established in Abu Dhabi in 1992. Over three decades
+          he has built a cross-continental business empire across the Middle East, Africa, and beyond,
+          while leading foundations dedicated to education, peace, and cultural diplomacy.
         </p>
 
         {/* CTA Buttons */}

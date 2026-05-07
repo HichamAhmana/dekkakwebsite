@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ClientSections from "./components/ClientSections";
-// Quote and Blog are SSR-enabled so Google can crawl their content
-import Quote from "./components/Quote";
-import Blog from "./components/Blog";
+// Quote and Blog dynamically imported — splits them into separate JS chunks
+const Quote = dynamic(() => import("./components/Quote"));
+const Blog = dynamic(() => import("./components/Blog"));
 
 export const metadata: Metadata = {
   title: "Mohamed Dekkak | Chairman of Adgeco Group, Investor & Philanthropist",

@@ -102,7 +102,7 @@ export default function AboutPage() {
               overflow: "hidden"
             }}>
               <Image
-                src="/mohamed-dekkak-amcham.png"
+                src="/dekkak-cinema-marrakech-festival.png"
                 alt="Mohamed Dekkak"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 700px"
