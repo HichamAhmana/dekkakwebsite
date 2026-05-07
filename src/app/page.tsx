@@ -9,9 +9,9 @@ const Quote = dynamic(() => import("./components/Quote"));
 const Blog = dynamic(() => import("./components/Blog"));
 
 export const metadata: Metadata = {
-  title: "Mohamed Dekkak | Chairman of Adgeco Group, Investor & Philanthropist",
+  title: "Mohamed Dekkak | Investor & Philanthropist",
   description:
-    "Official website of Mohamed Dekkak — Chairman & Founder of Adgeco Group, President of Gate One Properties, global investor, and philanthropist active across the UAE, Morocco, Spain, and beyond.",
+    "Official website of Mohamed Dekkak — Chairman of Adgeco Group, global investor and philanthropist across UAE, Morocco and Europe.",
   keywords: [
     "Mohamed Dekkak",
     "Adgeco Group chairman",
