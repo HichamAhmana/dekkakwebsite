@@ -45,14 +45,16 @@ function FooterLink({ label, href, hoverColor }: { label: string; href: string; 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display: "block",
+        display: "flex",
+        alignItems: "center",
+        minHeight: "44px",
         fontFamily: "var(--font-dm-sans), sans-serif",
         fontSize: "12px",
         fontWeight: 400,
         letterSpacing: "0.1em",
         color: hovered ? (hoverColor || GOLD) : CREAM,
-        opacity: hovered ? 1 : 0.5,
-        marginBottom: "14px",
+        opacity: hovered ? 1 : 0.65,
+        marginBottom: "2px",
         transition: "color 0.3s ease, opacity 0.3s ease",
       }}
     >
@@ -99,7 +101,7 @@ export default function Footer() {
               fontWeight: 300,
               lineHeight: 2,
               color: CREAM,
-              opacity: 0.45,
+              opacity: 0.6,
             }}>
               Marrakech, Kingdom of Morocco<br />
               Abu Dhabi, United Arab Emirates<br />
@@ -171,7 +173,7 @@ export default function Footer() {
             fontFamily: "var(--font-dm-sans), sans-serif",
             fontSize: "11px",
             color: CREAM,
-            opacity: 0.35,
+            opacity: 0.6,
             letterSpacing: "0.05em",
           }}>
             © {new Date().getFullYear()} Mohamed Dekkak. All rights reserved by Dekkak.com.
@@ -183,7 +185,7 @@ export default function Footer() {
             letterSpacing: "0.3em",
             textTransform: "uppercase" as const,
             color: GOLD,
-            opacity: 0.5,
+            opacity: 0.65,
           }}>
             MARRAKECH · ABU DHABI · MADRID · THE WORLD
           </span>

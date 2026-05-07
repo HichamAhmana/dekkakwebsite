@@ -172,10 +172,11 @@ export default function Hero() {
           src="/dekkak-cinema-marrakech-festival.png"
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
-          sizes="(max-width: 768px) 100vw, 70vw"
+          sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "60% center" }}
           priority
           fetchPriority="high"
+          quality={85}
         />
       </div>
 
@@ -294,7 +295,7 @@ export default function Hero() {
               letterSpacing: "0.25em",
               textTransform: "uppercase",
               color: CREAM,
-              opacity: 0.35,
+              opacity: 0.6,
               whiteSpace: "nowrap",
             }}>
               {COORDS}

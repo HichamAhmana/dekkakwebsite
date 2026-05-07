@@ -45,7 +45,7 @@ function ThemeToggle() {
         background: "none",
         border: "none",
         cursor: "pointer",
-        padding: "8px",
+        padding: "12px 8px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -104,6 +104,9 @@ function NavLink({ href, label }: { href: string; label: string }) {
         color: hovered ? GOLD : CREAM,
         opacity: hovered ? 1 : 0.7,
         whiteSpace: "nowrap",
+        minHeight: "44px",
+        display: "flex",
+        alignItems: "center",
         transition: "color 0.3s ease, opacity 0.3s ease",
       }}
     >
