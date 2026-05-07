@@ -4,9 +4,9 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ClientSections from "./components/ClientSections";
-// Quote and Blog lazy-loaded — below the fold, not needed for initial paint
-const Quote = dynamic(() => import("./components/Quote"), { ssr: false });
-const Blog = dynamic(() => import("./components/Blog"), { ssr: false });
+// Quote and Blog dynamically imported — splits them into separate JS chunks
+const Quote = dynamic(() => import("./components/Quote"));
+const Blog = dynamic(() => import("./components/Blog"));
 
 export const metadata: Metadata = {
   title: "Mohamed Dekkak | Chairman of Adgeco Group, Investor & Philanthropist",
