@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ClientSections from "./components/ClientSections";
-// Quote and Blog are SSR-enabled so Google can crawl their content
-import Quote from "./components/Quote";
-import Blog from "./components/Blog";
+// Quote and Blog lazy-loaded — below the fold, not needed for initial paint
+const Quote = dynamic(() => import("./components/Quote"), { ssr: false });
+const Blog = dynamic(() => import("./components/Blog"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Mohamed Dekkak | Chairman of Adgeco Group, Investor & Philanthropist",

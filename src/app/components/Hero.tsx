@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -19,7 +19,9 @@ export default function Hero() {
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 0);
+    // Mark as loaded immediately — no setTimeout delay for faster FCP
+    startTransition(() => setLoaded(true));
+
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -40,7 +42,6 @@ export default function Hero() {
     }, 2800);
 
     return () => {
-      clearTimeout(t);
       window.removeEventListener("mousemove", onMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (roleTimer.current) clearInterval(roleTimer.current);
@@ -171,7 +172,7 @@ export default function Hero() {
           src="/dekkak-cinema-marrakech-festival.png"
           alt="Mohamed Dekkak at Marrakech Festival"
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 768px) 100vw, 70vw"
           style={{ objectFit: "cover", objectPosition: "60% center" }}
           priority
           fetchPriority="high"

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { GOLD } from "../constants";
 
@@ -118,8 +118,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 80);
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const t = setTimeout(() => startTransition(() => setLoaded(true)), 80);
+    const onScroll = () => startTransition(() => setScrolled(window.scrollY > 60));
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { clearTimeout(t); window.removeEventListener("scroll", onScroll); };
   }, []);
