@@ -15,20 +15,22 @@ function ThemeToggle() {
     const saved = window.localStorage.getItem("theme");
     if (saved === "light") {
       setIsLight(true);
-      document.body.classList.add("light-theme");
+      document.documentElement.setAttribute("data-theme", "light");
     }
   }, []);
 
   const toggle = () => {
+    const html = document.documentElement;
     if (isLight) {
-      document.body.classList.remove("light-theme");
-      void document.body.offsetHeight; // force repaint for Mi Browser / WebViews
-      if (typeof window !== "undefined") window.localStorage.setItem("theme", "dark");
+      html.removeAttribute("data-theme");
+      // Force a style recalc on browsers that cache CSS vars aggressively
+      void html.getBoundingClientRect();
+      window.localStorage.setItem("theme", "dark");
       setIsLight(false);
     } else {
-      document.body.classList.add("light-theme");
-      void document.body.offsetHeight; // force repaint for Mi Browser / WebViews
-      if (typeof window !== "undefined") window.localStorage.setItem("theme", "light");
+      html.setAttribute("data-theme", "light");
+      void html.getBoundingClientRect();
+      window.localStorage.setItem("theme", "light");
       setIsLight(true);
     }
   };

@@ -119,7 +119,7 @@ export default function BlogPage() {
                 .blog-featured-overlay {
                   background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
                 }
-                .light-theme .blog-featured-overlay {
+                [data-theme="light"] .blog-featured-overlay {
                   background: linear-gradient(to top, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.1) 50%, transparent 100%), radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
                 }
               `}</style>

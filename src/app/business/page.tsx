@@ -98,7 +98,7 @@ export default function BusinessPage() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <style>{`
-        .light-theme nav {
+        [data-theme="light"] nav {
           background: var(--bg-color) !important;
         }
       `}</style>

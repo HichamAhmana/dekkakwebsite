@@ -9,7 +9,7 @@
   --nav-text: #F5F0E8;
 }
 
-.light-theme {
+[data-theme="light"] {
   --bg-color: #FFFFFF;
   --bg-secondary: #F5F0E8;
   --text-color: #0A0A0A;
@@ -31,7 +31,7 @@ body {
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
-  transition: background-color 0.6s ease, color 0.6s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, a, div {

@@ -194,7 +194,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: `
           try {
             if (localStorage.getItem('theme') === 'light') {
-              document.body.classList.add('light-theme');
+              document.documentElement.setAttribute('data-theme', 'light');
             }
           } catch(e) {}
         `}} />
