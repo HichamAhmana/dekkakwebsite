@@ -113,11 +113,12 @@ export default function Quote() {
               aria-label={`Quote ${i + 1}`}
               style={{
                 width: i === current ? "24px" : "6px",
-                height: "1px",
+                height: "6px",
                 background: i === current ? GOLD : "rgba(201,168,76,0.3)",
                 border: "none",
                 cursor: "pointer",
-                padding: 0,
+                padding: "20px",
+                boxSizing: "content-box",
                 transition: "width 0.4s ease, background 0.4s ease",
               }}
             />

@@ -57,6 +57,7 @@ function CardBackground({
             zIndex: 0,
           }}
           priority
+          quality={60}
         />
       ) : (
         <PlaceholderPattern id={item.id} accent={item.accent} hovered={hovered} />

@@ -198,8 +198,7 @@ export default function RootLayout({
             }
           } catch(e) {}
         `}} />
-        <link rel="preconnect" href="https://live.staticflickr.com" />
-        <link rel="preconnect" href="https://api.flickr.com" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
