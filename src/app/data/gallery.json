@@ -1,0 +1,56 @@
+[
+  {
+    "src": "./Mohamed-dekkak-adgeco-group.png",
+    "caption": "Royal Conference",
+    "category": "Photos",
+    "event": "Casablanca Summit"
+  },
+  {
+    "src": "./impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
+    "caption": "Mohamed Dekkak Speech",
+    "category": "Impact",
+    "event": "Foundation Visit"
+  },
+  {
+    "src": "./impact/Mohamed-dekkak-New-arab-foundation.png",
+    "caption": "New Arab Foundation Initiative",
+    "category": "Impact",
+    "event": "Humanitarian Partnership"
+  },
+  {
+    "src": "./impact/Mohamed-dekkak-sahara-foundation.png",
+    "caption": "Sahara Foundation Program",
+    "category": "Impact",
+    "event": "Community Outreach"
+  },
+  {
+    "src": "./dekkak-cinema-marrakech-festival.png",
+    "caption": "Marrakech Cinema Festival",
+    "category": "Photos",
+    "event": "Cultural Celebration"
+  },
+  {
+    "src": "./mohamed-dekkak-adgeco-group.png",
+    "caption": "ADGECO Leadership Event",
+    "category": "Photos",
+    "event": "Business Forum"
+  },
+  {
+    "src": "./mohamed-dekkak-amcham.png",
+    "caption": "AMCHAM Business Gathering",
+    "category": "Photos",
+    "event": "Corporate Networking"
+  },
+  {
+    "src": "./mohamed-dekkak-anouar-association.png",
+    "caption": "Anouar Association Visit",
+    "category": "Impact",
+    "event": "Charity Engagement"
+  },
+  {
+    "src": "./Mohamed-dekkak-healthcare.png",
+    "caption": "Healthcare Initiative",
+    "category": "Impact",
+    "event": "Medical Support Program"
+  }
+]
