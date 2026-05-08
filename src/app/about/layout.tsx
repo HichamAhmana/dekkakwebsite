@@ -15,7 +15,6 @@ export const metadata: Metadata = {
     "Moroccan businessman UAE",
     "global statesman",
     "philanthropist investor",
-    "serial entrepreneur",
   ],
   alternates: {
     canonical: `${BASE_URL}/about`,
