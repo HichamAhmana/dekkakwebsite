@@ -1,348 +1,512 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useMobile } from "../hooks/useMobile";
 
-import { GOLD, CREAM } from "../constants";
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-import { getFlickrPhotos } from "../actions/flickr";
-
-type FlickrItem = {
+type RawPost = {
   title: string;
-  link: string;
-  date_taken: string;
-  published: string;
-  media?: { m?: string };
+  slug: string;
+  url: string;
+  content: string;
+  date: string;           // e.g. "Tue, 03 Sep 2024 07:56:30 +0000"
+  excerpt: string;
+  metaDescription: string;
+  coverImage: string;     // may be empty string
 };
 
 type BlogPost = {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: string | null;
   shortDate: string;
   monthYear: string;
+  formattedDate: string;
+  location: string;
   href: string;
 };
-function useIntersectionObserver(threshold = 0.15) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, visible };
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+const MONTH_NAMES = [
+  "JAN","FEB","MAR","APR","MAY","JUN",
+  "JUL","AUG","SEP","OCT","NOV","DEC",
+];
+
+function formatPost(raw: RawPost): BlogPost {
+  const d = new Date(raw.date);
+  const mon = MONTH_NAMES[d.getMonth()];
+  const day = d.getDate().toString().padStart(2, "0");
+  const year = d.getFullYear();
+
+  return {
+    id: raw.slug,
+    title: raw.title,
+    description: raw.excerpt || raw.metaDescription || "",
+    image: raw.coverImage || null,
+    shortDate: day,
+    monthYear: `${mon} ${year}`,
+    formattedDate: `${mon} ${day}, ${year}`,
+    location: "Abu Dhabi",
+    href: `/blog/${raw.slug}`,
+  };
 }
 
-function BlogCard({
-  post,
-  index,
-  visible,
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const GOLD = "#C9A84C";
+const CREAM = "var(--text-color)";
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+export default function BlogPage() {
+  const [loaded, setLoaded] = useState(false);
+  const [events, setEvents] = useState<BlogPost[]>([]);
+  const isMobile = useMobile();
+
+  useEffect(() => {
+    // data/ and blog/ are siblings — go up one level from blog/
+    import("../data/posts.json")
+      .then((mod) => {
+        const raw: RawPost[] = mod.default ?? mod;
+        const sorted = [...raw].sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        setEvents(sorted.map(formatPost));
+        setTimeout(() => setLoaded(true), 80);
+      })
+      .catch((err) => {
+        console.error("Failed to load posts.json:", err);
+        setLoaded(true);
+      });
+  }, []);
+
+  const featured = events.find((e) => e.image);
+
+  return (
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
+      <Navbar />
+
+      {/* ── Page Hero ── */}
+      <header
+        style={{
+          padding: isMobile ? "120px 20px 48px" : "180px 60px 80px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          opacity: loaded ? 1 : 0,
+          transform: loaded ? "translateY(0)" : "translateY(20px)",
+          transition: "all 1s ease 0.2s",
+        }}
+      >
+        <div style={{ width: "40px", height: "1px", background: GOLD, marginBottom: "24px" }} />
+        <h1
+          style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "clamp(48px, 7vw, 96px)",
+            fontWeight: 300,
+            color: CREAM,
+            margin: "0 0 24px",
+            lineHeight: 1,
+          }}
+        >
+          Events &amp; <i style={{ color: GOLD }}>Journal</i>
+        </h1>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans), sans-serif",
+            fontSize: "15px",
+            fontWeight: 300,
+            lineHeight: 1.8,
+            color: CREAM,
+            opacity: 0.6,
+            maxWidth: "560px",
+          }}
+        >
+          A chronicle of global initiatives, summits, and community programs led
+          and attended by Mohamed Dekkak.
+        </p>
+      </header>
+
+      {/* ── Featured Post ── */}
+      {featured && (
+        <section
+          style={{
+            padding: isMobile ? "0 16px 40px" : "0 60px 80px",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+        >
+          <Link
+            href={featured.href}
+            style={{
+              display: "block",
+              position: "relative",
+              overflow: "hidden",
+              height: isMobile ? "260px" : "520px",
+            }}
+          >
+            <Image
+              src={featured.image!}
+              alt={featured.title}
+              fill
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 100vw, 1140px"
+              style={{
+                objectFit: "cover",
+                filter: "brightness(0.6) saturate(0.8)",
+                transition: "transform 1.4s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+              }}
+            />
+            <style>{`
+              .blog-featured-overlay {
+                background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%),
+                            radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
+              }
+              [data-theme="light"] .blog-featured-overlay {
+                background: linear-gradient(to top, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.1) 50%, transparent 100%),
+                            radial-gradient(ellipse at 30% 100%, ${GOLD}11, transparent 60%);
+              }
+            `}</style>
+            <div className="blog-featured-overlay" style={{ position: "absolute", inset: 0 }} />
+
+            {!isMobile && (
+              <>
+                <div style={{ position: "absolute", top: "24px", left: "24px", width: "48px", height: "1px", background: GOLD }} />
+                <div style={{ position: "absolute", top: "24px", left: "24px", width: "1px", height: "48px", background: GOLD }} />
+              </>
+            )}
+
+            <div
+              style={{
+                position: "absolute",
+                bottom: isMobile ? "24px" : "56px",
+                left: isMobile ? "20px" : "56px",
+                right: isMobile ? "20px" : "56px",
+                zIndex: 2,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "9px",
+                  fontWeight: 700,
+                  letterSpacing: "0.4em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  marginBottom: "16px",
+                }}
+              >
+                Featured · {featured.location} · {featured.formattedDate}
+              </div>
+              <h2
+                style={{
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: "clamp(32px, 5vw, 60px)",
+                  fontWeight: 300,
+                  color: CREAM,
+                  margin: "0 0 20px",
+                  lineHeight: 1.05,
+                  maxWidth: "700px",
+                }}
+              >
+                {featured.title}
+              </h2>
+              <div
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                }}
+              >
+                Read Full Story
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "28px",
+                    height: "28px",
+                    border: `1px solid ${GOLD}66`,
+                    borderRadius: "50%",
+                    fontSize: "14px",
+                  }}
+                >
+                  →
+                </span>
+              </div>
+            </div>
+          </Link>
+        </section>
+      )}
+
+      {/* ── All Posts Grid ── */}
+      <section
+        style={{
+          padding: isMobile ? "0 16px 60px" : "0 60px 120px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "48px" }}>
+          <div style={{ width: "32px", height: "1px", background: GOLD }} />
+          <span
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "9px",
+              fontWeight: 700,
+              letterSpacing: "0.4em",
+              textTransform: "uppercase",
+              color: GOLD,
+            }}
+          >
+            All Posts
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+            gap: "40px",
+          }}
+        >
+          {events.map((event, idx) => (
+            <PostCard key={event.id} event={event} idx={idx} loaded={loaded} />
+          ))}
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+// ─── PostCard ─────────────────────────────────────────────────────────────────
+
+function PostCard({
+  event,
+  idx,
+  loaded,
 }: {
-  post: BlogPost;
-  index: number;
-  visible: boolean;
+  event: BlogPost;
+  idx: number;
+  loaded: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
+    <Link
+      href={event.href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        position: "relative",
-        background: hovered ? "rgba(201,168,76,0.03)" : "color-mix(in srgb, var(--text-color) 1%, transparent)",
-        border: `1px solid ${hovered ? GOLD + "44" : "color-mix(in srgb, var(--text-color) 5%, transparent)"}`,
         display: "flex",
         flexDirection: "column",
+        border: `1px solid ${
+          hovered
+            ? GOLD + "44"
+            : "color-mix(in srgb, var(--text-color) 6%, transparent)"
+        }`,
         overflow: "hidden",
-        transform: visible
+        background: hovered
+          ? "rgba(201,168,76,0.03)"
+          : "color-mix(in srgb, var(--text-color) 1%, transparent)",
+        transform: loaded
           ? hovered
-            ? "translateY(-8px)"
+            ? "translateY(-6px)"
             : "translateY(0)"
-          : `translateY(40px)`,
-        opacity: visible ? 1 : 0,
-        transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: visible && !hovered ? `${index * 0.1}s` : "0s",
+          : "translateY(30px)",
+        opacity: loaded ? 1 : 0,
+        transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.07}s`,
+        boxShadow: hovered ? "0 20px 60px rgba(0,0,0,0.35)" : "none",
       }}
     >
-      {/* Image area */}
+      {/* Image */}
       <div
         style={{
-          width: "100%",
-          height: "240px",
-          background: "var(--bg-secondary)",
+          height: "220px",
           position: "relative",
           overflow: "hidden",
+          background: "var(--bg-secondary)",
         }}
       >
-        {post.image ? (
+        {event.image ? (
           <>
             <Image
-              src={post.image}
-              alt={post.title}
+              src={event.image}
+              alt={event.title}
               fill
               loading="lazy"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
                 objectFit: "cover",
-                objectPosition: post.id === "adgeco-group" ? "center 20%" : "center center",
-                filter: hovered ? "brightness(0.8) saturate(0.95)" : "brightness(0.55) saturate(0.7)",
+                filter: hovered
+                  ? "brightness(0.75) saturate(0.9)"
+                  : "brightness(0.5) grayscale(25%)",
                 transform: hovered ? "scale(1.06)" : "scale(1.0)",
-                transition: "filter 0.8s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1)",
+                transition: "filter 0.8s ease, transform 1.2s ease",
               }}
             />
-            {/* Gold gradient overlay */}
-            <div style={{
-              position: "absolute", inset: 0,
-              background: `linear-gradient(to top, var(--bg-color) 0%, transparent 60%), linear-gradient(45deg, ${GOLD}1A, transparent)`,
-            }} />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: `linear-gradient(to top, var(--bg-color) 0%, transparent 60%)`,
+              }}
+            />
           </>
         ) : (
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: `linear-gradient(45deg, ${GOLD}22, transparent)`,
-              opacity: hovered ? 1 : 0.5,
-              transition: "opacity 0.5s ease",
+              background: `radial-gradient(ellipse at 30% 50%, ${GOLD}18, transparent 70%)`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            <span style={{ fontSize: "32px", opacity: 0.15 }}>✦</span>
+          </div>
         )}
 
-        {/* Date Badge */}
+        {/* Date badge */}
         <div
           style={{
             position: "absolute",
-            top: "20px",
-            left: "20px",
+            top: "16px",
+            left: "16px",
             background: hovered ? GOLD : "var(--bg-secondary)",
-            border: `1px solid ${GOLD}44`,
+            border: `1px solid ${GOLD}55`,
+            padding: "10px 14px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            width: "60px",
-            height: "68px",
-            transition: "all 0.3s ease",
+            transition: "background 0.3s ease",
+            backdropFilter: "blur(8px)",
             zIndex: 2,
           }}
         >
           <span
             style={{
               fontFamily: "var(--font-cormorant), serif",
-              fontSize: "20px",
+              fontSize: "18px",
               fontWeight: 600,
               lineHeight: 1,
               color: "color-mix(in srgb, var(--text-color) 50%, transparent)",
-              transition: "color 0.3s ease",
             }}
           >
-            {post.shortDate}
+            {event.shortDate}
           </span>
-          <div style={{ height: "1px", width: "30px", background: hovered ? "rgba(0,0,0,0.2)" : "color-mix(in srgb, var(--text-color) 20%, transparent)", margin: "4px 0" }} />
+          <div
+            style={{
+              height: "1px",
+              width: "24px",
+              background: hovered ? "rgba(0,0,0,0.2)" : GOLD + "55",
+              margin: "4px 0",
+            }}
+          />
           <span
             style={{
-              fontFamily: "var(--font-dm-sans), sans-serif",
-              fontSize: "8px",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "7px",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
               color: hovered ? "#000" : GOLD,
-              transition: "color 0.3s ease",
             }}
           >
-            {post.monthYear}
+            {event.monthYear}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div style={{ padding: "40px 32px 32px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
+      <div
+        style={{
+          padding: "32px 28px 28px",
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <h3
           style={{
             fontFamily: "var(--font-cormorant), serif",
-            fontSize: "28px",
+            fontSize: "24px",
             fontWeight: 400,
             color: CREAM,
-            margin: "0 0 16px",
-            lineHeight: 1.2,
+            margin: "0 0 14px",
+            lineHeight: 1.25,
           }}
         >
-          {post.title}
+          {event.title}
         </h3>
         <p
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
-            fontSize: "14px",
+            fontSize: "13px",
             fontWeight: 300,
-            lineHeight: 1.8,
+            lineHeight: 1.75,
             color: CREAM,
             opacity: 0.6,
-            margin: "0 0 32px",
+            margin: "0 0 24px",
             flexGrow: 1,
           }}
         >
-          {post.description.substring(0, 150)}...
+          {event.description.substring(0, 130)}...
         </p>
-
-        <Link
-          href={post.href}
+        <div
           style={{
-            fontFamily: "var(--font-dm-sans), sans-serif",
-            fontSize: "10px",
-            fontWeight: 600,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: hovered ? CREAM : GOLD,
             display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
-            paddingTop: "20px",
-            borderTop: `1px solid color-mix(in srgb, var(--text-color) 5%, transparent)`,
-            transition: "color 0.3s ease",
+            alignItems: "center",
+            paddingTop: "16px",
+            borderTop:
+              "1px solid color-mix(in srgb, var(--text-color) 5%, transparent)",
           }}
         >
-          View Post
           <span
             style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "9px",
+              fontWeight: 600,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: GOLD,
+            }}
+          >
+            {event.location}
+          </span>
+          <span
+            style={{
+              color: GOLD,
+              fontSize: "14px",
               transform: hovered ? "translateX(4px)" : "translateX(0)",
               transition: "transform 0.3s ease",
             }}
           >
             →
           </span>
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-export default function Blog() {
-  const { ref, visible } = useIntersectionObserver(0.1);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const [titleVisible, setTitleVisible] = useState(false);
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-
-  useEffect(() => {
-    async function loadFlickr() {
-      const items = await getFlickrPhotos();
-      if (!items) return;
-      
-      const formatted = items.map((item: FlickrItem, index: number) => {
-        const date = new Date(item.date_taken || item.published);
-        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        
-        // Use title as description, but provide a fallback if it's too short
-        const description = item.title.length > 10 ? item.title : "Mohammed Dekkak Flickr Gallery Update.";
-        
-        return {
-          id: `flickr-${index}`,
-          title: item.title || "Photo Update",
-          description: description,
-          // Get higher quality image by changing _m.jpg to _b.jpg
-          image: item.media?.m?.replace("_m.jpg", "_b.jpg") || "",
-          shortDate: date.getDate().toString().padStart(2, "0"),
-          monthYear: `${monthNames[date.getMonth()]} ${date.getFullYear()}`,
-          href: item.link || "https://www.flickr.com/photos/adgeco/"
-        };
-      });
-      setPosts(formatted);
-    }
-    loadFlickr();
-  }, []);
-
-  useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setTitleVisible(true); },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  return (
-    <section
-      style={{
-        padding: "140px 40px",
-        width: "100%",
-        background: "var(--bg-color)",
-        position: "relative",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        {/* Header */}
-        <div
-          ref={titleRef}
-          style={{
-            textAlign: "center",
-            marginBottom: "80px",
-            opacity: titleVisible ? 1 : 0,
-            transform: titleVisible ? "translateY(0)" : "translateY(30px)",
-            transition: "opacity 0.9s ease, transform 0.9s ease",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "24px",
-            }}
-          >
-            <div style={{ width: "24px", height: "1px", background: GOLD }} />
-            <span
-              style={{
-                fontFamily: "var(--font-dm-sans), sans-serif",
-                fontSize: "10px",
-                fontWeight: 600,
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                color: GOLD,
-              }}
-            >
-              From the Blog
-            </span>
-            <div style={{ width: "24px", height: "1px", background: GOLD }} />
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "var(--font-cormorant), serif",
-              fontSize: "clamp(40px, 6vw, 64px)",
-              fontWeight: 300,
-              color: CREAM,
-              margin: 0,
-              lineHeight: 1.1,
-            }}
-          >
-            Latest news & articles
-            <br />
-            <span style={{ fontStyle: "italic", color: GOLD }}>from the blog</span>
-          </h2>
-        </div>
-
-        {/* Grid */}
-        <div
-          ref={ref}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "32px",
-          }}
-        >
-          {posts.slice(0, 3).map((post, i) => (
-            <BlogCard key={post.id} post={post} index={i} visible={visible} />
-          ))}
         </div>
       </div>
-    </section>
+    </Link>
   );
 }

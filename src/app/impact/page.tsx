@@ -49,6 +49,11 @@ const FOUNDATIONS = [
     role: "Honorary President",
     focus: "Disability Advocacy & Research",
     description: "A not-for-profit organization that creates awareness about the problems of physically disabled people, providing research and resources for alleviating their condition.",
+<<<<<<< HEAD
+=======
+      image: "/impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
+    accent: "#9D8A78"
+>>>>>>> dev
   },
   {
     name: "New Arab Foundation",
