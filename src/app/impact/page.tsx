@@ -44,17 +44,14 @@ const FOUNDATIONS = [
     description: "Spreading peace and tolerance through travel, rooted in the legacy of the great Moroccan explorer Ibn Battuta. Organizer of the International Ibn Battuta Festival in Tangier.",
     image: "/impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
   },
-  {
-    name: "Union Road Association",
-    role: "Honorary President",
-    focus: "Disability Advocacy & Research",
-    description: "A not-for-profit organization that creates awareness about the problems of physically disabled people, providing research and resources for alleviating their condition.",
-<<<<<<< HEAD
-=======
-      image: "/impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
-    accent: "#9D8A78"
->>>>>>> dev
-  },
+{
+  name: "Union Road Association",
+  role: "Honorary President",
+  focus: "Disability Advocacy & Research",
+  description: "A not-for-profit organization that creates awareness about the problems of physically disabled people, providing research and resources for alleviating their condition.",
+  image: "/impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
+  accent: "#9D8A78"
+},
   {
     name: "New Arab Foundation",
     role: "President / Executive Director",
