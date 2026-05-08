@@ -35,7 +35,7 @@ const COMPANIES = [
     role: "President",
     sector: "Real Estate — UAE",
     description: "One of the leading real estate firms in the UAE, offering property services to investors and companies across a diverse portfolio.",
-    link: "http://gateone.ae"
+    link: "http://gateonewhgvwcujbw.ae"
   },
   {
     name: "Horizonte Invertido",

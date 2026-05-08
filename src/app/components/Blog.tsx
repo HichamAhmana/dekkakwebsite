@@ -6,8 +6,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 type RawPost = {
   title: string;
   slug: string;
@@ -27,47 +25,17 @@ type BlogPost = {
   shortDate: string;
   monthYear: string;
   formattedDate: string;
-  location: string;
   href: string;
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-const MONTH_NAMES = [
-  "JAN",
-  "FEB",
-  "MAR",
-  "APR",
-  "MAY",
-  "JUN",
-  "JUL",
-  "AUG",
-  "SEP",
-  "OCT",
-  "NOV",
-  "DEC",
-];
+const MONTH_NAMES = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const GOLD = "#C9A84C";
 
 function normalizeImagePath(path: string | null | undefined) {
   if (!path) return null;
-
   const cleaned = path.trim();
-
-  // already valid
-  if (
-    cleaned.startsWith("/") ||
-    cleaned.startsWith("http://") ||
-    cleaned.startsWith("https://")
-  ) {
-    return cleaned;
-  }
-
-  // ./BlogImages/test.png -> /BlogImages/test.png
-  if (cleaned.startsWith("./")) {
-    return cleaned.replace("./", "/");
-  }
-
-  // BlogImages/test.png -> /BlogImages/test.png
+  if (cleaned.startsWith("/") || cleaned.startsWith("http://") || cleaned.startsWith("https://")) return cleaned;
+  if (cleaned.startsWith("./")) return cleaned.replace("./", "/");
   return `/${cleaned}`;
 }
 
@@ -76,7 +44,6 @@ function formatPost(raw: RawPost): BlogPost {
   const mon = MONTH_NAMES[d.getMonth()];
   const day = d.getDate().toString().padStart(2, "0");
   const year = d.getFullYear();
-
   return {
     id: raw.slug,
     title: raw.title,
@@ -85,56 +52,36 @@ function formatPost(raw: RawPost): BlogPost {
     shortDate: day,
     monthYear: `${mon} ${year}`,
     formattedDate: `${mon} ${day}, ${year}`,
-    location: "Abu Dhabi",
     href: `/blog/${raw.slug}`,
   };
 }
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-const GOLD = "#C9A84C";
-const CREAM = "var(--text-color)";
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-export default function BlogPage() {
+export default function BlogSection() {
   const [loaded, setLoaded] = useState(false);
-  const [events, setEvents] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const isMobile = useMobile();
 
   useEffect(() => {
     import("../data/posts.json")
       .then((mod) => {
         const raw: RawPost[] = mod.default ?? mod;
-
-        const sorted = [...raw].sort(
-          (a, b) =>
-            new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
-
-        setEvents(sorted.map(formatPost));
-
+        const sorted = [...raw]
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, 3); // only the 3 most recent
+        setPosts(sorted.map(formatPost));
         setTimeout(() => setLoaded(true), 80);
       })
-      .catch((err) => {
-        console.error("Failed to load posts.json:", err);
-        setLoaded(true);
-      });
+      .catch(() => setLoaded(true));
   }, []);
 
-  const featured = events.find((e) => e.image);
+  const featured = posts[0];
+  const secondary = posts.slice(1);
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "var(--bg-color)",
-        overflowX: "hidden",
-      }}
-    >
+    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
 
-      {/* ── Page Hero ── */}
+      {/* ── Hero ── */}
       <header
         style={{
           padding: isMobile ? "120px 20px 48px" : "180px 60px 80px",
@@ -145,41 +92,31 @@ export default function BlogPage() {
           transition: "all 1s ease 0.2s",
         }}
       >
-        <div
-          style={{
-            width: "40px",
-            height: "1px",
-            background: GOLD,
-            marginBottom: "24px",
-          }}
-        />
-
+        <div style={{ width: "40px", height: "1px", background: GOLD, marginBottom: "24px" }} />
         <h1
           style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(48px, 7vw, 96px)",
             fontWeight: 300,
-            color: CREAM,
+            color: "var(--text-color)",
             margin: "0 0 24px",
             lineHeight: 1,
           }}
         >
           Events &amp; <i style={{ color: GOLD }}>Journal</i>
         </h1>
-
         <p
           style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
             fontSize: "15px",
             fontWeight: 300,
             lineHeight: 1.8,
-            color: CREAM,
+            color: "var(--text-color)",
             opacity: 0.6,
             maxWidth: "560px",
           }}
         >
-          A chronicle of global initiatives, summits, and community programs led
-          and attended by Mohamed Dekkak.
+          A chronicle of global initiatives, summits, and community programs led and attended by Mohamed Dekkak.
         </p>
       </header>
 
@@ -187,9 +124,12 @@ export default function BlogPage() {
       {featured && (
         <section
           style={{
-            padding: isMobile ? "0 16px 40px" : "0 60px 80px",
+            padding: isMobile ? "0 16px 40px" : "0 60px 60px",
             maxWidth: "1200px",
             margin: "0 auto",
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateY(0)" : "translateY(20px)",
+            transition: "all 1s ease 0.35s",
           }}
         >
           <Link
@@ -201,92 +141,30 @@ export default function BlogPage() {
               height: isMobile ? "260px" : "520px",
             }}
           >
-            <Image
-              src={featured.image!}
-              alt={featured.title}
-              fill
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 768px) 100vw, 1140px"
-              style={{
-                objectFit: "cover",
-                filter: "brightness(0.6) saturate(0.8)",
-                transition: "transform 1.4s ease",
-              }}
-              onMouseEnter={(e) => {
-                (
-                  e.currentTarget as HTMLImageElement
-                ).style.transform = "scale(1.04)";
-              }}
-              onMouseLeave={(e) => {
-                (
-                  e.currentTarget as HTMLImageElement
-                ).style.transform = "scale(1)";
-              }}
-            />
-
-            <style>{`
-              .blog-featured-overlay {
-                background:
-                  linear-gradient(
-                    to top,
-                    rgba(10,10,10,0.92) 0%,
-                    rgba(10,10,10,0.3) 50%,
-                    transparent 100%
-                  ),
-                  radial-gradient(
-                    ellipse at 30% 100%,
-                    ${GOLD}11,
-                    transparent 60%
-                  );
-              }
-
-              [data-theme="light"] .blog-featured-overlay {
-                background:
-                  linear-gradient(
-                    to top,
-                    rgba(10,10,10,0.4) 0%,
-                    rgba(10,10,10,0.1) 50%,
-                    transparent 100%
-                  ),
-                  radial-gradient(
-                    ellipse at 30% 100%,
-                    ${GOLD}11,
-                    transparent 60%
-                  );
-              }
-            `}</style>
+            {featured.image && (
+              <Image
+                src={featured.image}
+                alt={featured.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 1140px"
+                style={{
+                  objectFit: "cover",
+                  filter: "brightness(0.6) saturate(0.8)",
+                  transition: "transform 1.4s ease",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+              />
+            )}
 
             <div
-              className="blog-featured-overlay"
-              style={{ position: "absolute", inset: 0 }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: `linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.3) 50%, transparent 100%)`,
+              }}
             />
-
-            {!isMobile && (
-              <>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "24px",
-                    left: "24px",
-                    width: "48px",
-                    height: "1px",
-                    background: GOLD,
-                  }}
-                />
-
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "24px",
-                    left: "24px",
-                    width: "1px",
-                    height: "48px",
-                    background: GOLD,
-                  }}
-                />
-              </>
-            )}
 
             <div
               style={{
@@ -308,16 +186,14 @@ export default function BlogPage() {
                   marginBottom: "16px",
                 }}
               >
-                Featured · {featured.location} ·{" "}
-                {featured.formattedDate}
+                Latest · {featured.formattedDate}
               </div>
-
               <h2
                 style={{
                   fontFamily: "var(--font-cormorant), serif",
                   fontSize: "clamp(32px, 5vw, 60px)",
                   fontWeight: 300,
-                  color: CREAM,
+                  color: "#fff",
                   margin: "0 0 20px",
                   lineHeight: 1.05,
                   maxWidth: "700px",
@@ -325,147 +201,164 @@ export default function BlogPage() {
               >
                 {featured.title}
               </h2>
+              {featured.description && (
+                <p
+                  style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "14px",
+                    color: "rgba(255,255,255,0.65)",
+                    margin: 0,
+                    maxWidth: "520px",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {featured.description}
+                </p>
+              )}
             </div>
           </Link>
         </section>
       )}
 
-      {/* ── All Posts Grid ── */}
-      <section
-        style={{
-          padding: isMobile ? "0 16px 60px" : "0 60px 120px",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <div
+      {/* ── 2 Secondary Posts ── */}
+      {secondary.length > 0 && (
+        <section
           style={{
+            padding: isMobile ? "0 16px 60px" : "0 60px 80px",
+            maxWidth: "1200px",
+            margin: "0 auto",
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fill, minmax(340px, 1fr))",
-            gap: "40px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: "1px",
+            background: `${GOLD}22`,
+            opacity: loaded ? 1 : 0,
+            transition: "all 1s ease 0.5s",
           }}
         >
-          {events.map((event, idx) => (
-            <PostCard
-              key={event.id}
-              event={event}
-              idx={idx}
-              loaded={loaded}
-            />
+          {secondary.map((post) => (
+            <SecondaryCard key={post.id} post={post} />
           ))}
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* ── View All CTA ── */}
+      <div
+        style={{
+          padding: isMobile ? "0 20px 80px" : "0 60px 120px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          opacity: loaded ? 1 : 0,
+          transition: "all 1s ease 0.6s",
+        }}
+      >
+        <Link
+          href="/blog"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "11px",
+            fontWeight: 500,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: GOLD,
+            border: `0.5px solid ${GOLD}55`,
+            padding: "14px 28px",
+            textDecoration: "none",
+            transition: "background 0.2s",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = `${GOLD}11`; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
+        >
+          View all posts →
+        </Link>
+      </div>
 
       <Footer />
     </main>
   );
 }
 
-// ─── PostCard ─────────────────────────────────────────────────────────────────
-
-function PostCard({
-  event,
-  idx,
-  loaded,
-}: {
-  event: BlogPost;
-  idx: number;
-  loaded: boolean;
-}) {
+function SecondaryCard({ post }: { post: BlogPost }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
-      href={event.href}
+      href={post.href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         display: "flex",
         flexDirection: "column",
-        border: `1px solid ${
-          hovered
-            ? GOLD + "44"
-            : "color-mix(in srgb, var(--text-color) 6%, transparent)"
-        }`,
-        overflow: "hidden",
-        background: hovered
-          ? "rgba(201,168,76,0.03)"
-          : "color-mix(in srgb, var(--text-color) 1%, transparent)",
-        transform: loaded
-          ? hovered
-            ? "translateY(-6px)"
-            : "translateY(0)"
-          : "translateY(30px)",
-        opacity: loaded ? 1 : 0,
-        transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${
-          idx * 0.07
-        }s`,
-        boxShadow: hovered
-          ? "0 20px 60px rgba(0,0,0,0.35)"
-          : "none",
+        background: "var(--bg-color)",
+        padding: "36px",
+        gap: "16px",
+        textDecoration: "none",
+        transition: "background 0.3s",
+        ...(hovered ? { background: `${GOLD}07` } : {}),
       }}
     >
+      {post.image && (
+        <div style={{ position: "relative", height: "180px", overflow: "hidden" }}>
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{
+              objectFit: "cover",
+              filter: hovered ? "brightness(0.75)" : "brightness(0.55) grayscale(20%)",
+              transform: hovered ? "scale(1.04)" : "scale(1)",
+              transition: "filter 0.6s ease, transform 1s ease",
+            }}
+          />
+        </div>
+      )}
+
       <div
         style={{
-          height: "220px",
-          position: "relative",
-          overflow: "hidden",
-          background: "var(--bg-secondary)",
+          fontFamily: "var(--font-dm-sans)",
+          fontSize: "9px",
+          fontWeight: 600,
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          color: GOLD,
         }}
       >
-        {event.image ? (
-          <>
-            <Image
-              src={event.image}
-              alt={event.title}
-              fill
-              loading="lazy"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{
-                objectFit: "cover",
-                filter: hovered
-                  ? "brightness(0.75) saturate(0.9)"
-                  : "brightness(0.5) grayscale(25%)",
-                transform: hovered
-                  ? "scale(1.06)"
-                  : "scale(1.0)",
-                transition:
-                  "filter 0.8s ease, transform 1.2s ease",
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(to top, var(--bg-color) 0%, transparent 60%)",
-              }}
-            />
-          </>
-        ) : (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `radial-gradient(ellipse at 30% 50%, ${GOLD}18, transparent 70%)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "32px",
-                opacity: 0.15,
-              }}
-            >
-              ✦
-            </span>
-          </div>
-        )}
+        {post.monthYear}
       </div>
+
+      <h3
+        style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "clamp(20px, 3vw, 28px)",
+          fontWeight: 300,
+          color: "var(--text-color)",
+          margin: 0,
+          lineHeight: 1.2,
+          transition: "color 0.2s",
+          ...(hovered ? { color: GOLD } : {}),
+        }}
+      >
+        {post.title}
+      </h3>
+
+      {post.description && (
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "13px",
+            lineHeight: 1.7,
+            color: "var(--text-color)",
+            opacity: 0.55,
+            margin: 0,
+          }}
+        >
+          {post.description}
+        </p>
+      )}
     </Link>
   );
 }
