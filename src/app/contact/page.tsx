@@ -411,13 +411,19 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <Turnstile
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                    options={{ theme: "dark", size: "flexible" }}
-                    onSuccess={(token) => { captchaToken.current = token; }}
-                    onExpire={() => { captchaToken.current = null; }}
-                    onError={() => { captchaToken.current = null; }}
-                  />
+                  {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
+                    <Turnstile
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                      options={{ theme: "dark", size: "flexible" }}
+                      onSuccess={(token) => { captchaToken.current = token; }}
+                      onExpire={() => { captchaToken.current = null; }}
+                      onError={() => { captchaToken.current = null; }}
+                    />
+                  ) : (
+                    <div style={{ color: "red", padding: "10px", border: "1px solid red" }}>
+                      Turnstile site key not configured
+                    </div>
+                  )}
                 </div>
 
                 <button type="submit" disabled={formState === "submitting"} style={{

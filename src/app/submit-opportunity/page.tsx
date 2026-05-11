@@ -243,8 +243,8 @@ export default function SubmitOpportunityPage() {
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "32px" }}>
                   <div>
                     <label htmlFor="opportunityType" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Opportunity Type *</label>
-                    <select id="opportunityType" name="opportunityType" required className="opp-input" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
-                      <option value="" disabled selected style={{ background: "var(--bg-color)" }}>Select Type</option>
+                    <select id="opportunityType" name="opportunityType" required defaultValue="" className="opp-input" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
+                      <option value="" disabled style={{ background: "var(--bg-color)" }}>Select Type</option>
                       <option value="Real Estate Asset" style={{ background: "var(--bg-color)" }}>Real Estate Asset</option>
                       <option value="Hotel / Hospitality Project" style={{ background: "var(--bg-color)" }}>Hotel / Hospitality Project</option>
                       <option value="Investment Partnership" style={{ background: "var(--bg-color)" }}>Investment Partnership</option>
@@ -257,8 +257,8 @@ export default function SubmitOpportunityPage() {
                   </div>
                   <div>
                     <label htmlFor="dealSize" style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Deal Size *</label>
-                    <select id="dealSize" name="dealSize" required className="opp-input" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
-                      <option value="" disabled selected style={{ background: "var(--bg-color)" }}>Select Size</option>
+                    <select id="dealSize" name="dealSize" required defaultValue="" className="opp-input" style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid color-mix(in srgb, var(--text-color) 20%, transparent)", padding: "12px 0", color: CREAM, fontFamily: "var(--font-dm-sans)", fontSize: "14px", outline: "none" }}>
+                      <option value="" disabled style={{ background: "var(--bg-color)" }}>Select Size</option>
                       <option value="Under $1M" style={{ background: "var(--bg-color)" }}>Under $1M</option>
                       <option value="$1M - $10M" style={{ background: "var(--bg-color)" }}>$1M - $10M</option>
                       <option value="$10M - $50M" style={{ background: "var(--bg-color)" }}>$10M - $50M</option>
@@ -305,13 +305,19 @@ export default function SubmitOpportunityPage() {
                 </div>
 
                 <div>
-                  <Turnstile
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                    options={{ theme: "dark", size: "flexible" }}
-                    onSuccess={(token) => { captchaToken.current = token; }}
-                    onExpire={() => { captchaToken.current = null; }}
-                    onError={() => { captchaToken.current = null; }}
-                  />
+                  {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
+                    <Turnstile
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                      options={{ theme: "dark", size: "flexible" }}
+                      onSuccess={(token) => { captchaToken.current = token; }}
+                      onExpire={() => { captchaToken.current = null; }}
+                      onError={() => { captchaToken.current = null; }}
+                    />
+                  ) : (
+                    <div style={{ color: "red", padding: "10px", border: "1px solid red" }}>
+                      Turnstile site key not configured
+                    </div>
+                  )}
                 </div>
 
                 <button type="submit" disabled={formState === "submitting"} style={{

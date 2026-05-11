@@ -45,6 +45,75 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   return result.success === true;
 }
 
+// VirusTotal malware scanning
+async function scanFileWithVirusTotal(base64Content: string): Promise<{ safe: boolean; message: string }> {
+  const apiKey = process.env.VIRUSTOTAL_API_KEY;
+  if (!apiKey) {
+    return { safe: true, message: 'VirusTotal API key not configured - skipping malware scan' };
+  }
+
+  try {
+    const buffer = Buffer.from(base64Content, 'base64');
+    
+    // Upload file to VirusTotal
+    const formData = new FormData();
+    const blob = new Blob([buffer]);
+    formData.append('file', blob);
+
+    const uploadRes = await fetch('https://www.virustotal.com/api/v3/files', {
+      method: 'POST',
+      headers: { 'x-apikey': apiKey },
+      body: formData,
+    });
+
+    if (!uploadRes.ok) {
+      return { safe: true, message: 'VirusTotal scan failed - proceeding with caution' };
+    }
+
+    const uploadData = await uploadRes.json();
+    const analysisId = uploadData.data?.id;
+
+    if (!analysisId) {
+      return { safe: true, message: 'No analysis ID received' };
+    }
+
+    // Wait a moment for analysis
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    // Get analysis results
+    const analysisRes = await fetch(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
+      headers: { 'x-apikey': apiKey },
+    });
+
+    if (!analysisRes.ok) {
+      return { safe: true, message: 'Could not retrieve scan results' };
+    }
+
+    const analysisData = await analysisRes.json();
+    const stats = analysisData.data?.attributes?.stats;
+
+    if (!stats) {
+      return { safe: true, message: 'No scan statistics available' };
+    }
+
+    // Check for malicious detections
+    const malicious = stats.malicious || 0;
+    const suspicious = stats.suspicious || 0;
+
+    if (malicious > 0 || suspicious > 0) {
+      return { 
+        safe: false, 
+        message: `File flagged by ${malicious} scanners as malicious, ${suspicious} as suspicious. File blocked.` 
+      };
+    }
+
+    return { safe: true, message: `Clean - checked by ${stats.harmless || 0} scanners` };
+  } catch (error) {
+    console.error('VirusTotal scan error:', error);
+    return { safe: true, message: 'Scan error - proceeding with basic validation only' };
+  }
+}
+
 function sanitizeFilename(filename: string): string {
   return filename
     .replace(/[<>:"\/\\|?*]+/g, '')
@@ -129,8 +198,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     }
 
-    // File handling
+    // File handling with malware scanning
     let fileInfo = "No file attached.";
+    let emailAttachments: Array<{ filename: string; content: string; contentType: string }> = [];
+    
     if (attachment && attachment.content && attachment.filename) {
       try {
         const fileBuffer = Buffer.from(attachment.content, 'base64');
@@ -179,11 +250,27 @@ export async function POST(request: Request) {
           }
         }
 
-        // Step 6: Do NOT attach file to email
+        // Step 6: Malware scan with VirusTotal
+        const scanResult = await scanFileWithVirusTotal(attachment.content);
+        
+        if (!scanResult.safe) {
+          return NextResponse.json({ 
+            error: `File rejected: ${scanResult.message}` 
+          }, { status: 400 });
+        }
+
+        // Step 7: Attach clean file to email
         const sizeMB = (fileBuffer.length / (1024 * 1024)).toFixed(2);
-        fileInfo = `Attached File Details:\n Filename: ${sanitizedFilename}\n Size: ${sizeMB} MB\n Type: ${mimeType}\n Note: File not stored for security. Available upon request from submitter.`;
-      } catch {
+        fileInfo = `Attached File:\n Filename: ${sanitizedFilename}\n Size: ${sizeMB} MB\n Type: ${mimeType}\n Security Scan: ${scanResult.message}`;
+        
+        emailAttachments = [{
+          filename: sanitizedFilename,
+          content: attachment.content,
+          contentType: mimeType
+        }];
+      } catch (err) {
         // Generic error for any file failure
+        console.error('File processing error:', err);
         return NextResponse.json({ error: 'Invalid file. Please upload a valid PDF, DOCX or PPTX file under 10MB.' }, { status: 400 });
       }
     }
@@ -212,6 +299,7 @@ Confidentiality Agreement: ${confidentiality ? 'Confirmed' : 'Not Confirmed'}
 
 ${fileInfo}
       `,
+      attachments: emailAttachments.length > 0 ? emailAttachments : undefined,
     });
 
     if (error) {

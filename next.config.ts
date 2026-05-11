@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.chatbase.co https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com https://www.google-analytics.com;",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.chatbase.co https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://js.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com https://www.google-analytics.com; frame-src 'self' https://challenges.cloudflare.com;",
           },
         ],
       },
