@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Real Estate Ecosystem - Report Continued</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a202c; line-height: 1.6; }
+        .page { width: 210mm; min-height: 297mm; padding: 40px 50px; margin: 0 auto; background: #ffffff; page-break-after: always; position: relative; overflow: hidden; }
+        .page:last-child { page-break-after: auto; }
+        .section-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #1e3a5f; }
+        .section-number { font-family: 'Playfair Display', serif; font-size: 48px; color: rgba(30, 58, 95, 0.15); font-weight: 600; line-height: 1; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 28px; color: #1e3a5f; margin-top: -15px; margin-left: 5px; }
+        .section-subtitle { font-size: 14px; color: #64748b; margin-top: 10px; margin-left: 5px; }
+        h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #1e3a5f; margin-bottom: 15px; font-weight: 500; }
+        h4 { font-size: 14px; color: #1e3a5f; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        p { font-size: 13px; color: #64748b; margin-bottom: 15px; line-height: 1.8; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 12px; }
+        .data-table th { background: #e0e7ff; color: #1e3a5f; padding: 12px 15px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-bottom: 2px solid #1e3a5f; }
+        .data-table td { padding: 12px 15px; border-bottom: 1px solid #e2e8f0; color: #64748b; }
+        .status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-complete { background: #d1fae5; color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .status-progress { background: #f0f9ff; color: #1e3a5f; border: 1px solid rgba(30, 58, 95, 0.3); }
+        .status-pending { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+        .status-critical { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .progress-container { margin: 15px 0; }
+        .progress-header { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; color: #64748b; }
+        .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #1e3a5f, #3b82f6); border-radius: 3px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 30px 0; }
+        .kpi-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 25px; text-align: center; border-radius: 4px; }
+        .kpi-value { font-family: 'Playfair Display', serif; font-size: 36px; color: #1e3a5f; font-weight: 600; }
+        .kpi-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+        .architecture-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; margin: 15px 0; border-radius: 4px; }
+        .architecture-title { font-size: 13px; color: #1e3a5f; font-weight: 600; margin-bottom: 10px; }
+        .component-list { font-size: 12px; color: #999; list-style: none; }
+        .component-list li { margin: 6px 0; padding-left: 15px; position: relative; }
+        .component-list li::before { content: '›'; position: absolute; left: 0; color: #1e3a5f; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .three-column { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 10px 0 10px 25px; position: relative; font-size: 13px; color: #475569; border-bottom: 1px solid #e2e8f0; }
+        .feature-list li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+        .score-container { display: flex; align-items: center; gap: 30px; margin: 25px 0; }
+        .score-circle { width: 100px; height: 100px; border-radius: 50%; border: 4px solid; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; }
+        .score-excellent { border-color: #22c55e; color: #22c55e; }
+        .score-good { border-color: #1e3a5f; color: #1e3a5f; }
+        .score-improve { border-color: #f59e0b; color: #f59e0b; }
+        .risk-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
+        .risk-item { padding: 15px; border-left: 3px solid #1e3a5f; background: #f8fafc; }
+        .risk-low { border-color: #22c55e; }
+        .risk-medium { border-color: #f59e0b; }
+        .risk-high { border-color: #ef4444; }
+        .roadmap-container { position: relative; padding-left: 30px; }
+        .roadmap-container::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #1e3a5f, #60a5fa); }
+        .roadmap-item { position: relative; margin-bottom: 30px; padding-left: 20px; }
+        .roadmap-item::before { content: ''; position: absolute; left: -26px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: #1e3a5f; border: 3px solid #ffffff; }
+        .roadmap-phase { font-size: 11px; color: #1e3a5f; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .roadmap-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .roadmap-desc { font-size: 12px; color: #64748b; }
+        .recommendation-item { display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
+        .rec-priority { min-width: 60px; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; text-align: center; }
+        .rec-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .rec-medium { background: rgba(30, 58, 95, 0.15); color: #1e3a5f; }
+        .rec-low { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .page-footer { position: absolute; bottom: 30px; left: 50px; right: 50px; display: flex; justify-content: space-between; font-size: 10px; color: #444; padding-top: 15px; border-top: 1px solid #e2e8f0; }
+        .gold-accent { color: #1e3a5f; }
+        .chart-container { background: #f8fafc; border: 1px solid rgba(30, 58, 95, 0.1); padding: 30px; margin: 20px 0; border-radius: 4px; text-align: center; }
+        .bar-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 150px; gap: 20px; }
+        .bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .bar { width: 100%; background: linear-gradient(180deg, #1e3a5f, #60a5fa); border-radius: 3px 3px 0 0; }
+        .bar-label { font-size: 10px; color: #64748b; margin-top: 10px; }
+        .bar-value { font-size: 12px; color: #1e3a5f; margin-bottom: 5px; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 6: SPEED & PERFORMANCE -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">05</div>
+        <h2 class="section-title">Speed & Performance Analysis</h2>
+        <p class="section-subtitle">Core Web Vitals and performance engineering assessment</p>
+    </div>
+    
+    <div class="score-container">
+        <div class="score-circle score-improve">68</div>
+        <div>
+            <h3 style="margin-top: 0;">Performance Score</h3>
+            <p style="margin-bottom: 5px;">Room for improvement in image optimization, bundle size, and rendering performance. Target score: 90+</p>
+        </div>
+    </div>
+    
+    <h3>Core Web Vitals Assessment</h3>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Target</th>
+                <th>Current Estimate</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>LCP (Largest Contentful Paint)</td>
+                <td>&lt; 2.5s</td>
+                <td>~2.8s</td>
+                <td><span class="status status-progress">Needs Work</span></td>
+            </tr>
+            <tr>
+                <td>INP (Interaction to Next Paint)</td>
+                <td>&lt; 200ms</td>
+                <td>~180ms</td>
+                <td><span class="status status-complete">Good</span></td>
+            </tr>
+            <tr>
+                <td>CLS (Cumulative Layout Shift)</td>
+                <td>&lt; 0.1</td>
+                <td>~0.05</td>
+                <td><span class="status status-complete">Good</span></td>
+            </tr>
+            <tr>
+                <td>TTFB (Time to First Byte)</td>
+                <td>&lt; 600ms</td>
+                <td>~400ms</td>
+                <td><span class="status status-complete">Good</span></td>
+            </tr>
+            <tr>
+                <td>FCP (First Contentful Paint)</td>
+                <td>&lt; 1.8s</td>
+                <td>~1.2s</td>
+                <td><span class="status status-complete">Good</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="two-column">
+        <div>
+            <h3>Performance Strengths</h3>
+            <ul class="feature-list">
+                <li>Next.js App Router with RSC</li>
+                <li>Server-side rendering enabled</li>
+                <li>Image component optimization</li>
+                <li>Vercel Edge deployment</li>
+                <li>Efficient hydration</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Optimization Priorities</h3>
+            <ul class="feature-list">
+                <li>Implement WebP/AVIF images</li>
+                <li>Add resource preloading</li>
+                <li>Enable font subsetting</li>
+                <li>Optimize CSS delivery</li>
+                <li>Implement lazy loading</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <h4 style="margin-bottom: 20px;">Page Load Performance Breakdown</h4>
+        <div class="bar-chart">
+            <div class="bar-item">
+                <div class="bar-value">0.4s</div>
+                <div class="bar" style="height: 20%"></div>
+                <div class="bar-label">TTFB</div>
+            </div>
+            <div class="bar-item">
+                <div class="bar-value">1.2s</div>
+                <div class="bar" style="height: 45%"></div>
+                <div class="bar-label">FCP</div>
+            </div>
+            <div class="bar-item">
+                <div class="bar-value">2.8s</div>
+                <div class="bar" style="height: 85%"></div>
+                <div class="bar-label">LCP</div>
+            </div>
+            <div class="bar-item">
+                <div class="bar-value">3.2s</div>
+                <div class="bar" style="height: 95%"></div>
+                <div class="bar-label">TTI</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 6 | Performance</span>
+    </div>
+</div>
+
+<!-- PAGE 7: SECURITY ANALYSIS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">06</div>
+        <h2 class="section-title">Security Analysis</h2>
+        <p class="section-subtitle">Enterprise security framework and vulnerability assessment</p>
+    </div>
+    
+    <div class="score-container">
+        <div class="score-circle score-excellent">85</div>
+        <div>
+            <h3 style="margin-top: 0;">Security Posture Score</h3>
+            <p style="margin-bottom: 5px;">Strong multi-layered security with advanced bot protection, CSP policies, and input sanitization. Room for authentication layer implementation.</p>
+        </div>
+    </div>
+    
+    <h3>Security Risk Matrix</h3>
+    <div class="risk-matrix">
+        <div class="risk-item risk-low">
+            <div class="risk-title">Cross-Site Scripting (XSS)</div>
+            <div class="risk-desc">CSP headers configured, input escaping implemented. Low risk.</div>
+        </div>
+        <div class="risk-item risk-low">
+            <div class="risk-title">Bot Attacks</div>
+            <div class="risk-desc">Turnstile CAPTCHA + honeypot + rate limiting. Very low risk.</div>
+        </div>
+        <div class="risk-item risk-medium">
+            <div class="risk-title">Authentication</div>
+            <div class="risk-desc">No admin authentication layer. Medium priority for CMS access.</div>
+        </div>
+        <div class="risk-item risk-low">
+            <div class="risk-title">Data Injection</div>
+            <div class="risk-desc">Input validation, file type checking, size limits. Low risk.</div>
+        </div>
+    </div>
+    
+    <h3>Security Implementation Inventory</h3>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Security Layer</th>
+                <th>Implementation</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Content Security Policy</td>
+                <td>Strict CSP with script-src, frame-src, connect-src</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>Bot Protection</td>
+                <td>Cloudflare Turnstile + honeypot fields</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>Rate Limiting</td>
+                <td>3 requests/hour per IP with reset</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>File Upload Security</td>
+                <td>Type validation, size limits, VirusTotal scan</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>Input Sanitization</td>
+                <td>Length validation, regex patterns, spam filters</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>Email Security</td>
+                <td>Disposable domain blocking, spam keyword filter</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>HTTPS/TLS</td>
+                <td>Vercel automatic SSL</td>
+                <td><span class="status status-complete">Active</span></td>
+            </tr>
+            <tr>
+                <td>Admin Authentication</td>
+                <td>Not implemented</td>
+                <td><span class="status status-pending">Pending</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">AI Security Considerations</div>
+        <ul class="component-list">
+            <li><strong>API Key Protection:</strong> Environment variables for all AI service credentials</li>
+            <li><strong>Prompt Injection:</strong> Input validation prevents manipulation of AI systems</li>
+            <li><strong>Rate Limiting:</strong> Protects AI endpoints from abuse and cost overruns</li>
+            <li><strong>Data Privacy:</strong> Investor data encrypted, confidential agreements enforced</li>
+        </ul>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 7 | Security</span>
+    </div>
+</div>
+
+<!-- PAGE 8: AI INTEGRATION READINESS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">07</div>
+        <h2 class="section-title">AI Integration Readiness</h2>
+        <p class="section-subtitle">Ecosystem preparedness for AI-powered automation</p>
+    </div>
+    
+    <div class="score-container">
+        <div class="score-circle score-good">60</div>
+        <div>
+            <h3 style="margin-top: 0;">AI Readiness Score</h3>
+            <p style="margin-bottom: 5px;">Strong foundation with chatbot integration and security framework. Requires API infrastructure and orchestration layer for full deployment.</p>
+        </div>
+    </div>
+    
+    <h3>AI Capability Readiness Matrix</h3>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>AI Capability</th>
+                <th>Readiness</th>
+                <th>Prerequisites</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AI Chatbot</td>
+                <td><span class="status status-complete">Ready</span></td>
+                <td>Chatbase integrated, requires training</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>SEO Content Generation</td>
+                <td><span class="status status-progress">75%</span></td>
+                <td>Need OpenAI/GPT integration, blog structure ready</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Investor Matching</td>
+                <td><span class="status status-progress">40%</span></td>
+                <td>CRM integration, opportunity classification</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Predictive Pricing</td>
+                <td><span class="status status-pending">Planning</span></td>
+                <td>Property data pipeline, market data sources</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Image Generation</td>
+                <td><span class="status status-pending">Planning</span></td>
+                <td>Midjourney/DALL-E API, storage infrastructure</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Document OCR</td>
+                <td><span class="status status-progress">60%</span></td>
+                <td>File upload system ready, need Azure/AWS Textract</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Sentiment Analysis</td>
+                <td><span class="status status-pending">Planning</span></td>
+                <td>Inquiry data pipeline, NLP service</td>
+                <td>Low</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="two-column">
+        <div>
+            <h3>AI Infrastructure Requirements</h3>
+            <ul class="feature-list">
+                <li>OpenAI API key management</li>
+                <li>Vector database (Pinecone/Weaviate)</li>
+                <li>Embeddings pipeline</li>
+                <li>AI orchestration layer</li>
+                <li>Prompt management system</li>
+                <li>Cost monitoring dashboard</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Data Readiness</h3>
+            <ul class="feature-list">
+                <li>Property database structure</li>
+                <li>Investor profile fields</li>
+                <li>Transaction history schema</li>
+                <li>Market data integration points</li>
+                <li>Content corpus for training</li>
+                <li>API endpoint architecture</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">Proposed AI Architecture</div>
+        <p style="font-size: 12px; color: #999; margin-bottom: 15px;">Recommended AI ecosystem integration pattern</p>
+        <ul class="component-list">
+            <li><strong>Orchestration Layer:</strong> LangChain/LangServe for workflow management</li>
+            <li><strong>LLM Provider:</strong> GPT-4 for content, Claude for analysis</li>
+            <li><strong>Vector Store:</strong> Pinecone for property/investor embeddings</li>
+            <li><strong>API Gateway:</strong> Rate limiting, authentication, logging</li>
+            <li><strong>Monitoring:</strong> Cost tracking, performance metrics, error handling</li>
+        </ul>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 8 | AI Readiness</span>
+    </div>
+</div>
+
+<!-- PAGE 9: SYSTEM ARCHITECTURE -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">08</div>
+        <h2 class="section-title">System Architecture</h2>
+        <p class="section-subtitle">Enterprise architecture and integration patterns</p>
+    </div>
+    
+    <h3>Current Architecture Overview</h3>
+    <div class="architecture-box">
+        <div class="architecture-title">Frontend Layer — Next.js Application</div>
+        <ul class="component-list">
+            <li><strong>App Router:</strong> Server Components, Streaming SSR, Parallel Routes</li>
+            <li><strong>Client Components:</strong> Interactive elements, Turnstile integration, File upload</li>
+            <li><strong>Styling:</strong> CSS-in-JS with inline styles, CSS Custom Properties for theming</li>
+            <li><strong>State Management:</strong> React hooks (useState, useRef, useEffect)</li>
+        </ul>
+    </div>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">API Layer — Next.js API Routes</div>
+        <ul class="component-list">
+            <li><strong>/api/contact:</strong> Form processing, rate limiting, email dispatch</li>
+            <li><strong>/api/submit-opportunity:</strong> File handling, VirusTotal scanning, attachments</li>
+            <li><strong>Security Middleware:</strong> CSP headers, bot detection, input validation</li>
+        </ul>
+    </div>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">External Services Integration</div>
+        <table class="data-table" style="margin-top: 15px;">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Purpose</th>
+                    <th>Integration Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vercel</td>
+                    <td>Hosting, Edge deployment, CI/CD</td>
+                    <td>Native</td>
+                </tr>
+                <tr>
+                    <td>Resend</td>
+                    <td>Transactional email delivery</td>
+                    <td>REST API</td>
+                </tr>
+                <tr>
+                    <td>Cloudflare Turnstile</td>
+                    <td>Bot protection, CAPTCHA alternative</td>
+                    <td>JavaScript Widget</td>
+                </tr>
+                <tr>
+                    <td>VirusTotal</td>
+                    <td>File malware scanning</td>
+                    <td>REST API</td>
+                </tr>
+                <tr>
+                    <td>Chatbase</td>
+                    <td>AI chatbot integration</td>
+                    <td>Embedded Script</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <h3>Proposed AI-Enhanced Architecture</h3>
+    <div class="two-column">
+        <div class="architecture-box">
+            <div class="architecture-title">Data Layer Additions</div>
+            <ul class="component-list">
+                <li><strong>Vector DB:</strong> Property embeddings, investor matching</li>
+                <li><strong>Redis Cache:</strong> Session management, rate limiting</li>
+                <li><strong>PostgreSQL:</strong> Structured property/investor data</li>
+                <li><strong>Blob Storage:</strong> Document storage, AI training data</li>
+            </ul>
+        </div>
+        <div class="architecture-box">
+            <div class="architecture-title">AI Service Layer</div>
+            <ul class="component-list">
+                <li><strong>Content Generation:</strong> OpenAI GPT-4, Anthropic Claude</li>
+                <li><strong>Image AI:</strong> Midjourney API, DALL-E 3</li>
+                <li><strong>Document AI:</strong> Azure Document Intelligence</li>
+                <li><strong>Analytics:</strong> Custom ML models for pricing</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 9 | Architecture</span>
+    </div>
+</div>
+
+</body>
+</html>

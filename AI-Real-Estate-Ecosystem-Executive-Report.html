@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Luxury Real Estate Ecosystem - Executive Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 40px 50px;
+            margin: 0 auto;
+            background: #ffffff;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page:last-child {
+            page-break-after: auto;
+        }
+        
+        /* Cover Page */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+            position: relative;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(30, 58, 95, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 58, 95, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .luxury-line {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #1e3a5f, transparent);
+            margin: 30px auto;
+        }
+        
+        .company-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #1e3a5f;
+            margin-bottom: 60px;
+            opacity: 0.9;
+        }
+        
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 500;
+            color: #1e3a5f;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .cover-subtitle {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .cover-meta {
+            margin-top: 80px;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+        
+        .cover-meta span {
+            display: block;
+            margin: 8px 0;
+        }
+        
+        .gold-accent {
+            color: #1e3a5f;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1e3a5f;
+        }
+        
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: rgba(30, 58, 95, 0.15);
+            font-weight: 600;
+            line-height: 1;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #ffffff;
+            margin-top: -15px;
+            margin-left: 5px;
+        }
+        
+        .section-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        
+        /* Content Styles */
+        .content-block {
+            margin-bottom: 30px;
+        }
+        
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        h4 {
+            font-size: 14px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        p {
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+        
+        .data-table th {
+            background: #e0e7ff;
+            color: #1e3a5f;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #1e3a5f;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        
+        .data-table tr:hover td {
+            background: rgba(201, 168, 76, 0.03);
+        }
+        
+        /* Status Indicators */
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-complete {
+            background: #d1fae5;
+            color: #22c55e;
+            border: 1px solid #10b981;
+        }
+        
+        .status-progress {
+            background: rgba(201, 168, 76, 0.15);
+            color: #1e3a5f;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+        }
+        
+        .status-pending {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+        
+        .status-critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Progress Bars */
+        .progress-container {
+            margin: 15px 0;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #475569;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #032B44, #3E8E41);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .kpi-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        
+        .kpi-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #032B44;
+            font-weight: 600;
+        }
+        
+        .kpi-label {
+            font-size: 11px;
+            color: #3E8E41;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        
+        /* Architecture Diagram */
+        .architecture-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .architecture-title {
+            font-size: 13px;
+            color: #032B44;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .component-list {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .component-list li {
+            margin: 6px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .component-list li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #032B44;
+        }
+        
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        /* Three Column Layout */
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0 10px 25px;
+            position: relative;
+            font-size: 13px;
+            color: #bbb;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        /* Score Circle */
+        .score-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        .score-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .score-excellent {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        
+        .score-good {
+            border-color: #032B44;
+            color: #032B44;
+        }
+        
+        .score-improve {
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+        
+        /* Risk Matrix */
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .risk-item {
+            padding: 15px;
+            border-left: 3px solid;
+            background: #f8fafc;
+        }
+        
+        .risk-low { border-color: #22c55e; }
+        .risk-medium { border-color: #f59e0b; }
+        .risk-high { border-color: #ef4444; }
+        
+        .risk-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .risk-desc {
+            font-size: 11px;
+            color: #3E8E41;
+        }
+        
+        /* Roadmap */
+        .roadmap-container {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #032B44, rgba(201, 168, 76, 0.2));
+        }
+        
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+        
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #032B44;
+            border: 3px solid #0a0a0a;
+        }
+        
+        .roadmap-phase {
+            font-size: 11px;
+            color: #032B44;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .roadmap-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .roadmap-desc {
+            font-size: 12px;
+            color: #3E8E41;
+        }
+        
+        /* Quote Block */
+        .quote-block {
+            border-left: 3px solid #032B44;
+            padding: 20px 25px;
+            margin: 30px 0;
+            background: #f0f9ff;
+            font-style: italic;
+            font-size: 14px;
+            color: #1e293b;
+        }
+        
+        /* Recommendations */
+        .recommendation-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .rec-priority {
+            min-width: 60px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .rec-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .rec-medium {
+            background: rgba(201, 168, 76, 0.2);
+            color: #1e3a5f;
+        }
+        
+        .rec-low {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        
+        .rec-content h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .rec-content p {
+            font-size: 12px;
+            color: #3E8E41;
+            margin: 0;
+        }
+        
+        /* Page Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            right: 50px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #94a3b8;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                width: 210mm;
+                height: 297mm;
+                padding: 40px 50px;
+                margin: 0;
+                page-break-after: always;
+            }
+            .page:last-child {
+                page-break-after: avoid;
+            }
+        }
+        
+        /* Executive Summary Box */
+        .exec-summary-box {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.02));
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        .exec-summary-box h3 {
+            margin-top: 0;
+        }
+        
+        /* Chart Placeholder */
+        .chart-container {
+            background: #f8fafc;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .chart-title {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+        
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            gap: 20px;
+        }
+        
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #032B44, #3E8E41);
+            border-radius: 3px 3px 0 0;
+            min-height: 20px;
+        }
+        
+        .bar-label {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .bar-value {
+            font-size: 12px;
+            color: #1e3a5f;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover-page">
+    <div class="company-logo">DEKKAK</div>
+    <div class="luxury-line"></div>
+    <h1 class="cover-title">AI-Powered Luxury Real Estate<br>Ecosystem Platform</h1>
+    <p class="cover-subtitle">Digital Infrastructure, SEO Architecture, Security Framework & AI Integration Readiness Assessment</p>
+    <div class="luxury-line"></div>
+    <div class="cover-meta">
+        <span>Executive Technical Report & Strategic Analysis</span>
+        <span class="gold-accent">CONFIDENTIAL — FOR INTERNAL REVIEW</span>
+        <span>Prepared: May 2026</span>
+    </div>
+</div>
+
+<!-- PAGE 2: EXECUTIVE SUMMARY -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Executive Summary</h2>
+        <p class="section-subtitle">Strategic transformation vision and infrastructure assessment</p>
+    </div>
+    
+    <div class="exec-summary-box">
+        <h3>Transformation Vision</h3>
+        <p>DEKKAK is executing a comprehensive digital transformation from traditional luxury real estate operations to an AI-powered ecosystem platform. This initiative positions the organization at the forefront of PropTech innovation, creating a centralized digital operating system that integrates AI-driven SEO, automated investor intelligence, predictive analytics, and seamless transaction workflows.</p>
+    </div>
+    
+    <div class="two-column">
+        <div>
+            <h3>Strategic Objectives</h3>
+            <ul class="feature-list">
+                <li>Establish AI-powered organic acquisition channels</li>
+                <li>Automate investor intelligence and opportunity matching</li>
+                <li>Create predictive property valuation systems</li>
+                <li>Implement end-to-end transaction digitization</li>
+                <li>Deploy real-time executive dashboards</li>
+                <li>Enable multilingual global expansion</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Key Findings</h3>
+            <ul class="feature-list">
+                <li>Modern Next.js 15 architecture deployed</li>
+                <li>SEO foundation established with 75% completion</li>
+                <li>Security framework operational (Turnstile, CSP, rate limiting)</li>
+                <li>AI integration readiness at 60%</li>
+                <li>CRM interoperability pending</li>
+                <li>Performance optimization requires attention</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-value">75%</div>
+            <div class="kpi-label">Infrastructure Complete</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">60%</div>
+            <div class="kpi-label">SEO Readiness</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">85%</div>
+            <div class="kpi-label">Security Score</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">40%</div>
+            <div class="kpi-label">AI Integration</div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 2 | Executive Summary</span>
+    </div>
+</div>
+
+<!-- PAGE 3: WEBSITE INFRASTRUCTURE -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">Website Infrastructure</h2>
+        <p class="section-subtitle">Technical architecture and deployment ecosystem</p>
+    </div>
+    
+    <div class="content-block">
+        <h3>Core Architecture</h3>
+        <p>The platform is built on Next.js 15, utilizing the App Router architecture for optimal performance and SEO capabilities. The infrastructure leverages React Server Components for reduced client-side JavaScript, implemented with a sophisticated component-based design system.</p>
+    </div>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Technology</th>
+                <th>Status</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Frontend Framework</td>
+                <td>Next.js 15.5.18</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>SSR, SSG, App Router</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>TypeScript 5</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>Type safety, IntelliSense</td>
+            </tr>
+            <tr>
+                <td>Styling</td>
+                <td>CSS Modules + Inline</td>
+                <td><span class="status status-progress">Operational</span></td>
+                <td>Component isolation</td>
+            </tr>
+            <tr>
+                <td>Deployment</td>
+                <td>Vercel</td>
+                <td><span class="status status-complete">Production</span></td>
+                <td>Edge deployment, CI/CD</td>
+            </tr>
+            <tr>
+                <td>Email Service</td>
+                <td>Resend API</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>Transactional emails</td>
+            </tr>
+            <tr>
+                <td>Bot Protection</td>
+                <td>Cloudflare Turnstile</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>CAPTCHA alternative</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">Deployment Pipeline Architecture</div>
+        <ul class="component-list">
+            <li><strong>Development:</strong> Local Next.js dev server with hot reload</li>
+            <li><strong>Git Repository:</strong> GitHub with branch protection</li>
+            <li><strong>CI/CD:</strong> Vercel automated deployment on push</li>
+            <li><strong>Edge Network:</strong> Global Vercel Edge for low-latency delivery</li>
+            <li><strong>Environment:</strong> Production + Preview deployments per branch</li>
+        </ul>
+    </div>
+    
+    <div class="two-column">
+        <div class="architecture-box">
+            <div class="architecture-title">Frontend Systems</div>
+            <ul class="component-list">
+                <li>Responsive design with mobile-first approach</li>
+                <li>CSS custom properties for theming</li>
+                <li>Dynamic route generation for blog posts</li>
+                <li>Image optimization with Next.js Image</li>
+                <li>Client-side navigation (SPA behavior)</li>
+            </ul>
+        </div>
+        <div class="architecture-box">
+            <div class="architecture-title">Backend Systems</div>
+            <ul class="component-list">
+                <li>API Routes for form processing</li>
+                <li>Server-side rate limiting</li>
+                <li>File upload handling (base64)</li>
+                <li>Email orchestration via Resend</li>
+                <li>Static JSON data management</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 3 | Infrastructure</span>
+    </div>
+</div>
+
+<!-- PAGE 4: IMPLEMENTED FEATURES -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">Implemented Features</h2>
+        <p class="section-subtitle">Operational capabilities and feature inventory</p>
+    </div>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Feature Category</th>
+                <th>Implementation</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Homepage</td>
+                <td>Hero section, intro, CTA</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Luxury styling, responsive</td>
+            </tr>
+            <tr>
+                <td>About Page</td>
+                <td>Biography, philosophy, achievements</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Multi-section layout</td>
+            </tr>
+            <tr>
+                <td>Contact Form</td>
+                <td>Subject dropdown, message, anti-spam</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Turnstile + VirusTotal ready</td>
+            </tr>
+            <tr>
+                <td>Investment Page</td>
+                <td>Opportunity categories, thesis display</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Category grid layout</td>
+            </tr>
+            <tr>
+                <td>Submit Opportunity</td>
+                <td>Multi-step form with file upload</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>PDF malware scanning</td>
+            </tr>
+            <tr>
+                <td>Blog System</td>
+                <td>Dynamic posts, categories, reading time</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>JSON-based CMS</td>
+            </tr>
+            <tr>
+                <td>Media Gallery</td>
+                <td>Photo grid with lightbox</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Optimized images</td>
+            </tr>
+            <tr>
+                <td>Navigation</td>
+                <td>Responsive navbar with mobile menu</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Theme toggle integrated</td>
+            </tr>
+            <tr>
+                <td>Footer</td>
+                <td>Links, social, contact info</td>
+                <td><span class="status status-complete">Complete</span></td>
+                <td>Consistent across pages</td>
+            </tr>
+            <tr>
+                <td>Chatbot</td>
+                <td>Chatbase integration</td>
+                <td><span class="status status-pending">Configured</span></td>
+                <td>Awaiting AI training</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="two-column">
+        <div>
+            <h3>Form Capabilities</h3>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Anti-Spam Protection</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>File Upload Security</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Rate Limiting</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Content Management</h3>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Blog Infrastructure</span>
+                    <span>90%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>SEO Metadata</span>
+                    <span>75%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Image Optimization</span>
+                    <span>80%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 4 | Features</span>
+    </div>
+</div>
+
+<!-- PAGE 5: SEO ANALYSIS -->
+<div class="page">
+    <div class="section-header">
+        <div class="section-number">04</div>
+        <h2 class="section-title">SEO Analysis</h2>
+        <p class="section-subtitle">Search engine optimization infrastructure and opportunities</p>
+    </div>
+    
+    <div class="score-container">
+        <div class="score-circle score-good">72</div>
+        <div>
+            <h3 style="margin-top: 0;">Overall SEO Readiness Score</h3>
+            <p style="margin-bottom: 5px;">Strong technical foundation with room for content expansion and schema markup implementation.</p>
+        </div>
+    </div>
+    
+    <h3>Technical SEO Components</h3>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Status</th>
+                <th>Implementation</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Meta Titles</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>All pages configured</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Meta Descriptions</td>
+                <td><span class="status status-complete">Active</span></td>
+                <td>Unique per page</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Canonical URLs</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>Not yet implemented</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Sitemap.xml</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>Requires generation</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Robots.txt</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>Basic configuration</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Schema Markup</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>RealEstateOrganization</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Heading Hierarchy</td>
+                <td><span class="status status-progress">Partial</span></td>
+                <td>H1, H2 structure exists</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Image Alt Tags</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>Requires audit</td>
+                <td>Medium</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="two-column">
+        <div>
+            <h3>SEO Strengths</h3>
+            <ul class="feature-list">
+                <li>Next.js App Router for optimal crawling</li>
+                <li>Server-side rendering for all pages</li>
+                <li>Fast loading with image optimization</li>
+                <li>Mobile-responsive design</li>
+                <li>Semantic HTML structure</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Improvement Opportunities</h3>
+            <ul class="feature-list">
+                <li>Implement structured data (Schema.org)</li>
+                <li>Generate XML sitemap</li>
+                <li>Add Open Graph meta tags</li>
+                <li>Create robots.txt rules</li>
+                <li>Optimize for local SEO</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="architecture-box">
+        <div class="architecture-title">AI SEO Expansion Roadmap</div>
+        <p style="font-size: 12px; color: #999; margin-bottom: 15px;">Planned AI-driven SEO automation capabilities</p>
+        <ul class="component-list">
+            <li><strong>Content Generation:</strong> AI-powered blog post creation from property data</li>
+            <li><strong>Keyword Optimization:</strong> Automated keyword research and content optimization</li>
+            <li><strong>Multilingual SEO:</strong> AI translation with cultural localization</li>
+            <li><strong>Dynamic Metadata:</strong> Context-aware meta generation per page type</li>
+            <li><strong>Competitive Analysis:</strong> Automated competitor SEO monitoring</li>
+        </ul>
+    </div>
+    
+    <div class="page-footer">
+        <span>DEKKAK — AI Real Estate Ecosystem</span>
+        <span>Page 5 | SEO Analysis</span>
+    </div>
+</div>
+</body>
+</html>

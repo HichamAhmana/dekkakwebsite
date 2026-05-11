@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -104,6 +104,7 @@ export default function ContactPage() {
   const [formState, setFormState] = useState("idle");
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
   const captchaToken = useRef<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const isMobile = useMobile();
 
   useEffect(() => {
@@ -143,6 +144,9 @@ export default function ContactPage() {
       } else {
         setFormState("idle");
         alert("Failed to send message");
+        // Reset captcha for next attempt
+        captchaToken.current = null;
+        turnstileRef.current?.reset();
       }
     } catch (err) {
       console.error(err);
@@ -413,6 +417,7 @@ export default function ContactPage() {
                 <div>
                   {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
                     <Turnstile
+                      ref={turnstileRef}
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
                       options={{ theme: "dark", size: "flexible" }}
                       onSuccess={(token) => { captchaToken.current = token; }}

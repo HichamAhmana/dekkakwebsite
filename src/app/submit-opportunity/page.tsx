@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -13,6 +13,7 @@ export default function SubmitOpportunityPage() {
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">("idle");
   const [fileName, setFileName] = useState<string | null>(null);
   const captchaToken = useRef<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const isMobile = useMobile();
 
   useEffect(() => {
@@ -88,7 +89,11 @@ export default function SubmitOpportunityPage() {
         setFormState("success");
       } else {
         setFormState("idle");
-        alert("Failed to submit opportunity");
+        const errorData = await res.json().catch(() => ({ error: "Failed to submit opportunity" }));
+        alert(errorData.error || "Failed to submit opportunity");
+        // Reset captcha for next attempt
+        captchaToken.current = null;
+        turnstileRef.current?.reset();
       }
     } catch (err) {
       console.error(err);
@@ -307,6 +312,7 @@ export default function SubmitOpportunityPage() {
                 <div>
                   {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
                     <Turnstile
+                      ref={turnstileRef}
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
                       options={{ theme: "dark", size: "flexible" }}
                       onSuccess={(token) => { captchaToken.current = token; }}

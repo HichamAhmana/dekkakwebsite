@@ -45,6 +45,41 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   return result.success === true;
 }
 
+// Disposable email domains
+const disposableDomains = new Set([
+  'tempmail.com', 'throwaway.com', 'mailinator.com', 'guerrillamail.com',
+  'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'trashmail.com',
+  'yopmail.com', 'temp-mail.org', 'getairmail.com', 'tempmailaddress.com',
+  'burnermail.io', '10minutemail.com', 'tempail.com', 'fakemail.net',
+  'sharklasers.com', 'guerrillamail.net', 'guerrillamail.org',
+]);
+
+function isDisposableEmail(email: string): boolean {
+  const domain = email.split('@')[1]?.toLowerCase();
+  return domain ? disposableDomains.has(domain) : false;
+}
+
+// Common spam patterns
+const spamKeywords = [
+  'viagra', 'cialis', 'casino', 'lottery', 'winner', 'million dollars',
+  'get rich quick', 'work from home', 'make money fast', 'click here',
+  'buy now', 'limited time', 'act now', 'urgent', 'congratulations you won',
+  'weight loss', 'diet pill', 'male enhancement', 'hot singles',
+  'debt relief', 'credit repair', 'loan approval', 'free money',
+];
+
+function containsSpamKeywords(text: string): boolean {
+  const lowerText = text.toLowerCase();
+  return spamKeywords.some(keyword => lowerText.includes(keyword));
+}
+
+// Check for repetitive characters (bot pattern)
+function hasRepetitiveChars(text: string, threshold: number = 0.7): boolean {
+  if (text.length < 10) return false;
+  const uniqueChars = new Set(text).size;
+  return uniqueChars / text.length < threshold;
+}
+
 export async function POST(request: Request) {
   // Rate limiting check
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
@@ -73,6 +108,20 @@ export async function POST(request: Request) {
     // Honeypot check
     if (website) {
       return NextResponse.json({ success: true });
+    }
+
+    // Spam detection checks
+    if (isDisposableEmail(email)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+    }
+
+    const combinedText = `${name} ${subject || ''} ${message}`;
+    if (containsSpamKeywords(combinedText)) {
+      return NextResponse.json({ error: 'Message contains invalid content' }, { status: 400 });
+    }
+
+    if (hasRepetitiveChars(message) || hasRepetitiveChars(name)) {
+      return NextResponse.json({ error: 'Invalid input detected' }, { status: 400 });
     }
 
     // Turnstile CAPTCHA verification
