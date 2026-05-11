@@ -25,7 +25,7 @@ type PageProps = {
 // ─── SEO: generateStaticParams ────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return posts.map((p: RawPost) => ({ slug: p.slug }));
 }
 
 // ─── SEO: generateMetadata ────────────────────────────────────────────────────
@@ -35,7 +35,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  const post = posts.find((p) => p.slug === slug);
+  const post = posts.find((p: RawPost) => p.slug === slug);
 
   if (!post) return { title: "Post Not Found" };
 
@@ -75,7 +75,7 @@ export default async function BlogPostPage({
 }: PageProps) {
   const { slug } = await params;
 
-  const idx = posts.findIndex((p) => p.slug === slug);
+  const idx = posts.findIndex((p: RawPost) => p.slug === slug);
 
   if (idx === -1) notFound();
 

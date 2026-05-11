@@ -8,7 +8,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import galleryData from "../data/gallery.json";
-import postsData from "../data/posts.json";
 
 import { useMobile } from "../hooks/useMobile";
 
@@ -86,24 +85,33 @@ export default function GalleryPage() {
       src: normalizeImageSrc(item.src),
     }));
 
-    // posts.json
-    const postImages = (postsData as PostItem[]).map(
-      (post: PostItem, i: number) => ({
-        id: `post-${i}`,
-        category: "Photos",
-        aspect: aspects[(i + 2) % aspects.length],
-        caption: post.title || "",
-        event: "Article",
-        src: normalizeImageSrc(post.coverImage),
+    // Fetch posts.json from API
+    fetch("/api/posts")
+      .then((res) => res.json())
+      .then((postsData: PostItem[]) => {
+        const postImages = postsData.map(
+          (post: PostItem, i: number) => ({
+            id: `post-${i}`,
+            category: "Photos",
+            aspect: aspects[(i + 2) % aspects.length],
+            caption: post.title || "",
+            event: "Article",
+            src: normalizeImageSrc(post.coverImage),
+          })
+        );
+
+        setGalleryItems([
+          ...manualGallery,
+          ...postImages,
+        ]);
+        setTimeout(() => setLoaded(true), 120);
       })
-    );
-
-    setGalleryItems([
-      ...manualGallery,
-      ...postImages,
-    ]);
-
-    setTimeout(() => setLoaded(true), 120);
+      .catch((error) => {
+        console.error("Failed to fetch posts:", error);
+        // Fallback to manual gallery only if API fails
+        setGalleryItems(manualGallery);
+        setTimeout(() => setLoaded(true), 120);
+      });
   }, []);
 
   const filteredItems =
