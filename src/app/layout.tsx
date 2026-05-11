@@ -78,6 +78,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: BASE_URL,
+    languages: {
+      'en': BASE_URL,
+      'fr': `${BASE_URL}/fr`,
+      'ar': `${BASE_URL}/ar`,
+    },
   },
 };
 
@@ -100,7 +105,9 @@ const personSchema = {
     "Chairman of Anouar Association",
     "Honorary President of Union Road Association",
     "Executive President of Sahara Spirit Foundation",
-     "serial entrepreneur Mohamed Dekkak"
+    "serial entrepreneur Mohamed Dekkak",
+    "Principal Investigator of Atlas GRB Project",
+    "Lead Researcher of M30 Project"
   ],
   "hasOccupation": [
     { "@type": "Occupation", "name": "Founding Partner", "mainEntityOfPage": { "@type": "Organization", "name": "US Data Center" } },
@@ -115,7 +122,9 @@ const personSchema = {
     { "@type": "Occupation", "name": "Honorary President", "mainEntityOfPage": { "@type": "Organization", "name": "Ibn Battuta Association" } },
     { "@type": "Occupation", "name": "Chairman", "mainEntityOfPage": { "@type": "Organization", "name": "Anouar Association" } },
     { "@type": "Occupation", "name": "Honorary President", "mainEntityOfPage": { "@type": "Organization", "name": "Union Road Association" } },
-    { "@type": "Occupation", "name": "Executive President", "mainEntityOfPage": { "@type": "Organization", "name": "Sahara Spirit Foundation" } }
+    { "@type": "Occupation", "name": "Executive President", "mainEntityOfPage": { "@type": "Organization", "name": "Sahara Spirit Foundation" } },
+    { "@type": "Occupation", "name": "Principal Investigator", "mainEntityOfPage": { "@type": "Organization", "name": "Atlas GRB Project" } },
+    { "@type": "Occupation", "name": "Lead Researcher", "mainEntityOfPage": { "@type": "Organization", "name": "M30 Project" } }
   ],
   "award": [
     "Medal from King Abdullah University of Science and Technology (January 2009)",

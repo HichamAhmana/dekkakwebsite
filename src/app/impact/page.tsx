@@ -150,6 +150,7 @@ export default function ImpactPage() {
                       alt={f.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      loading="lazy"
                       style={{
                         objectFit: "cover",
                         objectPosition: (f as typeof FOUNDATIONS[0] & { imagePosition?: string }).imagePosition ?? "center center",

@@ -294,7 +294,7 @@ export default function GalleryPage() {
                   <Image
                     className="gallery-image"
                     src={item.src}
-                    alt={item.caption}
+                    alt={`${item.caption} - ${item.event}`}
                     width={800}
                     height={800}
                     loading="lazy"

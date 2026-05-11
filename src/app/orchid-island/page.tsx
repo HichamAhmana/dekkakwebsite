@@ -170,6 +170,7 @@ export default function OrchidIslandPage() {
         alt="Luxury Marrakech Real Estate"
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
+        loading="lazy"
         style={{
           objectFit: "cover"
         }}

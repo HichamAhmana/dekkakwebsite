@@ -1,10 +1,13 @@
 import { MetadataRoute } from "next";
+import postsData from "./data/posts.json";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+const posts = postsData as Array<{ slug: string; date: string }>;
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const staticPages = [
     {
       url: `${BASE_URL}/`,
       lastModified: new Date(),
@@ -72,4 +75,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
   ];
+
+  const blogPostPages = posts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPostPages] as MetadataRoute.Sitemap;
 }
