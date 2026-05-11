@@ -81,6 +81,7 @@ export default function HealthcarePage() {
                     src="/Mohamed-dekkak-healthcare.png"
                     alt="Mohamed Dekkak healthcare"
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ 
                     objectFit: "cover",
                     border: `1px solid rgba(201,168,76,0.2)`,

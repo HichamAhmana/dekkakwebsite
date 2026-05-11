@@ -13,6 +13,7 @@ const NAVIGATE = [
   { label: "Blog",          href: "/blog" },
   { label: "About",         href: "/about" },
   { label: "Orchid Island", href: "/orchid-island" },
+  { label: "Submit Opportunity", href: "/submit-opportunity" },
   { label: "Contact",       href: "/contact" },
 ];
 
@@ -28,9 +29,9 @@ const SOCIALS = [
   { label: "LinkedIn",  href: "https://www.linkedin.com/in/mohameddekkak/",                              color: "#0A66C2" },
   { label: "Instagram", href: "https://www.instagram.com/mohameddekkak/",                                color: "#E1306C" },
   { label: "X",         href: "https://x.com/MohamedDekkak1",                                           color: "var(--text-color)" },
-  { label: "Facebook",  href: "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",            color: "#1877F2" },
+  { label: "Facebook",  href: "https://web.facebook.com/MohamedDekkakOfficial",            color: "#1877F2" },
   { label: "Pinterest", href: "https://www.pinterest.com/dekkak/",                                       color: "#E60023" },
-  { label: "YouTube",   href: "https://www.youtube.com/user/AdgecoGroup",                                color: "#FF0000" },
+  { label: "YouTube",   href: "https://www.youtube.com/@MohamedDekkak1",                                color: "#FF0000" },
   { label: "Flickr",    href: "https://www.flickr.com/photos/adgeco/",                                   color: "#FF0084" },
                                                             
 ];

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useMobile } from "../hooks/useMobile";
 
 import { GOLD, GOLD_LIGHT, CREAM } from "../constants";
 
@@ -17,10 +18,17 @@ export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isMobile = useMobile();
 
   useEffect(() => {
     // Mark as loaded immediately — no setTimeout delay for faster FCP
     startTransition(() => setLoaded(true));
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion && videoRef.current) {
+      videoRef.current.pause();
+    }
 
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -58,6 +66,34 @@ export default function Hero() {
       overflow: "hidden",
       background: "radial-gradient(ellipse at 65% 40%, var(--bg-secondary) 0%, var(--bg-color) 70%)",
     }}>
+
+      {/* ── Background Video ── */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
+        {!isMobile && (
+          <video
+            ref={videoRef}
+            src="/hero-video.mp4"
+            poster="/dekkak-cinema-marrakech-festival.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        )}
+        {/* // TODO: Replace with real Mohamed Dekkak footage */}
+        {isMobile && (
+          <Image 
+            src="/dekkak-cinema-marrakech-festival.png" 
+            alt="Hero background"
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        )}
+        <div className="hero-video-overlay" style={{ position: "absolute", inset: 0 }} />
+      </div>
 
       <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
         {/* ── Interactive mouse-following gold glow ── */}
@@ -133,52 +169,6 @@ export default function Hero() {
         background: "linear-gradient(to bottom, transparent 0%, transparent 55%, var(--bg-color) 100%)",
       }} />
 
-      {/* ── Editorial Cinematic Portrait ── */}
-      <div style={{
-        position: "absolute",
-        top: 0, right: 0,
-        width: "70%", height: "100%",
-        zIndex: 0,
-        opacity: loaded ? 0.8 : 0,
-        transform: loaded ? "scale(1.03)" : "scale(1.08)",
-        transition: "opacity 3.5s ease 0.5s, transform 25s cubic-bezier(0.1,0.5,0.8,1)",
-        overflow: "hidden",
-        pointerEvents: "none",
-      }}>
-        {/* Soft edge masks to blend image into the background gracefully */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(to right, var(--bg-color) 0%, transparent 40%)",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(to top, var(--bg-color) 0%, transparent 40%)",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(to bottom, var(--bg-color) 0%, transparent 15%)",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "radial-gradient(ellipse at center, transparent 0%, rgba(201,168,76,0.15) 100%)",
-          mixBlendMode: "color",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "var(--bg-color)", opacity: 0.45,
-        }} />
-
-        <Image
-          src="/dekkak-cinema-marrakech-festival.png"
-          alt="Mohamed Dekkak at Marrakech Festival"
-          fill
-          sizes="100vw"
-          style={{ objectFit: "cover", objectPosition: "60% center" }}
-          priority
-          fetchPriority="high"
-          quality={85}
-        />
-      </div>
 
       {/* ── Main content ── */}
       <div style={{

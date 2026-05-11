@@ -62,9 +62,9 @@ export default function BlogSection() {
   const isMobile = useMobile();
 
   useEffect(() => {
-    import("../data/posts.json")
-      .then((mod) => {
-        const raw: RawPost[] = mod.default ?? mod;
+    fetch("/api/posts")
+      .then((res) => res.json())
+      .then((raw: RawPost[]) => {
         const sorted = [...raw]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, 3); // only the 3 most recent

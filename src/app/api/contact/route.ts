@@ -4,8 +4,8 @@ import { Resend } from 'resend';
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-// TODO: Replace with Upstash Redis or similar Edge-compatible KV store for production rate-limiting.
-// WARNING: In-memory rate limiting is ineffective in serverless environments as state resets frequently.
+// Note: In-memory rate limiting resets on cold boots.
+// Consider Upstash Redis for production-grade limiting.
 const fallbackRateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 async function checkRateLimit(ip: string): Promise<boolean> {
