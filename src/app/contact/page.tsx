@@ -185,10 +185,21 @@ export default function ContactPage() {
             <p style={{
               fontFamily: "var(--font-dm-sans), sans-serif",
               fontSize: "16px", fontWeight: 300, lineHeight: 1.8,
-              color: CREAM, opacity: 0.7, margin: "0 0 60px"
+              color: CREAM, opacity: 0.7, margin: "0 0 40px"
             }}>
               Reach out regarding business alliances, philanthropic initiatives, or press inquiries.
             </p>
+
+            {/* Submit Opportunity CTA */}
+            <div style={{ marginBottom: "48px" }}>
+              <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: GOLD, marginBottom: "12px" }}>Submit an Opportunity</div>
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: CREAM, opacity: 0.7, lineHeight: 1.6, marginBottom: "16px" }}>
+                Present your investment opportunity or partnership proposal directly to our office.
+              </p>
+              <a href="/submit-opportunity" style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "transparent", border: `1px solid ${GOLD}`, padding: "12px 24px", color: GOLD, textDecoration: "none", fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", transition: "all 0.3s" }} onMouseEnter={(e) => { e.currentTarget.style.background = GOLD; e.currentTarget.style.color = "#000"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = GOLD; }}>
+                Submit Opportunity
+              </a>
+            </div>
 
             {/* WhatsApp */}
             <div style={{ marginBottom: "48px" }}>

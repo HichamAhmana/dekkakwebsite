@@ -254,31 +254,6 @@ export default function GalleryPage() {
           }}
         >
           {filteredItems.map((item, i) => {
-            let pb = "100%";
-
-            if (
-              item.aspect === "aspect-[16/9]"
-            ) {
-              pb = "56.25%";
-            }
-
-            if (
-              item.aspect === "aspect-[4/3]"
-            ) {
-              pb = "75%";
-            }
-
-            if (
-              item.aspect === "aspect-[4/5]"
-            ) {
-              pb = "125%";
-            }
-
-            if (
-              item.aspect === "aspect-[3/2]"
-            ) {
-              pb = "66.66%";
-            }
 
             return (
               <div
@@ -305,7 +280,6 @@ export default function GalleryPage() {
                   className="gallery-card"
                   style={{
                     width: "100%",
-                    paddingBottom: pb,
                     background:
                       "var(--bg-secondary)",
                     border:
@@ -313,6 +287,7 @@ export default function GalleryPage() {
                     position: "relative",
                     overflow: "hidden",
                     borderRadius: "6px",
+                    display: "flex", // ensures it wraps the image tightly
                   }}
                 >
                   {/* IMAGE */}
@@ -320,13 +295,16 @@ export default function GalleryPage() {
                     className="gallery-image"
                     src={item.src}
                     alt={item.caption}
-                    fill
+                    width={800}
+                    height={800}
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw,
                            (max-width: 1200px) 50vw,
                            33vw"
                     style={{
-                      objectFit: "cover",
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "cover", // objectFit doesn't matter much when height is auto, it acts like a normal image
                       filter:
                         "brightness(0.92)",
                       transition:

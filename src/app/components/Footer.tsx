@@ -13,6 +13,7 @@ const NAVIGATE = [
   { label: "Blog",          href: "/blog" },
   { label: "About",         href: "/about" },
   { label: "Orchid Island", href: "/orchid-island" },
+  { label: "Submit Opportunity", href: "/submit-opportunity" },
   { label: "Contact",       href: "/contact" },
 ];
 

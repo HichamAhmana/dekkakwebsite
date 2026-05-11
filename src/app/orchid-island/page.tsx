@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import { useMobile } from "../hooks/useMobile";
 import Footer from '../components/Footer';
@@ -164,12 +165,12 @@ export default function OrchidIslandPage() {
     }}>
       
       {/* TODO: Replace this image URL whenever you want */}
-      <img
+      <Image
         src="/dekkak-cinema-marrakech-festival.png"
         alt="Luxury Marrakech Real Estate"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
         style={{
-          width: "100%",
-          height: "100%",
           objectFit: "cover"
         }}
       />

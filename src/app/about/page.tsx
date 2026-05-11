@@ -193,6 +193,120 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Global Presence (As Seen In) */}
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: "var(--bg-color)" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          
+          {/* Header */}
+          <div style={{ 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "flex-end", 
+            marginBottom: "60px", 
+            borderBottom: `1px solid rgba(201,168,76,0.3)`, 
+            paddingBottom: "24px",
+            opacity: loaded ? 1 : 0, 
+            transition: "opacity 1s ease 0.2s"
+          }}>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: isMobile ? "32px" : "40px", 
+              fontWeight: 300, 
+              color: CREAM,
+              margin: 0,
+            }}>
+              Global Presence
+            </h2>
+            <span style={{ 
+              fontFamily: "var(--font-dm-sans), sans-serif", 
+              fontSize: "10px", 
+              fontWeight: 600,
+              letterSpacing: "0.2em", 
+              textTransform: "uppercase", 
+              color: GOLD,
+              marginBottom: "6px"
+            }}>
+              Press & Partnerships
+            </span>
+          </div>
+
+          {/* Clean Index List */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {[
+              { name: "SBCC SUMMIT", role: "Speaker & Partner", location: "Global" },
+              { name: "IBN BATTUTA FESTIVAL", role: "Honorary President", location: "Global" },
+              { name: "CARLAC", role: "Founding Member", location: "International" },
+              { name: "GITEX", role: "Investor / Participant", location: "UAE" },
+              { name: "ARAB PEACE CORPS", role: "Chairman", location: "Global" },
+              { name: "AMCHAM ABU DHABI", role: "Member", location: "UAE" },
+              { name: "SAHARA SPIRIT", role: "Executive President", location: "International" },
+              { name: "ADGECO GROUP", role: "Chairman & Founder", location: "UAE" }
+            ].map((org, i) => (
+              <div key={i} className="presence-row" style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "2fr 2fr 1fr",
+                alignItems: "center",
+                padding: "24px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                transition: "all 0.4s ease",
+                opacity: loaded ? 1 : 0,
+                transform: loaded ? "translateY(0)" : "translateY(10px)",
+                transitionDelay: `${0.3 + (i * 0.05)}s`
+              }}>
+                <div style={{
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: isMobile ? "20px" : "24px",
+                  color: CREAM,
+                  letterSpacing: "0.05em",
+                  transition: "color 0.4s ease",
+                }} className="pr-name">
+                  {org.name}
+                </div>
+                <div style={{
+                  fontFamily: "var(--font-dm-sans), sans-serif",
+                  fontSize: "12px",
+                  color: "var(--text-color)",
+                  letterSpacing: "0.1em",
+                  opacity: 0.7,
+                  marginTop: isMobile ? "8px" : "0",
+                  textTransform: "uppercase"
+                }} className="pr-role">
+                  {org.role}
+                </div>
+                {!isMobile && (
+                  <div style={{
+                    fontFamily: "var(--font-dm-sans), sans-serif",
+                    fontSize: "11px",
+                    color: GOLD,
+                    letterSpacing: "0.15em",
+                    textAlign: "right",
+                    opacity: 0.8,
+                    textTransform: "uppercase"
+                  }} className="pr-loc">
+                    {org.location}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <style dangerouslySetInnerHTML={{__html: `
+            .presence-row:hover {
+              border-bottom-color: rgba(201,168,76,0.6) !important;
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+              background: rgba(255,255,255,0.01);
+            }
+            .presence-row:hover .pr-name {
+              color: #C9A84C !important;
+            }
+            .presence-row:hover .pr-role, .presence-row:hover .pr-loc {
+              opacity: 1 !important;
+            }
+          `}} />
+        </div>
+      </section>
+
       {/* Awards & Memberships Section */}
       <section style={{ padding: isMobile ? "50px 20px 60px" : "80px 40px 120px", background: "var(--bg-color)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(400px, 1fr))", gap: isMobile ? "48px" : "80px" }}>
