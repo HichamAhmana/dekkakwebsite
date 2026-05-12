@@ -21,26 +21,36 @@ function ThemeToggle() {
       setIsLight(true);
       document.documentElement.setAttribute("data-theme", "light");
     }
+
+    // Stay in sync with other ThemeToggle instances on the page
+    const onThemeChange = (e: Event) => {
+      setIsLight((e as CustomEvent<{ isLight: boolean }>).detail.isLight);
+    };
+    window.addEventListener("theme-change", onThemeChange);
+    return () => window.removeEventListener("theme-change", onThemeChange);
   }, []);
 
   const toggle = () => {
     const html = document.documentElement;
+    const next = !isLight;
 
-    if (isLight) {
-      html.removeAttribute("data-theme");
-      void html.getBoundingClientRect();
-      window.localStorage.setItem("theme", "dark");
-      setIsLight(false);
-    } else {
+    if (next) {
       html.setAttribute("data-theme", "light");
-      void html.getBoundingClientRect();
       window.localStorage.setItem("theme", "light");
-      setIsLight(true);
+    } else {
+      html.removeAttribute("data-theme");
+      window.localStorage.setItem("theme", "dark");
     }
+
+    // Broadcast to all other ThemeToggle instances
+    window.dispatchEvent(
+      new CustomEvent("theme-change", { detail: { isLight: next } })
+    );
+    setIsLight(next);
   };
 
   if (!mounted) {
-    return <div style={{ width: 42, height: 42 }} />;
+    return <div style={{ width: 42, height: 42, flexShrink: 0 }} />;
   }
 
   return (
@@ -51,45 +61,36 @@ function ThemeToggle() {
         background: "none",
         border: "none",
         cursor: "pointer",
-
         width: "42px",
         height: "42px",
         minWidth: "42px",
-        minHeight: "42px",
-
         padding: 0,
-
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-
         color: GOLD,
         opacity: 0.8,
-
-        transition: "color 0.3s ease, opacity 0.3s ease",
-
+        transition: "opacity 0.3s ease",
         flexShrink: 0,
-        position: "relative",
-        overflow: "hidden",
       }}
       onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
       onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
     >
-      {isLight ? (
+      <span style={{ position: "relative", width: 18, height: 18, display: "block", flexShrink: 0 }}>
         <svg
-          key="sun"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            display: "block",
-            flexShrink: 0,
-          }}
+          width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="1.5"
+          strokeLinecap="round" strokeLinejoin="round"
+          style={{ position: "absolute", top: 0, left: 0, display: isLight ? "none" : "block" }}
+        >
+          <path d="M17.293 13.293A8 8 0 0 1 6.707 2.707a8.001 8.001 0 1 0 10.586 10.586z" />
+        </svg>
+
+        <svg
+          width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="1.5"
+          strokeLinecap="round" strokeLinejoin="round"
+          style={{ position: "absolute", top: 0, left: 0, display: isLight ? "block" : "none" }}
         >
           <circle cx="12" cy="12" r="5" />
           <line x1="12" y1="1" x2="12" y2="3" />
@@ -101,28 +102,11 @@ function ThemeToggle() {
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
-      ) : (
-        <svg
-          key="moon"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            display: "block",
-            flexShrink: 0,
-          }}
-        >
-          <path d="M17.293 13.293A8 8 0 0 1 6.707 2.707a8.001 8.001 0 1 0 10.586 10.586z" />
-        </svg>
-      )}
+      </span>
     </button>
   );
 }
+
 
 const NAV_LINKS = [
   { label: "BUSINESS", href: "/business" },
@@ -413,8 +397,6 @@ export default function Navbar() {
             gap: "16px",
           }}
         >
-          <ThemeToggle />
-
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
@@ -423,34 +405,14 @@ export default function Navbar() {
               border: "none",
               cursor: "pointer",
               padding: "8px",
-
               display: "flex",
               flexDirection: "column",
               gap: "5px",
             }}
           >
-            <span
-              style={{
-                ...barBase,
-                transform: menuOpen
-                  ? "translateY(6px) rotate(45deg)"
-                  : "none",
-              }}
-            />
-            <span
-              style={{
-                ...barBase,
-                opacity: menuOpen ? 0 : 1,
-              }}
-            />
-            <span
-              style={{
-                ...barBase,
-                transform: menuOpen
-                  ? "translateY(-6px) rotate(-45deg)"
-                  : "none",
-              }}
-            />
+            <span style={{ ...barBase, transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }} />
+            <span style={{ ...barBase, opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ ...barBase, transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }} />
           </button>
         </div>
 

@@ -45,7 +45,7 @@ const SOCIALS = [
   {
     name: "X",
     label: "X (Twitter)",
-    color: "#000000",
+    color: "#00bfffff",
     href: "https://x.com/MohamedDekkak1",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
