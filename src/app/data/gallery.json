@@ -1,5 +1,11 @@
 [ 
   {
+    "src": "./His-Majesty-King-of-spain.png",
+    "caption": "His Majesty King of Spain Juan Carlos with Mohamed Dekkak, Chairman and Founder of Adgeco Group, Abu dhabi UAE.",
+    "category": "Photos",
+    "event": "Foundation Visit"
+  },
+  {
     "src": "./impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
     "caption": "Mohamed Dekkak Speech",
     "category": "Impact",
@@ -10,6 +16,25 @@
     "caption": "New Arab Foundation Initiative",
     "category": "Impact",
     "event": "Humanitarian Partnership"
+  },
+  
+  {
+    "src": "./His-Excellency-Sheikh-Ahmad-Al-Khalifa.png",
+    "caption": "His Excellency Sheikh Ahmad Al-Khalifa with Mohamed Dekkak, Chairman and Founder of Adgeco Group, Abu dhabi UAE.",
+    "category": "Photos",
+    "event": "Foundation Visit"
+  },
+  {
+    "src": "./His-Excellency-Leonel-Fernandez-President-of-Republic-Of-Dominica.png",
+    "caption": "His Excellency Leonel Fernandez, President of the Republic of Dominica with Mohamed Dekkak, Chairman and Founder of Adgeco Group, Abu dhabi UAE.",
+    "category": "Photos",
+    "event": "Foundation Visit"
+  },
+  {
+    "src": "./His-Excellency-Bruno-S-Beijer-Ambassador-of-Sweden-to-UAE.png",
+    "caption": "His Excellency Bruno S. Beijer, Ambassador of Sweden to UAE with Mohamed Dekkak, Chairman and Founder of Adgeco Group, Abu dhabi UAE.",
+    "category": "Photos",
+    "event": "Foundation Visit"
   },
   {
     "src": "./impact/Mohamed-dekkak-sahara-foundation.png",
