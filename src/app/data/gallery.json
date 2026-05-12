@@ -1,10 +1,4 @@
-[
-  {
-    "src": "./Mohamed-dekkak-adgeco-group.png",
-    "caption": "Royal Conference",
-    "category": "Photos",
-    "event": "Casablanca Summit"
-  },
+[ 
   {
     "src": "./impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
     "caption": "Mohamed Dekkak Speech",
@@ -22,18 +16,6 @@
     "caption": "Sahara Foundation Program",
     "category": "Impact",
     "event": "Community Outreach"
-  },
-  {
-    "src": "./dekkak-cinema-marrakech-festival.png",
-    "caption": "Marrakech Cinema Festival",
-    "category": "Photos",
-    "event": "Cultural Celebration"
-  },
-    {
-    "src": "./mohamed-dekkak-anouar-association.png",
-    "caption": "Anouar Association Visit",
-    "category": "Impact",
-    "event": "Charity Engagement"
   },
   {
     "src": "./Mohamed-dekkak-healthcare.png",
