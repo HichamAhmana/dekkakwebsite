@@ -29,19 +29,7 @@
     "category": "Photos",
     "event": "Cultural Celebration"
   },
-  {
-    "src": "./mohamed-dekkak-adgeco-group.png",
-    "caption": "ADGECO Leadership Event",
-    "category": "Photos",
-    "event": "Business Forum"
-  },
-  {
-    "src": "./mohamed-dekkak-amcham.png",
-    "caption": "AMCHAM Business Gathering",
-    "category": "Photos",
-    "event": "Corporate Networking"
-  },
-  {
+    {
     "src": "./mohamed-dekkak-anouar-association.png",
     "caption": "Anouar Association Visit",
     "category": "Impact",

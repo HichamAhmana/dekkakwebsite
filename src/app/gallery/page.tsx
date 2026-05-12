@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -24,6 +23,7 @@ type GalleryJsonItem = {
 type PostItem = {
   title?: string;
   coverImage?: string;
+  showInGallery?: boolean;
 };
 
 type GalleryItem = {
@@ -73,7 +73,7 @@ export default function GalleryPage() {
       "aspect-[3/2]",
     ];
 
-    // gallery.json
+    // MANUAL GALLERY ITEMS
     const manualGallery = (
       galleryData as GalleryJsonItem[]
     ).map((item, i: number) => ({
@@ -85,18 +85,29 @@ export default function GalleryPage() {
       src: normalizeImageSrc(item.src),
     }));
 
-    // Fetch posts.json from API
+    // FETCH POSTS
     fetch("/api/posts")
       .then((res) => res.json())
       .then((postsData: PostItem[]) => {
-        const postImages = postsData.map(
-          (post: PostItem, i: number) => ({
+
+        // ONLY POSTS WITH showInGallery !== false
+        const filteredPosts = postsData.filter(
+          (post) =>
+            post.coverImage &&
+            post.showInGallery !== false
+        );
+
+        const postImages = filteredPosts.map(
+          (post, i: number) => ({
             id: `post-${i}`,
             category: "Photos",
-            aspect: aspects[(i + 2) % aspects.length],
+            aspect:
+              aspects[(i + 2) % aspects.length],
             caption: post.title || "",
             event: "Article",
-            src: normalizeImageSrc(post.coverImage),
+            src: normalizeImageSrc(
+              post.coverImage
+            ),
           })
         );
 
@@ -104,12 +115,18 @@ export default function GalleryPage() {
           ...manualGallery,
           ...postImages,
         ]);
+
         setTimeout(() => setLoaded(true), 120);
       })
       .catch((error) => {
-        console.error("Failed to fetch posts:", error);
-        // Fallback to manual gallery only if API fails
+        console.error(
+          "Failed to fetch posts:",
+          error
+        );
+
+        // FALLBACK TO MANUAL GALLERY ONLY
         setGalleryItems(manualGallery);
+
         setTimeout(() => setLoaded(true), 120);
       });
   }, []);
@@ -118,7 +135,8 @@ export default function GalleryPage() {
     activeCategory === "All"
       ? galleryItems
       : galleryItems.filter(
-          (item) => item.category === activeCategory
+          (item) =>
+            item.category === activeCategory
         );
 
   return (
@@ -157,7 +175,8 @@ export default function GalleryPage() {
             style={{
               fontFamily:
                 "var(--font-cormorant), serif",
-              fontSize: "clamp(48px, 8vw, 110px)",
+              fontSize:
+                "clamp(48px, 8vw, 110px)",
               fontWeight: 300,
               color: CREAM,
               margin: "0 0 24px",
@@ -262,7 +281,6 @@ export default function GalleryPage() {
           }}
         >
           {filteredItems.map((item, i) => {
-
             return (
               <div
                 key={item.id}
@@ -285,7 +303,7 @@ export default function GalleryPage() {
                 }}
               >
                 <div
-                  className="gallery-card"
+  className="gallery-card group"
                   style={{
                     width: "100%",
                     background:
@@ -294,8 +312,8 @@ export default function GalleryPage() {
                       "1px solid rgba(255,255,255,0.05)",
                     position: "relative",
                     overflow: "hidden",
-                    borderRadius: "6px",
-                    display: "flex", // ensures it wraps the image tightly
+                    borderRadius: "8px",
+                    display: "flex",
                   }}
                 >
                   {/* IMAGE */}
@@ -312,11 +330,11 @@ export default function GalleryPage() {
                     style={{
                       width: "100%",
                       height: "auto",
-                      objectFit: "cover", // objectFit doesn't matter much when height is auto, it acts like a normal image
+                      objectFit: "cover",
                       filter:
                         "brightness(0.92)",
                       transition:
-                        "transform 0.6s ease",
+                        "transform 0.8s cubic-bezier(0.22,1,0.36,1)",
                     }}
                     onError={(e) => {
                       const target =
@@ -404,53 +422,67 @@ export default function GalleryPage() {
                       position: "absolute",
                       inset: 0,
                       background:
-                        "linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.2))",
+                        "linear-gradient(to top, rgba(0,0,0,0.96), rgba(0,0,0,0.15))",
                       display: "flex",
                       flexDirection:
                         "column",
                       justifyContent:
                         "flex-end",
-                      padding: "28px",
+                      padding: "32px",
                       opacity: 0,
-                      pointerEvents: "none",
+                      pointerEvents: "auto",
                       transition:
-                        "opacity 0.35s ease",
+                        "opacity 0.45s ease",
                     }}
                   >
                     <span
+                      className="gallery-category"
                       style={{
                         fontFamily:
                           "var(--font-dm-sans)",
                         fontSize: "10px",
                         fontWeight: 600,
                         letterSpacing:
-                          "0.2em",
+                          "0.25em",
                         textTransform:
                           "uppercase",
                         color: GOLD,
                         marginBottom:
-                          "12px",
+                          "14px",
+                        transform:
+                          "translateY(18px)",
+                        opacity: 0,
+                        transition:
+                          "all 0.5s cubic-bezier(0.22,1,0.36,1)",
                       }}
                     >
                       {item.category}
                     </span>
 
                     <h3
+                      className="gallery-title"
                       style={{
                         fontFamily:
                           "var(--font-cormorant), serif",
-                        fontSize: "32px",
+                        fontSize:
+                          "clamp(30px, 3vw, 42px)",
                         fontWeight: 300,
                         color: CREAM,
                         margin:
                           "0 0 12px",
-                        lineHeight: 1.1,
+                        lineHeight: 1,
+                        transform:
+                          "translateY(40px)",
+                        opacity: 0,
+                        transition:
+                          "all 0.7s cubic-bezier(0.22,1,0.36,1)",
                       }}
                     >
                       {item.caption}
                     </h3>
 
                     <p
+                      className="gallery-event"
                       style={{
                         color:
                           "rgba(255,255,255,0.72)",
@@ -459,6 +491,11 @@ export default function GalleryPage() {
                         margin: 0,
                         fontFamily:
                           "var(--font-dm-sans)",
+                        transform:
+                          "translateY(20px)",
+                        opacity: 0,
+                        transition:
+                          "all 0.8s cubic-bezier(0.22,1,0.36,1)",
                       }}
                     >
                       {item.event}
@@ -470,20 +507,91 @@ export default function GalleryPage() {
           })}
         </div>
 
-        {/* FIXED HOVER */}
-        <style jsx>{`
-          .gallery-card:hover .gallery-image {
-            transform: scale(1.06);
-          }
+        {/* HOVER EFFECTS */}
+       <style jsx>{`
+  .gallery-card {
+    overflow: hidden;
+  }
 
-          .gallery-card:hover .gallery-overlay {
-            opacity: 1;
-          }
-        `}</style>
+  .gallery-image {
+    transition:
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.8s ease;
+  }
+
+  .gallery-overlay {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .gallery-title,
+  .gallery-event,
+  .gallery-category {
+    opacity: 0;
+  }
+
+  .gallery-title {
+    transform: translateY(40px);
+    transition:
+      all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-event {
+    transform: translateY(20px);
+    transition:
+      all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-category {
+    transform: translateY(18px);
+    transition:
+      all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-card:hover .gallery-image {
+    transform: scale(1.08);
+    filter: brightness(0.75);
+  }
+
+  .gallery-card:hover .gallery-overlay {
+    opacity: 1;
+  }
+
+  .gallery-card:hover .gallery-title,
+  .gallery-card:hover .gallery-event,
+  .gallery-card:hover .gallery-category {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gallery-event {
+    transition-delay: 0.08s;
+  }
+
+  .gallery-category {
+    transition-delay: 0.04s;
+  }
+
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 24px;
+  }
+
+  @media (max-width: 1100px) {
+    .masonry-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .masonry-grid {
+      column-count: 1;
+    }
+  }
+`}</style>
       </section>
 
       <Footer />
     </main>
   );
 }
-
