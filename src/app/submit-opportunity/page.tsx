@@ -303,7 +303,7 @@ export default function SubmitOpportunityPage() {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", marginTop: "10px" }}>
-                  <input type="checkbox" id="confidentiality" name="confidentiality" required style={{ marginTop: "4px", accentColor: GOLD }} />
+                  <input type="checkbox" id="confidentiality" name="confidentiality" required style={{ marginTop: "4px", accentColor: GOLD, cursor: "pointer" }} />
                   <label htmlFor="confidentiality" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: CREAM, opacity: 0.8, lineHeight: 1.5, cursor: "pointer" }}>
                     I confirm this submission is confidential and agree to the terms of engagement.
                   </label>
