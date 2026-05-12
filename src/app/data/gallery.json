@@ -6,11 +6,18 @@
     "event": "Foundation Visit"
   },
   {
+    "src": "./His-Excellency-Abdelkader-Zaoui-Ambassador-Kingdom-of-Morocco.png",
+    "caption": "His Majesty King of Spain Juan Carlos with Mohamed Dekkak, Chairman and Founder of Adgeco Group, Abu dhabi UAE.",
+    "category": "Photos",
+    "event": "Foundation Visit"
+  },
+  {
     "src": "./impact/Mohamed-dekkak-Ibn-Battuta-Association.png",
     "caption": "Mohamed Dekkak Speech",
     "category": "Impact",
     "event": "Foundation Visit"
   },
+  
   {
     "src": "./impact/Mohamed-dekkak-New-arab-foundation.png",
     "caption": "New Arab Foundation Initiative",
