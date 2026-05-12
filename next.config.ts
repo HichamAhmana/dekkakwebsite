@@ -1,29 +1,13 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 
-// Node.js 22+ exposes a built-in `localStorage` global when Next.js passes
-// `--localstorage-file` (even without a valid path). The resulting object has
-// `getItem`/`setItem` missing or broken, crashing SSR. We replace it with a
-// safe no-op so server-side code never throws.
-if (typeof globalThis.localStorage !== "undefined") {
-  const _store: Record<string, string> = {};
- 
-  globalThis.localStorage = {
-    getItem: (key: string) => _store[key] ?? null,
-    setItem: (key: string, value: string) => { _store[key] = value; },
-    removeItem: (key: string) => { delete _store[key]; },
-    clear: () => { Object.keys(_store).forEach((k) => delete _store[k]); },
-    key: (index: number) => Object.keys(_store)[index] ?? null,
-    get length() { return Object.keys(_store).length; },
-  };
-}
-
 const nextConfig: NextConfig = {
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: [
+          // Security headers
           {
             key: "X-Frame-Options",
             value: "DENY",
@@ -38,20 +22,49 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+            value:
+              "camera=(), microphone=(), geolocation=(), browsing-topics=()",
           },
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
           },
+
+          // ✅ FIXED CSP (Chatbase + Turnstile + Google + Resend)
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.chatbase.co https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://js.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com https://www.google-analytics.com; frame-src 'self' https://challenges.cloudflare.com;",
+            value: `
+              default-src 'self';
+
+              script-src 'self' 'unsafe-inline' 'unsafe-eval'
+                https://www.chatbase.co
+                https://challenges.cloudflare.com
+                https://www.googletagmanager.com
+                https://www.google-analytics.com
+                https://js.cloudflare.com;
+
+              style-src 'self' 'unsafe-inline';
+
+              img-src 'self' data: https:;
+
+              font-src 'self' data:;
+
+              connect-src 'self'
+                https://www.chatbase.co
+                https://api.resend.com
+                https://challenges.cloudflare.com
+                https://www.google-analytics.com;
+
+              frame-src 'self'
+                https://www.chatbase.co
+                https://challenges.cloudflare.com;
+            `.replace(/\n/g, " "),
           },
         ],
       },
     ];
   },
+
   images: {
     remotePatterns: [
       {
@@ -67,4 +80,3 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 export default withBundleAnalyzer(nextConfig);
-

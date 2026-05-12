@@ -183,12 +183,12 @@ const localBusinessSchema = {
     }
   ],
   "sameAs": [
-    "https://www.linkedin.com/in/mohameddekkak/",
-    "https://www.instagram.com/mohameddekkak/",
-    "https://x.com/MohamedDekkak1",
-    "https://web.facebook.com/MohamedDekkakOfficial/?_rdc=1&_rdr#",
-    "https://www.pinterest.com/dekkak/",
-    "https://www.youtube.com/user/AdgecoGroup"
+    "https://www.linkedin.com/in/mohameddekkak/",                             
+    "https://x.com/MohamedDekkak1",                                         
+    "https://web.facebook.com/MohamedDekkakOfficial",           
+    "https://www.pinterest.com/dekkak/",                                       
+    "https://www.youtube.com/@MohamedDekkak1",                              
+    "https://www.flickr.com/photos/adgeco/",
   ]
 };
 
@@ -222,13 +222,38 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         <CookieBanner />
-        <Script
-          id="chatbase-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="f1gn0pAoTs_SS_O9euCWl";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();`,
-          }}
-        />
+       {/* Chatbase */}
+<Script
+  id="chatbase-bootstrap"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `
+      (function () {
+        if (window.chatbase) return;
+
+        window.chatbase = function () {
+          (window.chatbase.q = window.chatbase.q || []).push(arguments);
+        };
+
+        window.chatbase.q = [];
+
+        const load = function () {
+          const script = document.createElement("script");
+          script.src = "https://www.chatbase.co/embed.min.js";
+          script.id = "f1gn0pAoTs_SS_O9euCWl";
+          script.async = true;
+          document.body.appendChild(script);
+        };
+
+        if (document.readyState === "complete") {
+          load();
+        } else {
+          window.addEventListener("load", load);
+        }
+      })();
+    `,
+  }}
+/>
       </body>
     </html>
   );
