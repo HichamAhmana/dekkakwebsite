@@ -81,6 +81,7 @@ function GalleryCard({
         width={800}
         height={600}
         loading="lazy"
+        quality={60}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         style={{
           width: "100%",
@@ -382,6 +383,7 @@ export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   const isMobile = useMobile();
 
@@ -522,16 +524,45 @@ export default function GalleryPage() {
       {/* GALLERY */}
       <section style={{ padding: isMobile ? "0 16px 80px" : "0 40px 120px" }}>
         <div className="masonry-grid" style={{ maxWidth: 1400, margin: "0 auto" }}>
-          {filteredItems.map((item, i) => (
+          {filteredItems.slice(0, visibleCount).map((item, i) => (
             <GalleryCard
               key={item.id}
               item={item}
               onClick={() => openLightbox(i)}
               loaded={loaded}
-              delay={0.4 + (i % 4) * 0.1}
+              delay={0.1 + (i % 4) * 0.1}
             />
           ))}
         </div>
+        
+        {visibleCount < filteredItems.length && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "48px" }}>
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 12)}
+              style={{
+                background: "transparent",
+                border: `1px solid ${GOLD}`,
+                color: GOLD,
+                padding: "14px 40px",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "12px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                borderRadius: "4px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(201,168,76,0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </section>
 
       <Footer />
