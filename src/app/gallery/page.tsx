@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CTABanner from "../components/CTABanner";
 import galleryData from "../data/gallery.json";
 import { useMobile } from "../hooks/useMobile";
 
@@ -583,6 +584,10 @@ export default function GalleryPage() {
         )}
       </section>
 
+      <CTABanner
+        heading="Like What You See?"
+        subheading="Explore collaboration opportunities or get in touch with Mohamed Dekkak's office directly."
+      />
       <Footer />
 
       {lightboxIndex !== null && (

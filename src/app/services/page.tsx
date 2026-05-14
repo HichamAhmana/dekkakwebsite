@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
-
+import CTABanner from "../components/CTABanner";
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
 
@@ -164,7 +164,7 @@ export default function ServicesPage() {
 
         </div>
       </section>
-
+      <CTABanner />
       <Footer />
     </main>
   );

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CTABanner from "../components/CTABanner";
 import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
@@ -391,6 +392,10 @@ export default function AboutPageClient() {
         </div>
       </section>
 
+      <CTABanner
+        heading="Connect With Mohamed Dekkak"
+        subheading="Whether you are exploring a joint venture, a philanthropic initiative, or a business introduction — reach out directly."
+      />
       <Footer />
     </main>
   );

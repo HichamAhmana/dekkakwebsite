@@ -2,8 +2,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useMobile } from "../hooks/useMobile";
 
 type RawPost = {
@@ -78,13 +76,11 @@ export default function BlogSection() {
   const secondary = posts.slice(1);
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
-      <Navbar />
+    <section style={{ background: "var(--bg-color)", overflowX: "hidden" }}>
 
-      {/* ── Hero ── */}
       <header
         style={{
-          padding: isMobile ? "120px 20px 48px" : "180px 60px 80px",
+          padding: isMobile ? "60px 20px 48px" : "80px 60px 80px",
           maxWidth: "1200px",
           margin: "0 auto",
           opacity: loaded ? 1 : 0,
@@ -275,8 +271,7 @@ export default function BlogSection() {
         </Link>
       </div>
 
-      <Footer />
-    </main>
+    </section>
   );
 }
 

@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CTABanner from "../components/CTABanner";
 import BlogGridClient, { BlogPost } from "../components/BlogGridClient";
 import postsData from "../data/posts.json";
 
@@ -99,6 +100,10 @@ export default function BlogPage() {
     <main style={{ minHeight: "100vh", background: "var(--bg-color)", overflowX: "hidden" }}>
       <Navbar />
       <BlogGridClient initialPosts={formattedPosts} />
+      <CTABanner
+        heading="Have a Story to Share?"
+        subheading="Pitch a collaboration, event, or initiative to be featured. Mohamed Dekkak is always open to meaningful conversations."
+      />
       <Footer />
     </main>
   );

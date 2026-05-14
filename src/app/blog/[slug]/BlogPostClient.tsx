@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import { useMobile } from "../../hooks/useMobile";
+import SocialShare from "../../components/SocialShare";
+import CTABanner from "../../components/CTABanner";
 
 const GOLD = "#C9A84C";
 const CREAM = "var(--text-color)";
@@ -314,6 +315,13 @@ export default function BlogPostClient({
           className="post-content"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+
+        {/* ── Social Sharing ── */}
+        <SocialShare
+          url={post.href}
+          title={post.title}
+          description={post.excerpt}
+        />
       </article>
 
       <section
@@ -403,8 +411,13 @@ export default function BlogPostClient({
         )}
       </section>
 
+      <CTABanner
+        heading="Enjoyed This Article?"
+        subheading="Explore Mohamed Dekkak's wider work, or reach out to discuss a project, partnership, or opportunity."
+      />
+
       <div style={{ padding: "0 40px" }}>
-        <Footer />
+        
       </div>
     </main>
   );

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CTABanner from "../components/CTABanner";
 import { useMobile } from "../hooks/useMobile";
 
 const GOLD = "#C9A84C";
@@ -745,6 +746,10 @@ export default function BusinessPageClient() {
         </div>
       </section>
 
+      <CTABanner
+        heading="Interested in a Partnership?"
+        subheading="Explore joint ventures, investment opportunities, or strategic alliances across Adgeco Group and the wider portfolio."
+      />
       <Footer />
     </main>
   );

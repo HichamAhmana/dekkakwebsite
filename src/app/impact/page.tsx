@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CTABanner from "../components/CTABanner";
 import { useMobile } from "../hooks/useMobile";
 
 
@@ -186,6 +187,10 @@ export default function ImpactPage() {
         </div>
       </section>
 
+      <CTABanner
+        heading="Support the Mission"
+        subheading="Partner with the foundations, sponsor a program, or simply get in touch to learn how you can contribute to meaningful impact."
+      />
       <Footer />
     </main>
   );

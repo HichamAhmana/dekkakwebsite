@@ -4,9 +4,11 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ClientSections from "./components/ClientSections";
-// Quote and Blog dynamically imported — splits them into separate JS chunks
+
+// Dynamically imported — splits into separate JS chunks, avoids chunk-loading race
 const Quote = dynamic(() => import("./components/Quote"));
 const Blog = dynamic(() => import("./components/Blog"));
+const CTABanner = dynamic(() => import("./components/CTABanner"));
 
 export const metadata: Metadata = {
   title: "Mohamed Dekkak | Investor & Philanthropist",
@@ -38,6 +40,7 @@ export default function Home() {
       <ClientSections />
       <Quote />
       <Blog />
+      <CTABanner />
       <Footer />
     </main>
   );
