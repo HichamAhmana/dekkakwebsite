@@ -194,14 +194,15 @@ export default function Hero() {
               fontSize: "clamp(28px, 4vw, 56px)",
               fontWeight: 300,
               fontStyle: "italic",
-              color: CREAM,
-              opacity: 0.55,
-              letterSpacing: "0.35em",
               textTransform: "uppercase",
-              transform: "translateY(100%)",
-              animation: "revealUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards",
             }}>
-              Mohamed
+              <span style={{
+                display: "block",
+                transform: "translateY(100%)",
+                animation: "revealUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards",
+              }}>
+                Mohamed
+              </span>
             </div>
           </div>
 
