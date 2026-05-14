@@ -136,10 +136,6 @@ TURNSTILE_SECRET_KEY=your_secret_key
 
 # VirusTotal (Document Malware Scanning)
 VIRUSTOTAL_API_KEY=your_virustotal_api_key
-
-# Flickr API
-FLICKR_API_KEY=your_flickr_api_key
-FLICKR_USER_ID=your_flickr_user_id
 ```
 
 ### Run Locally

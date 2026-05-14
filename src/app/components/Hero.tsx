@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useMobile } from "../hooks/useMobile";
 
 import { GOLD, GOLD_LIGHT, CREAM } from "../constants";
 
@@ -18,17 +17,10 @@ export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const isMobile = useMobile();
 
   useEffect(() => {
     // Mark as loaded immediately — no setTimeout delay for faster FCP
     startTransition(() => setLoaded(true));
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion && videoRef.current) {
-      videoRef.current.pause();
-    }
 
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -67,32 +59,18 @@ export default function Hero() {
       background: "radial-gradient(ellipse at 65% 40%, var(--bg-secondary) 0%, var(--bg-color) 70%)",
     }}>
 
-      {/* ── Background Video ── */}
+      {/* ── Background Image ── */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
-        {!isMobile && (
-          <video
-            ref={videoRef}
-            src="/hero-video.mp4"
-            poster="/dekkak-cinema-marrakech-festival.png"
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        )}
-        {/* // TODO: Replace with real Mohamed Dekkak footage */}
-        {isMobile && (
-          <Image 
-            src="/dekkak-cinema-marrakech-festival.png" 
-            alt="Hero background"
-            fill
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-            priority
-          />
-        )}
-        <div className="hero-video-overlay" style={{ position: "absolute", inset: 0 }} />
+        <Image 
+          src="/dekkak-cinema-marrakech-festival.png" 
+          alt="Hero background"
+          fill
+          sizes="100vw"
+          quality={60}
+          style={{ objectFit: "cover" }}
+          priority
+        />
+        <div className="hero-video-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.15)" }} />
       </div>
 
       <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
