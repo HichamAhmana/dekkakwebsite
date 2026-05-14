@@ -33,10 +33,12 @@
 - 📧 **Contact form** — Resend integration with rate limiting and Turnstile CAPTCHA
 - 💬 **WhatsApp integration** — secure server-side redirect (number never exposed)
 - 🖼️ **Flickr gallery & blog** — pulls real photos from official Flickr account
+- 🖼️ **Optimized Gallery Interactions** — load-more pagination, mobile swipe gestures, and robust lightbox
 - 🔍 **Full SEO** — metadata, sitemap, robots, Schema.org JSON-LD, OpenGraph, Twitter Cards
 - 🌍 **GEO optimization** — llms.txt and llms-full.txt for advanced search engines
 - ⚡ **Performance score 98** — lazy loading, optimized images, code splitting
 - 🔒 **Security hardened** — headers, input validation, honeypot, rate limiting
+- 📄 **Technical Audit** — Comprehensive 3-page professional technical & infrastructure report generated
 
 ---
 
@@ -54,6 +56,7 @@
 | `/orchid-island` | Orchid Island Real Estate Agency |
 | `/healthcare` | Healthcare ventures and initiatives |
 | `/contact` | Contact form, WhatsApp, social links |
+| `/submit-opportunity` | Form for business proposals with file upload and malware scanning |
 
 
 ---
@@ -64,8 +67,10 @@
 src/
 ├── app/
 │   ├── api/
-│   │   ├── contact/        # Email API (Resend)
-│   │   └── whatsapp/       # Secure WhatsApp redirect
+│   │   ├── contact/            # Email API (Resend)
+│   │   ├── submit-opportunity/ # Secure proposals with file upload & VirusTotal scanning
+│   │   ├── posts/              # Local data fetching for blog and gallery
+│   │   └── whatsapp/           # Secure WhatsApp redirect
 │   ├── components/
 │   │   ├── Navbar.tsx
 │   │   ├── Footer.tsx
@@ -83,6 +88,7 @@ src/
 │   ├── impact/
 │   ├── orchid-island/
 │   ├── services/
+│   ├── submit-opportunity/
 │   ├── layout.tsx          # Root layout with metadata + schema
 │   ├── page.tsx            # Homepage
 │   ├── sitemap.ts          # Auto-generated sitemap
@@ -127,6 +133,9 @@ WHATSAPP_NUMBER=212XXXXXXXXX
 # Cloudflare Turnstile
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_site_key
 TURNSTILE_SECRET_KEY=your_secret_key
+
+# VirusTotal (Document Malware Scanning)
+VIRUSTOTAL_API_KEY=your_virustotal_api_key
 
 # Flickr API
 FLICKR_API_KEY=your_flickr_api_key
