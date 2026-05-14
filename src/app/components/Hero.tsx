@@ -166,8 +166,8 @@ export default function Hero() {
             alignItems: "center",
             gap: "12px",
             marginBottom: "32px",
-            opacity: loaded ? 1 : 0,
-            transition: "opacity 0.8s ease 0.5s",
+            opacity: 0,
+            animation: "heroFadeIn 0.8s ease 0.2s forwards",
           }}>
             <div style={{ width: "28px", height: "1px", background: GOLD, opacity: 0.7 }} />
             <div style={{
@@ -202,8 +202,9 @@ export default function Hero() {
               opacity: 0.55,
               letterSpacing: "0.35em",
               textTransform: "uppercase",
-              transform: loaded ? "translateY(0)" : "translateY(100%)",
-              transition: "transform 1s cubic-bezier(0.16,1,0.3,1) 0.6s",
+              transform: "translateY(100%)",
+              opacity: 0,
+              animation: "revealUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards",
             }}>
               Mohamed
             </div>
@@ -236,9 +237,7 @@ export default function Hero() {
                   display: "inline-block",
                   opacity: 0,
                   transform: "translateY(100%)",
-                  animation: loaded
-                    ? `revealUp 0.9s cubic-bezier(0.16,1,0.3,1) ${0.75 + i * 0.08}s forwards`
-                    : "none",
+                  animation: `revealUp 0.9s cubic-bezier(0.16,1,0.3,1) ${0.4 + i * 0.08}s forwards`,
                 }}>
                   {letter}
                 </span>
@@ -252,9 +251,8 @@ export default function Hero() {
             alignItems: "center",
             gap: "20px",
             marginTop: "20px",
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "translateY(0)" : "translateY(10px)",
-            transition: "opacity 0.8s ease 1.4s, transform 0.8s ease 1.4s",
+            opacity: 0,
+            animation: "heroFadeInUp 0.8s ease 0.9s forwards",
           }}>
             <div style={{ flex: 1, maxWidth: "220px", height: "1px", background: `linear-gradient(90deg, ${GOLD}66, transparent)` }} />
             <span style={{
@@ -289,10 +287,9 @@ export default function Hero() {
           fontFamily: "var(--font-dm-sans), sans-serif",
           fontSize: "17px", fontWeight: 300, lineHeight: 1.8,
           color: CREAM,
-          opacity: loaded ? 0.72 : 0,
-          transform: loaded ? "translateY(0)" : "translateY(18px)",
           maxWidth: "580px", margin: "0 0 44px",
-          transition: "opacity 1s ease 1.35s, transform 1s ease 1.35s",
+          opacity: 0,
+          animation: "heroFadeInUp 1s ease 0.9s forwards",
         }}>
           Mohamed Dekkak is a Moroccan chairman, investor, and philanthropist, best known as the
           Chairman and Founder of Adgeco Group, established in Abu Dhabi in 1992. Over three decades
@@ -303,9 +300,8 @@ export default function Hero() {
         {/* CTA Buttons */}
         <div style={{
           display: "flex", gap: "16px", flexWrap: "wrap",
-          opacity: loaded ? 1 : 0,
-          transform: loaded ? "translateY(0)" : "translateY(18px)",
-          transition: "opacity 1s ease 1.55s, transform 1s ease 1.55s",
+          opacity: 0,
+          animation: "heroFadeInUp 1s ease 1.1s forwards",
         }}>
           <Link
             href="/about"
@@ -353,8 +349,8 @@ export default function Hero() {
       <div style={{
         position: "absolute", bottom: "36px", right: "48px", zIndex: 2,
         display: "flex", flexDirection: "column", alignItems: "center", gap: "12px",
-        opacity: loaded ? 1 : 0,
-        transition: "opacity 1s ease 2s",
+        opacity: 0,
+        animation: "heroFadeIn 1s ease 1.5s forwards",
       }}>
         <span style={{
           fontFamily: "var(--font-dm-sans), sans-serif",

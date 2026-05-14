@@ -9,7 +9,7 @@
   --nav-text: #F5F0E8;
 }
 
-[data-theme="light"] {
+:root[data-theme="light"] {
   --bg-color: #FFFFFF;
   --bg-secondary: #F5F0E8;
   --text-color: #0A0A0A;
@@ -22,7 +22,7 @@
   background-color: rgba(0, 0, 0, 0.65);
 }
 
-[data-theme="light"] .hero-video-overlay {
+:root[data-theme="light"] .hero-video-overlay {
   background-color: rgba(255, 255, 255, 0.55);
 }
 
@@ -84,6 +84,16 @@ body::after {
 /* H1 line-by-line reveal: slides up from below clip */
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(108%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes heroFadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
