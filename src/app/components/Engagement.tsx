@@ -121,21 +121,13 @@ const ENGAGEMENT_ITEMS = [
 
 function EngagementCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setMousePos({ x: ((e.clientX - rect.left) / rect.width) * 100, y: ((e.clientY - rect.top) / rect.height) * 100 });
-  };
 
   return (
     <div
       ref={cardRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
       style={{
         position: "relative",
         background: "transparent",
@@ -158,7 +150,7 @@ function EngagementCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; i
     >
       <CardBackground item={item} hovered={hovered} />
       {hovered && (
-        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: `radial-gradient(circle 300px at ${mousePos.x}% ${mousePos.y}%, ${item.accent}15, transparent 70%)`, pointerEvents: "none", transition: "none" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: `radial-gradient(circle 300px at ${hovered ? "50% 50%" : "50% 50%"}%, ${item.accent}15, transparent 70%)`, pointerEvents: "none", transition: "none" }} />
       )}
       <div style={{ position: "absolute", top: 0, left: 0, width: hovered ? "100px" : "40px", height: "2px", background: `linear-gradient(90deg, ${item.accent}, transparent)`, transition: "width 0.5s ease", zIndex: 3 }} />
       <div style={{ position: "absolute", top: 0, left: 0, width: "2px", height: hovered ? "100px" : "40px", background: `linear-gradient(180deg, ${item.accent}, transparent)`, transition: "height 0.5s ease", zIndex: 3 }} />
@@ -197,9 +189,9 @@ function ReadMoreLink({ href, accent, hovered: cardHovered }: { href: string; ac
   );
 }
 
-function ParticleField() {
+function ParticleField({ count = 18 }: { count?: number }) {
   const [particles] = useState(() =>
-    Array.from({ length: 18 }, (_, i) => ({
+    Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -246,7 +238,7 @@ function EngagementDesktop() {
       style={{ height: "600vh", position: "relative", background: "var(--bg-color)" }}
     >
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
-        <ParticleField />
+        <ParticleField count={10} />
         {/*
           The track: 6 slides wide, translated by x.
           No flex needed — slides are absolutely nothing
@@ -354,7 +346,6 @@ function MobileSlideCard({ item, index }: { item: (typeof ENGAGEMENT_ITEMS)[0]; 
 function EngagementMobile() {
   return (
     <section style={{ position: "relative", background: "var(--bg-color)", padding: "80px 0" }}>
-      <ParticleField />
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "40px 24px 60px", position: "relative", zIndex: 1 }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
           <div style={{ width: "32px", height: "1px", background: `linear-gradient(90deg, transparent, ${GOLD})` }} />

@@ -199,6 +199,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* ── Resource Hints: preconnect for faster font loading ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+
+        {/* ── Preload the LCP hero image with responsive sizes ── */}
+        <link
+          rel="preload"
+          as="image"
+          href="/_next/image?url=%2Fdekkak-cinema-marrakech-festival.png&w=828&q=60"
+          imageSrcSet="/_next/image?url=%2Fdekkak-cinema-marrakech-festival.png&w=640&q=60 640w, /_next/image?url=%2Fdekkak-cinema-marrakech-festival.png&w=828&q=60 828w, /_next/image?url=%2Fdekkak-cinema-marrakech-festival.png&w=1200&q=60 1200w, /_next/image?url=%2Fdekkak-cinema-marrakech-festival.png&w=1920&q=60 1920w"
+          imageSizes="100vw"
+          fetchPriority="high"
+        />
+
         <script dangerouslySetInnerHTML={{ __html: `
           try {
             if (localStorage.getItem('theme') === 'light') {

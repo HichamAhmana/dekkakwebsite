@@ -19,11 +19,13 @@ export default function Hero() {
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      // Throttle: only schedule a new RAF if one isn't already pending
+      if (rafRef.current !== null) return;
       rafRef.current = requestAnimationFrame(() => {
         if (glowRef.current) {
           glowRef.current.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
         }
+        rafRef.current = null;
       });
     };
     window.addEventListener("mousemove", onMove);
@@ -194,6 +196,9 @@ export default function Hero() {
               fontSize: "clamp(28px, 4vw, 56px)",
               fontWeight: 300,
               fontStyle: "italic",
+              color: CREAM,
+              opacity: 0.55,
+              letterSpacing: "0.35em",
               textTransform: "uppercase",
             }}>
               <span style={{
