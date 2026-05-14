@@ -56,8 +56,7 @@ function CardBackground({
             transition: "filter 1.1s ease, transform 1.6s cubic-bezier(0.16,1,0.3,1)",
             zIndex: 0,
           }}
-          priority
-          quality={60}
+          quality={50}
         />
       ) : (
         <PlaceholderPattern id={item.id} accent={item.accent} hovered={hovered} />

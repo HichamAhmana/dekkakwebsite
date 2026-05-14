@@ -146,7 +146,7 @@ export default function BlogSection() {
                 src={featured.image}
                 alt={featured.title}
                 fill
-                priority
+                quality={60}
                 sizes="(max-width: 768px) 100vw, 1140px"
                 style={{
                   objectFit: "cover",
@@ -306,6 +306,7 @@ function SecondaryCard({ post }: { post: BlogPost }) {
             alt={post.title}
             fill
             loading="lazy"
+            quality={60}
             sizes="(max-width: 768px) 100vw, 50vw"
             style={{
               objectFit: "cover",
