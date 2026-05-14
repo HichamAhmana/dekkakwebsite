@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, startTransition } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,7 +10,6 @@ const ROLES = ["Chairman", "Investor", "Philanthropist", "Statesman", "Visionary
 const COORDS = "34°01′N 6°50′W  ·  24°28′N 54°22′E";
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false);
   const [btnHover, setBtnHover] = useState<"primary" | "secondary" | null>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
@@ -19,9 +18,6 @@ export default function Hero() {
   const roleTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    // Mark as loaded immediately — no setTimeout delay for faster FCP
-    startTransition(() => setLoaded(true));
-
     const onMove = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -203,7 +199,6 @@ export default function Hero() {
               letterSpacing: "0.35em",
               textTransform: "uppercase",
               transform: "translateY(100%)",
-              opacity: 0,
               animation: "revealUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards",
             }}>
               Mohamed
