@@ -222,38 +222,6 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         <CookieBanner />
-       {/* Chatbase */}
-<Script
-  id="chatbase-bootstrap"
-  strategy="afterInteractive"
-  dangerouslySetInnerHTML={{
-    __html: `
-      (function () {
-        if (window.chatbase) return;
-
-        window.chatbase = function () {
-          (window.chatbase.q = window.chatbase.q || []).push(arguments);
-        };
-
-        window.chatbase.q = [];
-
-        const load = function () {
-          const script = document.createElement("script");
-          script.src = "https://www.chatbase.co/embed.min.js";
-          script.id = "f1gn0pAoTs_SS_O9euCWl";
-          script.async = true;
-          document.body.appendChild(script);
-        };
-
-        if (document.readyState === "complete") {
-          load();
-        } else {
-          window.addEventListener("load", load);
-        }
-      })();
-    `,
-  }}
-/>
       </body>
     </html>
   );

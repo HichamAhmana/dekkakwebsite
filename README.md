@@ -29,12 +29,12 @@
 - 🌑 **Dark luxury design** — editorial aesthetic with gold `#C9A84C` accents
 - ☀️ **Light/Dark theme toggle** — seamless switch preserving brand colors
 - 📱 **Fully responsive** — optimized for all screen sizes
-- 🤖 **AI Chatbot** — Chatbase powered, trained on Mohamed Dekkak's content
+- 🤖 **Virtual Assistant** — Custom interactive virtual assistant for site visitors
 - 📧 **Contact form** — Resend integration with rate limiting and Turnstile CAPTCHA
 - 💬 **WhatsApp integration** — secure server-side redirect (number never exposed)
 - 🖼️ **Flickr gallery & blog** — pulls real photos from official Flickr account
 - 🔍 **Full SEO** — metadata, sitemap, robots, Schema.org JSON-LD, OpenGraph, Twitter Cards
-- 🌍 **GEO optimization** — llms.txt and llms-full.txt for AI search engines
+- 🌍 **GEO optimization** — llms.txt and llms-full.txt for advanced search engines
 - ⚡ **Performance score 98** — lazy loading, optimized images, code splitting
 - 🔒 **Security hardened** — headers, input validation, honeypot, rate limiting
 
@@ -89,8 +89,8 @@ src/
 │   ├── robots.ts           # Robots.txt
 │   └── globals.css         # CSS variables + theme
 public/
-├── llms.txt                # GEO optimization for AI crawlers
-└── llms-full.txt           # Full biography for AI engines
+├── llms.txt                # GEO optimization for advanced crawlers
+└── llms-full.txt           # Full biography for advanced engines
 ```
 
 ---

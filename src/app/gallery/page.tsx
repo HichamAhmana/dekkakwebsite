@@ -196,6 +196,7 @@ function Lightbox({
   onNav: (dir: 1 | -1) => void;
 }) {
   const item = items[index];
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
@@ -215,9 +216,23 @@ function Lightbox({
     };
   }, [handleKey]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 50) onNav(1);
+    if (distance < -50) onNav(-1);
+  };
+
   return (
     <div
       onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: "fixed",
         inset: 0,
@@ -273,17 +288,19 @@ function Lightbox({
           flexDirection: "column",
           alignItems: "center",
           gap: 16,
-          maxWidth: "92vw",
-          maxHeight: "92vh",
+          maxWidth: "100vw",
+          maxHeight: "100vh",
+          padding: "20px 0",
         }}
       >
         {/* Plain <img> for reliable cross-origin + local image display */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          key={item.src}
           src={item.src}
           alt={item.title}
           style={{
-            maxWidth: "88vw",
+            maxWidth: "96vw",
             maxHeight: "75vh",
             width: "auto",
             height: "auto",
@@ -291,6 +308,7 @@ function Lightbox({
             borderRadius: 6,
             boxShadow: "0 0 100px rgba(0,0,0,0.9), 0 0 30px rgba(201,168,76,0.08)",
             display: "block",
+            pointerEvents: "none",
           }}
         />
 
